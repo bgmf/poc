@@ -7,6 +7,7 @@ import com.google.inject.Injector;
 
 import eu.dzim.guice.fx.disposable.Disposable;
 import eu.dzim.guice.fx.disposable.MyDisposableHolder;
+import eu.dzim.guice.fx.resource.Resource;
 import eu.dzim.guice.fx.schedule.SchedulerExample;
 import eu.dzim.guice.fx.service.FXMLLoaderService;
 import eu.dzim.guice.fx.service.MyInterface;
@@ -47,6 +48,7 @@ public class MainWithGuiceControllerFactory extends Application {
 		stage.setOnCloseRequest(this::handleCloseRequest);
 		
 		injector.getInstance(SchedulerExample.class);
+		System.err.println(injector.getInstance(Resource.class).getGuranteedString("key"));
 		
 		stage.show();
 	}
@@ -63,14 +65,11 @@ public class MainWithGuiceControllerFactory extends Application {
 	// controller for an FXML without any content, just a showcase...
 	public static class ExamplaryGuicyController {
 		// necessary, if you have sub-fragments
-		@Inject
-		private FXMLLoaderService fxmlLoaderService;
+		@Inject private FXMLLoaderService fxmlLoaderService;
 		// some idiotic service interface implementation injected
-		@Inject
-		private MyInterface myInterfaceInstance;
+		@Inject private MyInterface myInterfaceInstance;
 		// you can also inject the injector
-		@Inject
-		private Injector injector;
+		@Inject private Injector injector;
 		
 		@FXML
 		protected void initialize() {

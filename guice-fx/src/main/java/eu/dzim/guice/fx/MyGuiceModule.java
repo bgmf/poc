@@ -12,6 +12,8 @@ import com.google.inject.spi.TypeListener;
 
 import eu.dzim.guice.fx.disposable.Disposable;
 import eu.dzim.guice.fx.disposable.MyDisposableHolder;
+import eu.dzim.guice.fx.resource.Resource;
+import eu.dzim.guice.fx.resource.impl.ResourceImpl;
 import eu.dzim.guice.fx.schedule.SchedulerService;
 import eu.dzim.guice.fx.service.FXMLLoaderService;
 import eu.dzim.guice.fx.service.MyInterface;
@@ -21,16 +23,20 @@ import eu.dzim.guice.fx.service.impl.MyInterfaceImpl;
 // module - generally needed, once for the FXMLLoaderService and of course for any other service you would need
 public class MyGuiceModule extends AbstractModule {
 	
-	private final MyInterface myInterfaceInstance = new MyInterfaceImpl();
+	private final MyDisposableHolder disposableHolder = new MyDisposableHolder();
+	private final SchedulerService schedulerService = new SchedulerService();
+	
+	private final Resource resource = new ResourceImpl();
 	private final FXMLLoaderService fxmlLoaderService = new FXMLLoaderServiceImpl();
 	
-	private final MyDisposableHolder disposableHolder = new MyDisposableHolder();
-	
-	private final SchedulerService schedulerService = new SchedulerService();
+	private final MyInterface myInterfaceInstance = new MyInterfaceImpl();
 	
 	@Override
 	protected void configure() {
+		
 		bind(FXMLLoaderService.class).toInstance(fxmlLoaderService);
+		bind(Resource.class).toInstance(resource);
+		
 		bind(MyInterface.class).toInstance(myInterfaceInstance);
 		
 		/*
