@@ -356,5 +356,6 @@
 
 	<module>simple-tests-fx</module>
 	<module>guice-fx</module>
+	<module>kotlin-java-mix</module>
 	</modules>
 </project>
