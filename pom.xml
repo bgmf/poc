@@ -353,6 +353,8 @@
 	</dependencyManagement>
 
 	<modules>
-		
+
+	<module>simple-tests-fx</module>
+	<module>guice-fx</module>
 	</modules>
 </project>
