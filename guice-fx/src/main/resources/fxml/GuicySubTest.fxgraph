@@ -1,0 +1,14 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import eu.dzim.guice.fx.GuicySubController
+import javafx.scene.control.Button
+
+component GuicySubTest controlledby GuicySubController {
+	BorderPane {
+		center : Button id button {
+			text : "Click me!",
+			onAction : controllermethod handleButton
+		}
+	}
+}

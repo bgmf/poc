@@ -1,0 +1,10 @@
+package fxml.allinone
+
+import javafx.scene.layout.BorderPane
+import eu.dzim.guice.fx.allinone.GuicyController
+
+component GuicyTest controlledby GuicyController {
+	BorderPane {
+		//XXX nothing here
+	}
+}

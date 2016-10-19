@@ -1,0 +1,25 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import eu.dzim.guice.fx.GuicyController
+import javafx.scene.control.MenuBar
+import javafx.scene.control.Menu
+import javafx.scene.control.MenuItem
+
+component GuicyTest controlledby GuicyController {
+
+	define include fxml.GuicySubTest as sub
+
+	BorderPane {
+		top : MenuBar {
+			Menu {
+				text : "File",
+				MenuItem {
+					text : "Exit",
+					onAction : controllermethod handleMenuFileExit
+				}
+			}
+		},
+		center : idref sub
+	}
+}
