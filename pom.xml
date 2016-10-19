@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>eu.dzim.poc</groupId>
-	<artifactId>parent</artifactId>
+	<artifactId>poc-parent</artifactId>
 
 	<name>POC &amp; Tests - Parent</name>
 	<description>Simple parent project to collect a couple of POCs and tests I wrote.</description>
