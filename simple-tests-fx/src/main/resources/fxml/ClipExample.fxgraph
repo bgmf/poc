@@ -1,0 +1,29 @@
+package fxml
+
+import javafx.scene.layout.VBox
+import javafx.scene.control.Label
+import javafx.scene.control.TextField
+import javafx.scene.control.Button
+import javafx.scene.shape.Circle
+import eu.dzim.tests.fx.ClipExampleController
+import javafx.scene.layout.BorderPane
+
+component ClipExample controlledby ClipExampleController {
+	BorderPane id root {
+		style : "-fx-background-color: steelblue;",
+		center : VBox id vbox {
+			alignment : "CENTER",
+			spacing : 5,
+			maxWidth : 150,
+			Label {
+				text : "Bla"
+			},
+			TextField {
+				promptText : "Blub"
+			},
+			Button {
+				text : "Do it"
+			}
+		}
+	}
+}

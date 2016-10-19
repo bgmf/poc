@@ -1,0 +1,13 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.embed.swing.SwingNode
+import eu.dzim.tests.fx.SwingInteropControllerSwing
+
+component SwingInteropSwingButton controlledby SwingInteropControllerSwing {
+	BorderPane id root {
+		center : SwingNode id swingNode {
+
+		}
+	}
+}

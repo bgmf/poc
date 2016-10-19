@@ -1,0 +1,14 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.control.SplitPane
+
+import eu.dzim.tests.fx.MultiInstanceTestRootController
+
+component MultiInstanceTestRoot controlledby MultiInstanceTestRootController {
+	BorderPane id rootPane {
+		center : SplitPane id contentPane {
+			
+		}
+	}
+}

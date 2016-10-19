@@ -1,0 +1,81 @@
+package fxml
+
+import javafx.scene.layout.GridPane
+import javafx.scene.control.Label
+import javafx.scene.control.TextField
+import javafx.scene.control.Button
+import javafx.scene.control.ProgressBar
+import java.lang.Double
+import javafx.geometry.Insets
+import javafx.scene.control.ProgressIndicator
+import eu.dzim.tests.fx.ProgressTestController
+
+component ProgressTest controlledby ProgressTestController {
+	GridPane {
+		alignment : "CENTER",
+		vgap : 5, hgap : 5,
+		Label {
+			text : "HD Drive",
+			static columnIndex : 0,
+			static rowIndex : 0
+		}, 
+		TextField {
+			promptText : "pick drive",
+			disable : true,
+			static columnIndex : 1,
+			static rowIndex : 0,
+			static columnSpan : 2
+		},
+		Button {
+			text : "Select ...",
+			disable : true,
+			static columnIndex : 3,
+			static rowIndex : 0
+		},
+		Label {
+			text : "Drive No.",
+			static columnIndex : 0,
+			static rowIndex : 1
+		}, 
+		TextField {
+			promptText : "01",
+			disable : true,
+			static columnIndex : 1,
+			static rowIndex : 1,
+			static columnSpan : 3
+		},
+		Button {
+			text : "Delete Archive",
+			disable : true,
+			static columnIndex : 0,
+			static rowIndex : 2,
+			static columnSpan : 2,
+			static halignment : "LEFT"
+		},
+		Button id readButton {
+			text : "Start Reading",
+			onAction : controllermethod handleReadButton,
+			static columnIndex : 2,
+			static rowIndex : 2,
+			static columnSpan : 2,
+			static halignment : "RIGHT" 
+		},
+		ProgressBar id progressBar {
+			maxWidth : const Double#MAX_VALUE,
+			static columnIndex : 0,
+			static rowIndex : 3,
+			static columnSpan : 4,
+			static margin : Insets {
+				top : 10
+			}
+		},
+		ProgressIndicator id progressIndicator {
+			static columnIndex : 0,
+			static rowIndex : 4,
+			static columnSpan : 4,
+			static margin : Insets {
+				top : 10
+			}
+		}
+	}
+}

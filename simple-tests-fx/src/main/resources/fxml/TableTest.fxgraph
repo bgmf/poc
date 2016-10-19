@@ -1,0 +1,42 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.control.TableView
+import eu.dzim.tests.fx.TableTestObject
+import javafx.scene.control.TableColumn
+import javafx.geometry.Insets
+import eu.dzim.tests.fx.TableTestController
+
+component TableTest controlledby TableTestController {
+	BorderPane {
+		center : TableView < TableTestObject > id tableView {
+			columns : [
+				TableColumn < TableTestObject, String > id tableColumnText {
+					text : "Text",
+					prefWidth : 150
+				},
+				TableColumn < TableTestObject, TableTestObject > id tableColumnFlag {
+					text : "Flag",
+					prefWidth : 50
+				},
+				TableColumn < TableTestObject, String > id tableColumnAncestor {
+					text : "Ancestor",
+					prefWidth : 75
+				},
+				TableColumn < TableTestObject, String > id tableColumnDescendant {
+					text : "Descendant",
+					prefWidth : 100
+				},
+				TableColumn < TableTestObject, Integer > id tableColumnPoints {
+					text : "Points",
+					prefWidth : 75
+				}
+			], static margin : Insets {
+				top : 5,
+				left : 5,
+				right : 5,
+				bottom : 5
+			}
+		}
+	}
+}

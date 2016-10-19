@@ -1,0 +1,113 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.HBox
+import javafx.scene.layout.VBox
+import javafx.scene.control.Label
+import javafx.scene.layout.Region
+import javafx.scene.layout.Background
+import javafx.geometry.Insets
+import eu.dzim.tests.fx.DnDController
+
+component DnDTest controlledby DnDController {
+	BorderPane {
+		minWidth : 640,
+		minHeight : 480,
+		top : HBox id top {
+			style : "-fx-background-color: grey;",
+			padding : Insets {
+				left : 10,
+				top : 10,
+				right : 10,
+				bottom : 10
+			}, Region id r1 {
+				style : "-fx-background-color: red;",
+				minHeight : 50,
+				minWidth : 5, static margin : Insets {
+					right : 5
+				}
+			}, BorderPane id c1 {
+				style : "-fx-background-color: blue;",
+				minHeight : 50,
+				minWidth : 50,
+				center : Label {
+					style : "-fx-text-fill: white;",
+					text : "1"
+				}
+
+			}, Region id r2 {
+				style : "-fx-background-color: red;",
+				minHeight : 50,
+				minWidth : 5, static margin : Insets {
+					left : 5,
+					right : 5
+				}
+			}, BorderPane id c2 {
+				style : "-fx-background-color: blue;",
+				minHeight : 50,
+				minWidth : 50,
+				center : Label {
+					style : "-fx-text-fill: white;",
+					text : "2"
+				}
+			}, Region id r3 {
+				style : "-fx-background-color: red;",
+				minHeight : 50,
+				minWidth : 5, static margin : Insets {
+					left : 5,
+					right : 5
+				}
+			}, BorderPane id c3 {
+				style : "-fx-background-color: blue;",
+				minHeight : 50,
+				minWidth : 50,
+				center : Label {
+					style : "-fx-text-fill: white;",
+					text : "3"
+				}
+			}, Region id r4 {
+				style : "-fx-background-color: red;",
+				minHeight : 50,
+				minWidth : 5, static margin : Insets {
+					left : 5,
+					right : 5
+				}
+			}, BorderPane id c4 {
+				style : "-fx-background-color: blue;",
+				minHeight : 50,
+				minWidth : 50,
+				center : Label {
+					style : "-fx-text-fill: white;",
+					text : "4"
+				}
+			}, Region id r5 {
+				style : "-fx-background-color: red;",
+				minHeight : 50,
+				minWidth : 5, static margin : Insets {
+					left : 5,
+					right : 5
+				}
+			}, BorderPane id c5 {
+				style : "-fx-background-color: blue;",
+				minHeight : 50,
+				minWidth : 50,
+				center : Label {
+					style : "-fx-text-fill: white;",
+					text : "5"
+				}
+			}, Region id r6 {
+				style : "-fx-background-color: red;",
+				minHeight : 50,
+				minWidth : 5, static margin : Insets {
+					left : 5,
+					right : 5
+				}
+			}
+		},
+		center : VBox {
+			alignment : "CENTER", Label {
+				text : "Bla bla some text"
+			}
+		}
+	}
+}

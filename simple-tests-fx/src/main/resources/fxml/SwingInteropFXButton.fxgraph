@@ -1,0 +1,13 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.control.Button
+import eu.dzim.tests.fx.SwingInteropControllerFX
+
+component SwingInteropFXButton controlledby SwingInteropControllerFX {
+	BorderPane id root {
+		center: Button id button {
+			text: "FX Button"
+		}
+	}
+}

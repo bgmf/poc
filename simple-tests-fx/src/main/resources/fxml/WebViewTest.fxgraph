@@ -1,0 +1,12 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.web.WebView
+import eu.dzim.tests.fx.WebViewTestController
+
+component WebViewTest controlledby WebViewTestController {
+	BorderPane {
+		center : WebView id webView {
+		}
+	}
+}

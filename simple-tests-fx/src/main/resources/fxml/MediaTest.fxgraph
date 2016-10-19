@@ -1,0 +1,37 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.media.MediaView
+import javafx.scene.media.MediaPlayer
+import javafx.scene.media.Media
+import javafx.scene.layout.HBox
+import javafx.scene.control.Button
+import javafx.scene.control.ButtonBar
+import javafx.scene.control.Slider
+import javafx.scene.control.Label
+import eu.dzim.tests.fx.MediaTestController
+
+component MediaTest controlledby MediaTestController {
+	BorderPane id root {
+		maxWidth : const Double#MAX_VALUE,
+		center : MediaView id mediaView {
+
+		},
+		bottom : HBox {
+			spacing : 10,
+			alignment : "CENTER",
+			Button id buttonPlay {
+				text : "Play"
+			},
+			Button id buttonStop {
+				text : "Stop"
+			},
+			Label id label {
+				text : "--:--:--"
+			},
+			Slider id slider {
+				static hgrow : "ALWAYS"
+			}
+		}
+	}
+}

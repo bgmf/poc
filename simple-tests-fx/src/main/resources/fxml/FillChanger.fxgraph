@@ -1,0 +1,17 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.VBox
+import javafx.scene.shape.Rectangle
+import eu.dzim.tests.fx.FillChangerController
+import javafx.scene.paint.Color
+
+component FillChanger controlledby FillChangerController {
+	BorderPane id root {
+		center : VBox id center {
+			Rectangle id rect {
+				fill : "rgb(0,0,0)"
+			}
+		}
+	}
+}

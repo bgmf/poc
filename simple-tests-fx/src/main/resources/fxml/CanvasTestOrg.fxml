@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import application.CanvasTestController?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="700.0"
+	xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+	>
+	<children>
+		<VBox prefHeight="700.0" prefWidth="700.0">
+			<children>
+				<HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="700.0">
+					<children>
+						<Label alignment="BASELINE_RIGHT" contentDisplay="CENTER"
+							text="Horizontale Strecke">
+							<font>
+								<Font size="15.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="10.0" />
+							</HBox.margin>
+						</Label>
+						<TextField fx:id="horizStrecke_textField" prefHeight="28.0"
+							prefWidth="69.0" promptText="0 Pixel">
+							<font>
+								<Font size="15.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="10.0" />
+							</HBox.margin>
+						</TextField>
+						<Label alignment="BASELINE_RIGHT" contentDisplay="CENTER"
+							text="Vertikale Strecke">
+							<font>
+								<Font size="15.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="30.0" />
+							</HBox.margin>
+						</Label>
+						<TextField fx:id="vertStrecke_textField" prefHeight="28.0"
+							prefWidth="69.0" promptText="0 Pixel">
+							<font>
+								<Font size="15.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="10.0" />
+							</HBox.margin>
+						</TextField>
+						<Button fx:id="verschieben_button" mnemonicParsing="false"
+							 text="Verschieben">
+							<HBox.margin>
+								<Insets left="30.0" />
+							</HBox.margin>
+							<font>
+								<Font size="15.0" />
+							</font>
+						</Button>
+					</children>
+				</HBox>
+				<HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="700.0">
+					<children>
+						<Label text="Winkel">
+							<font>
+								<Font size="15.0" />
+							</font>
+							<HBox.margin>
+								<Insets left="10.0" />
+							</HBox.margin>
+						</Label>
+						<TextField fx:id="winkel_textField" prefHeight="29.0"
+							prefWidth="99.0" promptText="+/- 0.0°">
+							<HBox.margin>
+								<Insets left="10.0" />
+							</HBox.margin>
+							<font>
+								<Font size="15.0" />
+							</font>
+						</TextField>
+						<Button fx:id="rotieren_button" mnemonicParsing="false"
+							 text="Rotieren">
+							<HBox.margin>
+								<Insets left="30.0" />
+							</HBox.margin>
+							<font>
+								<Font size="15.0" />
+							</font>
+						</Button>
+					</children>
+				</HBox>
+				<Canvas fx:id="canvas" height="624.0" width="700.0" />
+			</children>
+		</VBox>
+	</children>
+</AnchorPane>

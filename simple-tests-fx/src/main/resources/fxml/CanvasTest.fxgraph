@@ -1,0 +1,82 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.canvas.Canvas
+import eu.dzim.tests.fx.CanvasTestController
+import javafx.scene.layout.VBox
+import javafx.scene.control.Button
+import javafx.scene.layout.HBox
+import javafx.scene.control.Label
+import javafx.geometry.Insets
+import javafx.scene.control.TextField
+import javafx.scene.layout.GridPane
+import eu.dzim.tests.fx.ResizableCanvas
+import javafx.scene.layout.StackPane
+
+component CanvasTest controlledby CanvasTestController {
+	BorderPane {
+		top : VBox {
+			GridPane {
+				hgap : 5,
+				vgap : 5,
+				// zeile 1
+				Label {
+					text : "Horizontale Strecke:",
+					static columnIndex : 0,
+					static rowIndex : 0
+				},
+				TextField id text1 {
+					promptText : "Horizontale Strecke eingeben",
+					static columnIndex : 1,
+					static rowIndex : 0
+				},
+				// zeile 2
+				Label {
+					text : "Vertikale Strecke:",
+					static columnIndex : 0,
+					static rowIndex : 1
+				},
+				TextField id text2 {
+					promptText : "Vertikale Strecke eingeben",
+					static columnIndex : 1,
+					static rowIndex : 1
+				},
+				Button id button1 {
+					text : "Und Los...",
+					static columnIndex : 2,
+					static rowIndex : 1,
+					onAction : controllermethod handleButton1
+				},
+				// zeile 3
+				Label {
+					text : "Winkel:",
+					static columnIndex : 0,
+					static rowIndex : 2
+				},
+				TextField id text3 {
+					promptText : "Winkel eingeben",
+					static columnIndex : 1,
+					static rowIndex : 2
+				},
+				Button id button2 {
+					text : "Rotieren",
+					static columnIndex : 2,
+					static rowIndex : 2,
+					onAction : controllermethod handleButton2
+				}
+			},
+			static margin : Insets {
+				left : 5,
+				top : 5,
+				right : 5,
+				bottom : 5
+			}
+		},
+		center : StackPane id canvasPane {
+			style : "-fx-border-color: red;",
+			static alignment : "CENTER",
+			ResizableCanvas id canvas {
+			}
+		}
+	}
+}

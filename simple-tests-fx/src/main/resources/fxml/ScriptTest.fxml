@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1">
+	
+	<fx:script>
+	function handleButton(event) {
+		label.text = "" + new java.util.Random().nextInt();
+	}
+	</fx:script>
+	
+	<center>
+		<VBox spacing="5" alignment="CENTER">
+			<Label fx:id="label"></Label>
+			<Button fx:id="button" text="Click me!" onAction="handleButton(event)">
+			</Button>
+		</VBox>
+	</center>
+	
+</BorderPane>
+

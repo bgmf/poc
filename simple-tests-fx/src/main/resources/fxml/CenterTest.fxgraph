@@ -1,0 +1,37 @@
+package fxml
+
+import javafx.scene.layout.VBox
+import javafx.scene.control.Label
+import java.lang.Double
+import javafx.scene.layout.Region
+
+component CenterTest {
+	VBox {
+		alignment : "CENTER",
+		Region {
+			maxHeight : const Double#MAX_VALUE,
+			static vgrow : "ALWAYS"
+		},
+		Label {
+			text : "Label 1"
+		},
+		Region {
+			maxHeight : const Double#MAX_VALUE,
+			static vgrow : "ALWAYS"
+		},
+		Label {
+			text : "Label 2"
+		},
+		Region {
+			maxHeight : const Double#MAX_VALUE,
+			static vgrow : "ALWAYS"
+		},
+		Label {
+			text : "Label 3"
+		},
+		Region {
+			maxHeight : const Double#MAX_VALUE,
+			static vgrow : "ALWAYS"
+		}
+	}
+}
