@@ -19,7 +19,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class MainWithGuiceControllerFactory extends Application {
+public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
