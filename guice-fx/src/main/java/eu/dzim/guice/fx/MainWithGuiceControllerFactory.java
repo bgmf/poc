@@ -26,7 +26,7 @@ public class MainWithGuiceControllerFactory extends Application {
 	}
 	
 	final com.google.inject.Stage injectionStage = com.google.inject.Stage.DEVELOPMENT;
-	final Injector injector = Guice.createInjector(injectionStage, new MyGuiceModule());
+	final Injector injector = Guice.createInjector(injectionStage, new GuiceModule());
 	
 	@Override
 	public void start(Stage stage) throws Exception {

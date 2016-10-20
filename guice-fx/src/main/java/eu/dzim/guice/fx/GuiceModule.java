@@ -21,7 +21,7 @@ import eu.dzim.guice.fx.service.impl.FXMLLoaderServiceImpl;
 import eu.dzim.guice.fx.service.impl.MyInterfaceImpl;
 
 // module - generally needed, once for the FXMLLoaderService and of course for any other service you would need
-public class MyGuiceModule extends AbstractModule {
+public class GuiceModule extends AbstractModule {
 	
 	private final DisposableHolder disposableHolder = new DisposableHolder();
 	private final SchedulerService schedulerService = new SchedulerService();
