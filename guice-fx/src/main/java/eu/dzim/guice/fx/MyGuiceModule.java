@@ -11,7 +11,7 @@ import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 
 import eu.dzim.guice.fx.disposable.Disposable;
-import eu.dzim.guice.fx.disposable.MyDisposableHolder;
+import eu.dzim.guice.fx.disposable.DisposableHolder;
 import eu.dzim.guice.fx.resource.Resource;
 import eu.dzim.guice.fx.resource.impl.ResourceImpl;
 import eu.dzim.guice.fx.schedule.SchedulerService;
@@ -23,7 +23,7 @@ import eu.dzim.guice.fx.service.impl.MyInterfaceImpl;
 // module - generally needed, once for the FXMLLoaderService and of course for any other service you would need
 public class MyGuiceModule extends AbstractModule {
 	
-	private final MyDisposableHolder disposableHolder = new MyDisposableHolder();
+	private final DisposableHolder disposableHolder = new DisposableHolder();
 	private final SchedulerService schedulerService = new SchedulerService();
 	
 	private final Resource resource = new ResourceImpl();
@@ -47,7 +47,7 @@ public class MyGuiceModule extends AbstractModule {
 				return Disposable.class.isAssignableFrom(typeLiteral.getRawType());
 			}
 		}, new MyDisposeTypeListener(disposableHolder.getDisposables()));
-		bind(MyDisposableHolder.class).toInstance(disposableHolder);
+		bind(DisposableHolder.class).toInstance(disposableHolder);
 		
 		/*
 		 * Schedule Extension

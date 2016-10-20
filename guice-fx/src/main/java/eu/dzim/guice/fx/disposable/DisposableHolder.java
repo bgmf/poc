@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MyDisposableHolder {
+public class DisposableHolder {
 	
 	private final List<Disposable> disposables = Collections.synchronizedList(new ArrayList<>());
 	
-	public MyDisposableHolder() {}
+	public DisposableHolder() {}
 	
 	public List<Disposable> getDisposables() {
 		return disposables;

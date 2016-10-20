@@ -6,7 +6,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import eu.dzim.guice.fx.disposable.Disposable;
-import eu.dzim.guice.fx.disposable.MyDisposableHolder;
+import eu.dzim.guice.fx.disposable.DisposableHolder;
 import eu.dzim.guice.fx.resource.Resource;
 import eu.dzim.guice.fx.schedule.SchedulerExample;
 import eu.dzim.guice.fx.service.FXMLLoaderService;
@@ -57,7 +57,7 @@ public class MainWithGuiceControllerFactory extends Application {
 		/*
 		 * Disposable Extension
 		 */
-		for (Disposable disposable : injector.getInstance(MyDisposableHolder.class).getDisposables()) {
+		for (Disposable disposable : injector.getInstance(DisposableHolder.class).getDisposables()) {
 			disposable.dispose();
 		}
 	}
