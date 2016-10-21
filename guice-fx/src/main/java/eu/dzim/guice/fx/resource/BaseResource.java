@@ -104,7 +104,7 @@ public abstract class BaseResource implements Resource, Disposable {
 	}
 	
 	@Override
-	public boolean setLocale(Locale next) {
+	public synchronized boolean setLocale(Locale next) {
 		Locale current = Locale.getDefault();
 		if (current == null || !current.equals(next)) {
 			resourceBundle.set(ResourceBundle.getBundle(bundleName, next, getClass().getClassLoader()));
@@ -113,17 +113,17 @@ public abstract class BaseResource implements Resource, Disposable {
 		return false;
 	}
 	
-	public ReadOnlyObjectProperty<Locale> localeProperty() {
+	public synchronized ReadOnlyObjectProperty<Locale> localeProperty() {
 		return locale.getReadOnlyProperty();
 	}
 	
 	@Override
-	public Locale getLocale() {
+	public synchronized Locale getLocale() {
 		return locale.get();
 	}
 	
 	@Override
-	public ReadOnlyObjectProperty<ResourceBundle> resourceBundleProperty() {
+	public synchronized ReadOnlyObjectProperty<ResourceBundle> resourceBundleProperty() {
 		return resourceBundle.getReadOnlyProperty();
 	}
 	
@@ -133,7 +133,7 @@ public abstract class BaseResource implements Resource, Disposable {
 	}
 	
 	@Override
-	public synchronized String getGuranteedString(String key) {
+	public synchronized String getGuaranteedString(String key) {
 		try {
 			return resourceBundle.get().getString(key);
 		} catch (MissingResourceException e) {
@@ -142,7 +142,7 @@ public abstract class BaseResource implements Resource, Disposable {
 	}
 	
 	@Override
-	public String getGuranteedString(String key, Object... args) {
+	public synchronized String getGuaranteedString(String key, Object... args) {
 		String value = "!empty!";
 		try {
 			value = resourceBundle.get().getString(key);
@@ -155,7 +155,7 @@ public abstract class BaseResource implements Resource, Disposable {
 	}
 	
 	@Override
-	public Optional<String> getString(String key) {
+	public synchronized Optional<String> getString(String key) {
 		try {
 			return Optional.of(resourceBundle.get().getString(key));
 		} catch (MissingResourceException e) {
@@ -186,12 +186,12 @@ public abstract class BaseResource implements Resource, Disposable {
 	}
 	
 	@Override
-	public Boolean getBoolean(String key, Boolean defaultValue) {
+	public synchronized Boolean getBoolean(String key, Boolean defaultValue) {
 		return getBoolean(key).orElse(defaultValue);
 	}
 	
 	@Override
-	public Optional<Integer> getInteger(String key) {
+	public synchronized Optional<Integer> getInteger(String key) {
 		try {
 			return Optional.of(Integer.parseInt(resourceBundle.get().getString(key)));
 		} catch (MissingResourceException | NumberFormatException e) {
@@ -200,7 +200,7 @@ public abstract class BaseResource implements Resource, Disposable {
 	}
 	
 	@Override
-	public Integer getInteger(String key, Integer defaultValue) {
+	public synchronized Integer getInteger(String key, Integer defaultValue) {
 		return getInteger(key).orElse(defaultValue);
 	}
 	
@@ -214,7 +214,7 @@ public abstract class BaseResource implements Resource, Disposable {
 	}
 	
 	@Override
-	public Long getLong(String key, Long defaultValue) {
+	public synchronized Long getLong(String key, Long defaultValue) {
 		return getLong(key).orElse(defaultValue);
 	}
 	
@@ -228,7 +228,7 @@ public abstract class BaseResource implements Resource, Disposable {
 	}
 	
 	@Override
-	public Double getDouble(String key, Double defaultValue) {
+	public synchronized Double getDouble(String key, Double defaultValue) {
 		return getDouble(key).orElse(defaultValue);
 	}
 	
@@ -277,12 +277,12 @@ public abstract class BaseResource implements Resource, Disposable {
 			StringBinding binding = keyStringBindings.get(key);
 			if (binding != null)
 				return binding;
-			binding = Bindings.createStringBinding(() -> defaultValue == null ? getGuranteedString(key) : getString(key).orElse(defaultValue),
+			binding = Bindings.createStringBinding(() -> defaultValue == null ? getGuaranteedString(key) : getString(key).orElse(defaultValue),
 					resourceBundle);
 			keyStringBindings.put(key, binding);
 			return binding;
 		} else {
-			return Bindings.createStringBinding(() -> defaultValue == null ? getGuranteedString(key, parameter)
+			return Bindings.createStringBinding(() -> defaultValue == null ? getGuaranteedString(key, parameter)
 					: String.format(getLocale(), getString(key).orElse(defaultValue), parameter), resourceBundle);
 		}
 	}
@@ -332,14 +332,14 @@ public abstract class BaseResource implements Resource, Disposable {
 		// @formatter:off
 		return Bindings.createStringBinding(
 				() -> defaultValue == null 
-						? getGuranteedString(type.get().getKey())
+						? getGuaranteedString(type.get().getKey())
 						: String.format(getLocale(), getString(type.get().getKey()).orElse(defaultValue), parameter),
 				finalDependencies.stream().toArray(size -> new Observable[size]));
 		// @formatter:on
 	}
 	
 	@Override
-	public void dispose() {
+	public synchronized void dispose() {
 		keyStringBindings.clear();
 		keyBooleanBindings.clear();
 		keyIntegerBindings.clear();

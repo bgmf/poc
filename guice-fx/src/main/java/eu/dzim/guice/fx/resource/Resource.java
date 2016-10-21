@@ -81,7 +81,7 @@ public interface Resource {
 	 * 
 	 * @return the string resource, or the key within exclamation marks, if the key is non-existent in the resources
 	 */
-	String getGuranteedString(String key);
+	String getGuaranteedString(String key);
 	
 	/**
 	 * Use this method, if the key you want to fetch contains formatting options (see {@link Formatter}).
@@ -93,7 +93,7 @@ public interface Resource {
 	 * 
 	 * @return the formatted string resource, or something within exclamation marks, if the key is non-existent in the resources
 	 */
-	String getGuranteedString(String key, Object... args);
+	String getGuaranteedString(String key, Object... args);
 	
 	/**
 	 * Use this method, if you need only the plain string for a specific key.

@@ -48,7 +48,7 @@ public class Main extends Application {
 		stage.setOnCloseRequest(this::handleCloseRequest);
 		
 		injector.getInstance(SchedulerExample.class);
-		System.err.println(injector.getInstance(Resource.class).getGuranteedString("key"));
+		System.err.println(injector.getInstance(Resource.class).getGuaranteedString("key"));
 		
 		stage.show();
 	}
