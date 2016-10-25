@@ -1,0 +1,10 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import org.jpedal.PdfDecoderFX
+import eu.dzim.tests.fx.PDFTestController
+
+component PDFTest controlledby PDFTestController {
+	BorderPane id root {
+	}
+}

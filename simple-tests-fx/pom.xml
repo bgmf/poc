@@ -7,12 +7,17 @@
     <artifactId>poc-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>eu.dzim.poc</groupId>
   <artifactId>simple-tests-fx</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>simple-tests-fx</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.jpedal</groupId>
+  		<artifactId>OpenViewerFX</artifactId>
+  		<version>7.5.30</version>
+  	</dependency>
+  </dependencies>
 </project>
