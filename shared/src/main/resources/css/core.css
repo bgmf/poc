@@ -1,0 +1,1733 @@
+.root {
+	-listmenu-color1: #3da0e3;
+	-listmenu-item-color1: #3da0e3;
+	-listmenu-item-hover-color1: #4aa7e5;
+	-listmenu-item-active-color1: #1e88cf;
+	
+	-listmenu-color1: black;
+	-listmenu-item-color1: black;
+	-listmenu-item-hover-color1: darkgrey;
+	-listmenu-item-active-color1: derive(darkgrey, -25.0%);
+	
+	-login-overlay-background: rgb(0.0, 0.0, 0.0, 0.75);
+	
+	-bg-dark: #1fa5d1;
+	-bg-light: #a1d7ea;
+	
+	-brand-primary: #004893;
+	-brand-secondary: #009EE3;
+	-brand-tertiary: #99D8F4;
+	-brand-gradient-horizontal: linear-gradient(to right, #004893 0%, #009EE3 100%);
+	-brand-gradient-vertical: linear-gradient(to bottom, #004893 0%, #009EE3 100%);
+	
+	-neutral-black: black;
+	-neutral-white: white;
+	-neutral-dark-gray-1: #505050;
+	-neutral-dark-gray-2: #999999;
+	-neutral-light-gray-1: #E0E0E0;
+	-neutral-light-gray-2: #F3F3F3;
+	
+	-util-error: #EF3C2F;
+	-util-positive: #00BD76;
+	-util-warning: #EEBA2B;
+	-util-neutral: #009EE3;
+	
+	-overlay-dark: rgb(0.8, 0.8, 0.8, 0.7); /*#505050*/
+	
+	-fx-base: -brand-secondary;
+	-fx-background-color: -neutral-white;
+}
+
+/*
+ * Separator appearance
+ */
+
+.separator .line {
+	-fx-base: -neutral-white;
+}
+
+.separator-thick .line {
+    /*-fx-background: red;*/
+    /*-fx-border-style: segments(0.166667em, 0.166667em);*/
+    -fx-border-width: 0.2em; /* 1 */
+}
+
+.separator-thin .line {
+    /*-fx-background: red;*/
+    /*-fx-border-style: segments(0.166667em, 0.166667em);*/
+    -fx-border-width: 0.083333em; /* 1 */
+}
+
+/*
+ * Defaults for several controls
+ */
+
+.button,
+.toggle-button,
+.menu-button,
+.choice-box,
+.color-picker.split-button > .color-picker-label,
+.combo-box-base,
+.combo-box-base:editable > .arrow-button {
+	-fx-background-color: -brand-secondary;
+    -fx-background-insets: 0; /*0 0 -1 0, 0, 1, 2;*/
+    -fx-background-radius: 0px, 0px, 0px, 0px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em;
+    -fx-text-fill: -neutral-white;
+    -fx-alignment: CENTER; /*top-left, top-center, top-right, center-left, center, center-right, bottom-left, bottom-center, bottom-right, baseline-left, baseline-center, baseline-right*/
+    /*-fx-content-display: LEFT;*/ /*top, right, bottom, left, center, right, graphic-only, text-only*/
+}
+
+/*
+ * RadioButton & CheckBox appearance
+ */
+
+.radio-button > .radio,
+.check-box > .box {
+	-fx-background-color: -brand-secondary;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-text-fill: -neutral-white;
+    -fx-alignment: CENTER; /*top-left, top-center, top-right, center-left, center, center-right, bottom-left, bottom-center, bottom-right, baseline-left, baseline-center, baseline-right*/
+}
+
+.radio-button:hover > .radio,
+.check-box:hover > .box {
+	-fx-color: -brand-tertiary;
+}
+
+.radio-button:armed > .radio,
+.check-box:armed .box {
+	-fx-color: -brand-primary;
+}
+
+.radio-button:focused > .radio,
+.radio-button:selected > .radio,
+.check-box:focused > .box,
+.check-box:selected > .box {
+	-fx-background-color: -brand-primary;
+}
+
+.radio-button:disabled,
+.check-box:disabled  {
+	-fx-opacity: 0.4;
+	-fx-color: -neutral-dark-gray-2;
+}
+
+/*
+ * RadioButton
+ */
+
+.radio-button > .radio {
+	-fx-border-width: 2px;
+    -fx-border-color: -neutral-dark-gray-1;
+    -fx-background-color: white;
+    -fx-background-image: null;
+    -fx-border-radius: 15px;
+    -fx-padding: 4px;
+}
+
+.radio-button:hover > .radio {
+	-fx-border-color: -brand-tertiary;
+}
+.radio-button:armed > .radio,
+.radio-button:selected > .radio {
+	-fx-border-color: -neutral-dark-gray-1;
+	-fx-background-color: transparent;
+}
+
+.radio-button > .radio > .dot {
+	-fx-background-insets: 0;
+	-fx-background-color: transparent;
+	-fx-background-radius: 10px;
+	-fx-padding: 4px;
+}
+
+.radio-button:selected > .radio > .dot {
+	-fx-background-color: -brand-secondary;
+}
+
+/*
+ * CheckBox appearance
+ */
+ 
+ .check-box > .box {
+ 	-fx-border-width: 2px;
+    -fx-border-color: -neutral-dark-gray-1;
+    -fx-border-radius: 2px;
+	-fx-background-color: white;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-text-fill: -neutral-white;
+    -fx-alignment: CENTER; /*top-left, top-center, top-right, center-left, center, center-right, bottom-left, bottom-center, bottom-right, baseline-left, baseline-center, baseline-right*/
+}
+
+.check-box:hover > .box {
+	-fx-border-color: -brand-tertiary;
+}
+
+.check-box > .box > .mark {
+    -fx-background-color: null;
+    -fx-padding: 0.416667em 0.416667em 0.5em 0.5em;
+    /*-fx-shape: "M-0.25,6.083c0.843-0.758,4.583,4.833,5.75,4.833S14.5-1.5,15.917-0.917c1.292,0.532-8.75,17.083-10.5,17.083C3,16.167-1.083,6.833-0.25,6.083z";*/
+    -fx-shape: "M10.9531936,3.35999695 L7.09547081,9.88133168 L5.07395578,7.85981665 C4.82821355,7.61407441 4.43004891,7.61407441 4.18430668,7.85981665 C3.93856444,8.10555889 3.93856444,8.50372352 4.18430668,8.74946576 L6.20582171,10.7709808 L7.33327803,11.7374235 L8.1423841,10.5134107 L11.914579,4.02484771 C12.1327032,3.70619979 12.179991,3.30929175 11.7869308,3.0761762 C11.3584048,2.87301232 11.079311,3.11363502 10.9531936,3.35999695 Z";
+}
+
+.check-box:selected > .box,
+.check-box:armed > .box,
+.check-box:focused > .box {
+	-fx-background-color: white;
+}
+
+.check-box:selected > .box > .mark {
+    -fx-background-color: -brand-secondary;
+}
+
+.check-box:indeterminate  > .box > .mark {
+    -fx-shape: "M0,0H10V2H0Z";
+    -fx-scale-shape: false;
+    -fx-padding: 0.666667em; 
+}
+
+/*
+ * several default control appearance overrides
+ */
+
+.button:hover,
+.toggle-button:hover,
+.menu-button:hover,
+.split-menu-button > .label:hover,
+.split-menu-button > .arrow-button:hover,
+.slider .thumb:hover,
+.scroll-bar > .thumb:hover,
+.scroll-bar > .increment-button:hover,
+.scroll-bar > .decrement-button:hover,
+.choice-box:hover,
+.color-picker.split-button > .arrow-button:hover,
+.color-picker.split-button > .color-picker-label:hover,
+.combo-box-base:hover,
+.combo-box-base:editable > .arrow-button:hover,
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover,
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button:hover {
+	-fx-color: -brand-tertiary;
+	/*-fx-background-color: -brand-tertiary;*/ /* TODO decide, if this is good */
+}
+
+.button:armed,
+.toggle-button:armed,
+.menu-button:armed,
+.split-menu-button:armed > .label,
+.split-menu-button > .arrow-button:pressed,
+.split-menu-button:showing > .arrow-button,
+.slider .thumb:pressed,
+.scroll-bar > .thumb:pressed,
+.scroll-bar > .increment-button:pressed,
+.scroll-bar > .decrement-button:pressed,
+.choice-box:showing,
+.combo-box-base:showing,
+.combo-box-base:editable:showing > .arrow-button,
+.spinner .increment-arrow-button:pressed,
+.spinner .decrement-arrow-button:pressed,
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button:pressed {
+	-fx-color: -brand-primary;
+}
+
+/*.button:focused,*/
+.button:pressed,
+.button:selected, /* TODO */
+.toggle-button:focused,
+.toggle-button:selected,
+.menu-button:focused,
+.choice-box:focused,
+.color-picker.split-button:focused > .color-picker-label,
+.combo-box-base:focused,
+.slider:focused .thumb {
+	-fx-background-color: -brand-primary;
+    -fx-background-insets: -0.2, 1, 2, -1.4, 2.6;
+    -fx-background-radius: 0, 0, 0, 0, 0;
+}
+
+/*
+ * disabled appearance for several controls
+ */
+
+.button:disabled,
+.toggle-button:disabled,
+.menu-button:disabled,
+.split-menu-button:disabled,
+.slider:disabled,
+.scroll-bar:disabled,
+.choice-box:disabled,
+.date-cell:disabled > *,
+.tab-pane > .tab-header-area > .headers-region > .tab:disabled,
+.combo-box-base:disabled {
+	-fx-opacity: 0.4;
+	-fx-color: -neutral-dark-gray-2;
+}
+
+/*
+.toggle-button:selected {
+    -fx-background-insets: 0 0 -1 0, 0, 1;
+}
+.toggle-button:selected:focused {
+    -fx-background-insets: -0.2, 1, -1.4, 2.6;
+    -fx-background-radius: 3, 2, 4, 0;
+}
+*/
+
+/*
+ * ScrollBar appearance
+ */
+
+.scroll-bar {
+	-fx-background-color: -neutral-light-gray-2;
+	-fx-padding: 1 1 1 1;
+}
+
+/*
+.scoll-bar:hover {
+	-fx-padding: 5px;
+}
+*/
+
+.scroll-bar > .decrement-button {
+	/*-fx-color: derive(-brand-tertiary, 50%);*/
+	-fx-background-color: -neutral-light-gray-1;
+	-fx-background-radius: 2;
+	-fx-padding: 3 3 3 3;
+}
+.scroll-bar > .decrement-button:hover,
+.scroll-bar > .decrement-button:pressed {
+	-fx-background-color: -brand-secondary;
+}
+
+.scroll-bar > .increment-button {
+	/*-fx-color: derive(-brand-tertiary, 50%);*/
+	-fx-background-color: -neutral-light-gray-1;
+	-fx-background-radius: 2;
+	-fx-padding: 3 3 3 3;
+}
+.scroll-bar > .increment-button:hover,
+.scroll-bar > .increment-button:pressed {
+	-fx-background-color: -brand-secondary;
+}
+
+.scroll-bar .track {
+	-fx-background-color: -neutral-light-gray-2;
+	-fx-background-insets: 2;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar > .thumb {
+	-fx-background-color: -neutral-dark-gray-2;
+	-fx-background-insets: 2;
+    -fx-background-radius: 2;
+}
+.scroll-bar > .thumb:hover,
+.scroll-bar > .thumb:pressed {
+	-fx-background-color: -brand-secondary;
+}
+
+/* keyboard scrolling */
+/*
+.scroll-bar:vertical {
+    -fx-unit-increment: 10 ;
+    -fx-block-increment: 50 ;
+}
+.scroll-bar:horizontal {
+    -fx-unit-increment: 5 ;
+    -fx-block-increment: 20 ;
+}
+*/
+
+/*
+ * Default button appearance
+ */
+
+.button:default {
+    -fx-base: -brand-secondary;
+}
+
+/*
+ * Button & ToogleButton, primary coloring
+ */
+
+.button.primary,
+.toggle-button.primary {
+    -fx-background-color: -neutral-dark-gray-1;
+    -fx-text-fill: -neutral-white;
+}
+
+.button.primary:hover,
+.toggle-button.primary:hover {
+	-fx-background-color: -brand-secondary;
+}
+
+.button.primary:armed,
+.button.primary:pressed,
+.button.primary:selected,
+.toggle-button.primary:armed,
+.toggle-button.primary:pressed,
+.toggle-button.primary:selected {
+    -fx-background-color: -brand-secondary;
+    -fx-text-fill: -neutral-black;
+}
+
+.button.primary:disabled,
+.toggle-button.primary:disabled {
+	-fx-opacity: 1.0;
+    -fx-background-color: -neutral-dark-gray-2;
+}
+
+/*
+ * Button & ToogleButton, secondary coloring
+ */
+
+.button.secondary,
+.toggle-button.secondary {
+    -fx-background-color: -neutral-white;
+    -fx-border-color: -neutral-dark-gray-1;
+    -fx-text-fill: -neutral-dark-gray-1;
+}
+
+.button.secondary:hover,
+.toggle-button.secondary:hover {
+    -fx-border-color: -brand-secondary;
+    -fx-text-fill: -brand-secondary;
+}
+
+.button.secondary:armed,
+.button.secondary:pressed,
+.button.secondary:selected,
+.toggle-button.secondary:armed,
+.toggle-button.secondary:pressed,
+.toggle-button.secondary:selected {
+    -fx-border-color: -brand-secondary;
+    -fx-text-fill: -neutral-black;
+}
+
+.button.secondary:disabled,
+.toggle-button.secondary:disabled {
+	-fx-opacity: 1.0;
+    -fx-border-color: -neutral-dark-gray-2;
+    -fx-text-fill: -neutral-dark-gray-2;
+}
+
+/*
+ * Button & ToogleButton, tertiary coloring
+ */
+
+.button.tertiary,
+.toggle-button.tertiary {
+    -fx-background-color: -neutral-white;
+    -fx-border-color: -neutral-white;
+    -fx-text-fill: -brand-secondary;
+}
+
+.button.tertiary:hover,
+.toggle-button.tertiary:hover {
+    -fx-text-fill: -neutral-dark-gray-2;
+}
+
+.button.tertiary:armed,
+.button.tertiary:pressed,
+.button.tertiary:selected,
+.toggle-button.tertiary:armed,
+.toggle-button.tertiary:pressed,
+.toggle-button.tertiary:selected {
+    -fx-text-fill: -neutral-dark-gray-1;
+}
+
+.button.tertiary:disabled,
+.toggle-button.tertiary:disabled {
+	-fx-opacity: 1.0;
+	-fx-background-color: -neutral-dark-gray-2;
+    -fx-text-fill: -neutral-white;
+}
+
+/*
+ * Button & ToogleButton, acting as a link
+ */
+
+.button.link,
+.toggle-button.link {
+    -fx-background-color: null;
+    -fx-border-color: null;
+    -fx-text-fill: -brand-secondary;
+}
+
+.button.link:hover,
+.toggle-button.link:hover {
+    -fx-text-fill: -brand-tertiary;
+}
+
+.button.link:armed,
+.button.link:pressed,
+.button.link:selected,
+.toggle-button.link:armed,
+.toggle-button.link:pressed,
+.toggle-button.link:selected {
+    -fx-text-fill: -brand-primary;
+}
+
+.button.link:disabled,
+.toggle-button.link:disabled {
+    -fx-text-fill: -neutral-dark-gray-1;
+}
+
+/*
+ * TextArea appearance
+ */
+
+.text-area {
+	-fx-background-color: null;
+	-fx-background-radius: 0;
+	-fx-border-color: -neutral-light-gray-1;
+}
+
+.text-area:focused {
+    -fx-background-color: null;
+    -fx-border-color: -brand-secondary;
+}
+
+.text-area > .scroll-pane {
+    -fx-background-color: null;
+    -fx-border-color: null;
+}
+
+.text-area .content {
+	-fx-padding: 4 6 4 6;
+	-fx-background-radius: 0;
+	-fx-background-color: -neutral-white;
+	-fx-border-color: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;	
+}
+
+.text-area:focused .content {
+	-fx-background-color: -neutral-white;
+	-fx-border-color: null;
+}
+
+/*
+ * TextField appearance
+ */
+
+.text-field {
+	-fx-background-radius: 0, 0, 0, 0, 0;
+	-fx-background-color: -neutral-white;
+	-fx-border-color: -neutral-light-gray-1;
+    /*-fx-background-color: #a9a9a9 , white , white;;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;*/
+}
+
+.text-field:focused {
+	-fx-background-radius: 0, 0, 0, 0, 0;
+	-fx-background-color: -neutral-white;
+	-fx-border-color: -brand-secondary;
+    /*-fx-background-color: #a9a9a9 , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;*/
+}
+
+.text-field:disabled {
+	-fx-opacity: 0.4;
+}
+
+/*
+ * Container for an embedded TextField: HBox
+ */
+
+.text-field.extended {
+	-fx-padding: 0 3 0 3;
+}
+
+/* embedded TextField */
+
+.text-field.embedded {
+	-fx-border-color: transparent;
+	-fx-padding: 3 2 3 2;
+}
+
+.text-field:focused.embedded {
+	-fx-border-color: transparent;
+}
+
+.text-field:disabled.embedded {
+	-fx-opacity: 0.4;
+}
+
+/*
+ * ListView and other components
+ */
+
+.scroll-pane,
+.split-pane,
+.list-view,
+.tree-view,
+.table-view,
+.tree-table-view,
+.html-editor {
+    -fx-background-color: -neutral-white;
+    -fx-background-insets: 0, 1;
+    -fx-padding: 1;
+}
+.scroll-pane:focused,
+.split-pane:focused,
+.list-view:focused,
+.tree-view:focused,
+.table-view:focused,
+.tree-table-view:focused,
+.html-editor:contains-focus {
+    -fx-background-color: -neutral-white;
+    /*-fx-background-insets: -1.4, -0.3, 1;
+    -fx-background-radius: 2, 0, 0;*/
+}
+/* ones with grey -fx-background not lighter -fx-control-inner-background */
+.scroll-pane,
+.split-pane {
+    -fx-background-color: -neutral-white;
+}
+.scroll-pane:focused,
+.split-pane:focused {
+    -fx-background-color: -neutral-white;
+}
+/* standard cell */
+.list-cell,
+.tree-cell {
+    -fx-background: -fx-control-inner-background;
+    -fx-background-color: -neutral-white;
+    -fx-text-fill: -fx-text-background-color;
+}
+/* Selected rows */
+.list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected,
+.tree-view:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:filled:selected,
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:selected,
+.tree-table-view:focused > .virtual-flow > .clipped-container > .sheet > .tree-table-row-cell:filled:selected,
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected,
+.tree-table-view:focused > .virtual-flow > .clipped-container > .sheet > .tree-table-row-cell .tree-table-cell:selected {
+    -fx-background: -brand-secondary; /*-fx-selection-bar;*/
+    -fx-table-cell-border-color: derive(-fx-selection-bar, 20%);
+}
+/* Selected when control is not focused */
+.list-cell:filled:selected,
+.tree-cell:filled:selected,
+.table-row-cell:filled:selected,
+.tree-table-row-cell:filled:selected,
+.table-row-cell:filled > .table-cell:selected,
+.tree-table-row-cell:filled > .tree-table-cell:selected {
+    -fx-background: -brand-secondary; /*-fx-selection-bar-non-focused;*/
+    -fx-background-color: -brand-secondary;
+    -fx-table-cell-border-color: derive(-brand-secondary, 20%);/*derive(-fx-selection-bar-non-focused, 20%);*/
+}
+/* focused cell (keyboard navigation) */
+.list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:focused,
+.tree-view:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused,
+.table-view:focused:row-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell:focused,
+.tree-table-view:focused:row-selection > .virtual-flow > .clipped-container > .sheet > .tree-table-row-cell:focused,
+.table-view:focused:cell-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell > .table-cell:focused,
+.tree-table-view:focused:cell-selection > .virtual-flow > .clipped-container > .sheet > .tree-table-row-cell > .tree-table-cell:focused {
+    -fx-background-color: -brand-secondary; /*-fx-background, -fx-cell-focus-inner-border, -fx-background;*/
+    /*-fx-background-insets: 0, 1, 2;*/
+}
+
+.list-view.bordered {
+	-fx-border-color: -neutral-light-gray-1;
+}
+
+/* ListView and ListCell */
+.list-cell {
+	/*-fx-padding: 0.25em 0.583em 0.25em 0.583em;*/ /* 3 7 3 7 */
+}
+.list-cell:odd {
+	/*-fx-background: -fx-control-inner-background-alt;*/
+    -fx-background: -neutral-white;
+}
+
+.list-cell:selected {
+	-fx-background-color: -brand-secondary;
+}
+
+/*
+ * ComboBox and DatePicker related (some shared with the above ListView stuff)
+ */
+
+.combo-box-base .list-cell:hover {
+	-fx-background-color: -brand-tertiary;
+}
+
+.combo-box .list-view {
+	-fx-border-color: -neutral-light-gray-1;
+}
+
+.combo-box-base,
+.combo-box-base:editable > .arrow-button {
+    -fx-background-color: -neutral-white;/*-fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;*/
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -fx-text-base-color;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+.combo-box-base:hover,
+.combo-box-base:editable > .arrow-button:hover {
+    -fx-color: -brand-tertiary;
+}
+.combo-box-base:showing,
+.combo-box-base:editable:showing > .arrow-button {
+    -fx-color: -neutral-white;
+}
+.combo-box-base:focused {
+    -fx-background-color: -neutral-white;/*-fx-focus-color, -fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color;*/
+    -fx-background-insets: -0.2, 1, 2, -1.4, 2.6;
+    -fx-background-radius: 3, 2, 1, 4, 1;
+}
+.combo-box-base > .arrow-button > .arrow {
+	-fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 0 0 -1 0, 0;
+    -fx-padding: 0.166667em 0.333333em 0.166667em 0.333333em; /* 2 4 2 4 */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+.combo-box-base {
+    -fx-padding: 0;
+    -fx-border-color: -neutral-light-gray-1;
+}
+.combo-box-base:focused {
+    -fx-padding: 0;
+    -fx-border-color: -brand-secondary;
+}
+
+.combo-box > .list-cell {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+}
+.combo-box-base > .arrow-button {
+    -fx-background-radius: 0 3 3 0, 0 2 2 0, 0 1 1 0;
+    -fx-padding: 0.5em 0.667em 0.5em 0.833333em; /* 6 8 6 10 */
+    -fx-background-color: transparent;
+}
+.combo-box-base:editable > .arrow-button,
+.date-picker > .arrow-button {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 1 1 1 0, 1, 2;
+    -fx-background-radius: 0 3 3 0, 0 2 2 0, 0 1 1 0;
+}
+.combo-box-base:editable > .text-field,
+.date-picker > .text-field {
+    -fx-background-color: white;
+        /*linear-gradient(to bottom, derive(-fx-text-box-border, -10%), -fx-text-box-border),
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);*/
+    -fx-background-insets: 1 0 1 1;
+    -fx-background-radius: 2 0 0 2;
+}
+.combo-box-base:editable:focused,
+.date-picker:focused {
+    -fx-background-color: -fx-focus-color;
+    -fx-background-insets: -0.2;
+    -fx-background-radius: 3;
+}
+.combo-box-base:editable:focused > .text-field,
+.combo-box-base:editable > .text-field:focused,
+.date-picker:focused > .text-field,
+.date-picker > .text-field:focused {
+    -fx-background-color:
+        -fx-control-inner-background,
+        -fx-faint-focus-color,
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
+    -fx-background-insets: 1 0 1 1, 1 0 1 1, 3 2 3 3;
+    -fx-background-radius: 2 0 0 2, 1 0 0 1, 0;
+}
+.combo-box-base:editable:focused > .arrow-button,
+.date-picker:focused > .arrow-button {
+    -fx-background-color: -fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color;
+    -fx-background-insets: 1, 2, 1, 2.6;
+    -fx-background-radius: 0 2 2 0, 0 1 1 0, 0 1 1 0, 0 1 1 0;
+}
+.combo-box-popup > .list-view {
+    -fx-background-color:
+        linear-gradient(to bottom,
+            derive(-fx-color,-17%),
+            derive(-fx-color,-30%)
+        ),
+        -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 12, 0.0 , 0 , 8 );
+}
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-padding: 4 0 4 5;
+    /* No alternate highlighting */
+    -fx-background: -fx-control-inner-background;
+}
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+}
+.combo-box-popup  > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected,
+.combo-box-popup  > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-background, -fx-cell-focus-inner-border, -fx-background;
+    -fx-background-insets: 0, 1, 2;
+}
+.combo-box-popup > .list-view > .placeholder > .label {
+    -fx-text-fill: derive(-fx-control-inner-background,-30%);
+}
+
+/*
+ * Progress indicator on busy overlay
+ */
+
+.progress-indicator.overlay-progress .percentage {
+	-fx-fill: -neutral-white;
+}
+
+/*
+ * Transparent Panes
+ */
+
+.transparent-scroll-pane {
+	-fx-background-color: transparent;
+}
+
+.transparent-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.transparent-pane {
+	-fx-background-color: transparent;
+}
+
+.white-pane {
+	-fx-background-color: white;
+}
+
+/*
+ * Toolbar
+ */
+
+.toolbar-box {
+	-fx-padding: 5.0 5.0 5.0 5.0;
+	-fx-min-height: 50.0;
+	-fx-alignment: center; /*top-left, top-center, top-right, center-left, center, center-right, bottom-left, bottom-center, bottom-right, baseline-left, baseline-center, baseline-right*/
+	-fx-spacing: 5.0;
+	-fx-background-color: -neutral-light-gray-1; /*-brand-secondary;*/
+	-fx-text-fill: -neutral-dark-gray-1;
+}
+
+.toolbar-box #applicationLabel {
+	-fx-text-fill: -neutral-dark-gray-1;
+}
+
+/*
+ * Overlay related styles
+ */
+
+.overlay-background {
+	-fx-background-color: -neutral-black;
+}
+
+.menu-background {
+	-fx-background-color: -brand-secondary;
+}
+
+.column-overlay-dark {
+	-fx-background-color: -brand-secondary;
+}
+
+.column-overlay-light {
+	-fx-background-color: -brand-tertiary;
+}
+
+/*
+ * Root center
+ */
+
+.center-pane {
+	-fx-background-color: -neutral-white;
+	/*-fx-background-image: url("./img/hg_tablet_1980x1080.jpg");
+	-fx-background-size: cover;*/
+}
+
+/*
+ * Navigation Pane and specific labels
+ */
+
+.navigation {
+	-fx-background-color: -neutral-light-gray-1;
+}
+.navigation:hover {
+	-fx-background-color: -neutral-dark-gray-2;
+}
+
+.navigation:selected {
+	-fx-background-color: -brand-secondary;
+}
+
+.navigation:selected-light {
+	-fx-background-color: -brand-tertiary;
+}
+
+.navigation-no-hover {
+	-fx-background-color: -neutral-light-gray-1;
+}
+
+.menu-header {
+	-fx-alignment: center-left; /*top-left, top-center, top-right, center-left, center, center-right, bottom-left, bottom-center, bottom-right, baseline-left, baseline-center, baseline-right*/
+}
+
+.nav-text-default {
+	-fx-text-fill: -neutral-black;
+}
+
+.nav-text-white {
+	-fx-text-fill: -neutral-white;
+}
+
+.nav-text-bold {
+	-fx-font-weight: bold;
+}
+
+.nav-text-big {
+	-fx-font-size: 1.5em;
+}
+
+/*
+ * Colum Selection Container
+ */
+
+.column-selection {
+	-fx-background-color: -neutral-white;
+}
+
+/*
+ * Table Entry, Static left content
+ */
+
+.column-selection-table-entry-first {
+	/*-fx-border-color: black;*/
+	-fx-border-color: black transparent black black;  
+	-fx-border-style: dotted;
+}
+
+/* .column-selection-table-entry-first * */
+.column-selection-table-entry-first .label,
+.column-selection-table-entry-first TextFlow {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: dotted;
+	-fx-min-height: 32;
+	-fx-padding: 0 0 0 16;
+}
+
+.column-selection-table-entry-first > .first {
+	-fx-border-color: transparent transparent black transparent;
+	-fx-background-color: -neutral-light-gray-1;
+}
+
+.column-selection-table-entry-first > .last {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: dotted;
+	/*-fx-min-height: 34;*/
+}
+
+.column-selection-table-entry-first VBox > .first {
+	-fx-border-color: transparent; 
+}
+
+.column-selection-table-entry-first VBox > .last {
+	-fx-border-color: black transparent transparent transparent; 
+}
+
+/*
+ * Table Entry Container
+ */
+
+.column-selection-table-container {
+	-fx-border-color: transparent transparent transparent black; 
+	-fx-border-style: dotted;
+	-fx-padding: 0 -1 0 0;
+}
+
+/*
+ * Table Entry
+ */
+
+.column-selection-table-entry {
+	-fx-border-color: black black black transparent; 
+	-fx-border-style: dotted;
+}
+
+.column-selection-table-entry:selected {
+	-fx-border-color: -brand-primary;
+	-fx-border-style: solid;
+}
+
+/* .column-selection-table-entry * */
+.column-selection-table-entry .label,
+.column-selection-table-entry TextFlow {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: dotted;
+	-fx-min-height: 32;
+}
+
+.column-selection-table-entry > .first {
+	-fx-border-color: transparent transparent black transparent; 
+	-fx-background-color: -neutral-light-gray-1;
+	-fx-background-insets: 0 0 0 -1;
+}
+
+.column-selection-table-entry:selected  > .first {
+	-fx-background-color: -brand-tertiary;
+	-fx-background-insets: 0 0 0 0;
+}
+
+.column-selection-table-entry > .last {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: dotted;
+	-fx-min-height: 32;
+}
+
+.column-selection-table-entry VBox > .first {
+	-fx-border-color: transparent; 
+}
+
+.column-selection-table-entry VBox > .last {
+	-fx-border-color: black transparent transparent transparent; 
+}
+
+/*
+ * Tile Container
+ */
+
+/* ScrollPane */
+.column-selection-tile-parent {
+	-fx-padding: 0.0 0.0 0.0 0.0;
+}
+
+.column-selection-tile-parent *.viewport {
+	-fx-padding: 0.0 0.0 0.0 0.0;
+}
+
+/* Flow/TilePane */
+.column-selection-tile-flow {
+	/*-fx-padding: 0.0 5.0 0.0 5.0;*/
+	/* flow & tile pane */
+	-fx-orientation: horizontal; /* horizontal, vertical */
+	-fx-hgap: 5.0;
+	-fx-vgap: 5.0;
+	-fx-alignment: top-center; /* top-left, top-center, top-right, center-left, center, center-right bottom-left, bottom-center, bottom-right, baseline-left, baseline-center, baseline-right */
+	/* flow pane */
+	-fx-column-halignment: left; /* left, center, right */
+	-fx-row-valignment: center; /* top, center, baseline, bottom */
+	/* tile pane */
+	/*-fx-pref-rows: 5;
+	-fx-pref-columns: 5;
+	-fx-pref-tile-width: -1;
+	-fx-pref-tile-height: -1;
+	-fx-tile-alignment: center;*/ /* see -fx-alignment */
+}
+
+/*
+ * Tile Entry
+ */
+
+/* VBox */
+.column-selection-tile {
+	/*-fx-padding: 1.0 1.0 1.0 1.0;*/
+	-fx-border-color: -neutral-dark-gray-2;
+	-fx-background-color: -neutral-light-gray-2;
+	/*-fx-max-width: 380.0;*/
+	/*-fx-max-height: 250.0;*/
+	-fx-pref-width: 400.0;
+	-fx-pref-height: 250.0;
+}
+
+/* HBox */
+.column-selection-tile .tile-header {
+	-fx-background-color: -neutral-light-gray-1;
+	-fx-padding: 1.0 5.0 1.0 5.0;
+	-fx-alignment: center;
+	-fx-spacing: 5.0;
+}
+
+.column-selection-tile:selected {
+	-fx-border-color: -brand-secondary;
+	-fx-background-color: -brand-tertiary;
+}
+
+.column-selection-tile:selected .tile-header {
+	-fx-background-color: -brand-secondary;
+}
+
+/* HBox */
+.column-selection-tile .tile-content {
+	-fx-padding: 5.0 5.0 5.0 5.0;
+	-fx-spacing: 10.0;
+	-fx-alignment: center-left;
+}
+
+/* GridPane */
+.column-selection-tile .tile-content .label-box {
+	-fx-alignment: center;
+	-fx-hgap: 10.0;
+	-fx-vgap: 5.0;
+}
+
+.column-selection-tile .tile-content .label-box .tile-label {
+	-fx-text-alignment: right; /* left, center, right, justify */
+	-fx-text-origin: baseline; /* baseline, top, bottom */
+}
+
+.column-selection-tile .tile-content .label-box .tile-value {
+	-fx-text-alignment: left; /* left, center, right, justify */
+	-fx-text-origin: baseline; /* baseline, top, bottom */
+}
+
+/* Pane */
+.column-selection-tile .tile-content .tile-canvas-container {
+	/* -fx-background-color: antiquewhite, -neutral-white; */
+    /* -fx-background-insets: 0.0, 10.0; */
+    /*-fx-padding: 10.0;*/
+}
+
+/*
+ * Graphic Container
+ */
+
+/* BorderPane */
+.column-selection-graphic {
+	
+}
+
+.column-selection-graphic .top {
+	-fx-padding: 5.0 0.0;
+	-fx-alignment: center;
+}
+
+.column-selection-graphic .center {
+	-fx-alignment: center;
+}
+
+.column-selection-graphic .bottom {
+	-fx-padding: 5.0 0.0 5.0 0.0;
+	-fx-alignment: center;
+}
+
+.column-selection-graphic .selection-combo-box {
+	-fx-pref-width: 250;
+}
+
+.column-selection-graphic .selection-counter {
+	
+}
+
+.column-selection-graphic .selection-counter-value {
+	
+}
+
+.column-selection-graphic .button {
+	
+}
+
+.column-selection-graphic .line {
+	-fx-padding: 0.0 0.0 5.0 0.0;
+}
+
+/*
+ * Graphic Container - Overlay
+ */
+ 
+ /* ScrollPane */
+.column-selection-graphic-overlay {
+	-fx-padding: 0.0 0.0 0.0 0.0;
+}
+
+.column-selection-graphic-overlay *.viewport {
+	-fx-padding: 0.0 0.0 0.0 0.0;
+}
+
+/* Flow/TilePane */
+.column-selection-graphic-overlay-flow {
+	/*-fx-padding: 0.0 5.0 0.0 5.0;*/
+	/* flow & tile pane */
+	-fx-orientation: horizontal; /* horizontal, vertical */
+	-fx-hgap: 5.0;
+	-fx-vgap: 5.0;
+	-fx-alignment: top-center; /* top-left, top-center, top-right, center-left, center, center-right bottom-left, bottom-center, bottom-right, baseline-left, baseline-center, baseline-right */
+	/* flow pane */
+	-fx-column-halignment: left; /* left, center, right */
+	-fx-row-valignment: center; /* top, center, baseline, bottom */
+	/* tile pane */
+	/*-fx-pref-rows: 5;
+	-fx-pref-columns: 5;
+	-fx-pref-tile-width: -1;
+	-fx-pref-tile-height: -1;
+	-fx-tile-alignment: center;*/ /* see -fx-alignment */
+}
+
+.column-selection-graphic-overlay-flow .column-selection-graphic-entry {
+	-fx-pref-height: 350.0;
+}
+
+/*
+ * Graphic Entry
+ */
+
+/* VBox */
+.column-selection-graphic-entry {
+	/*-fx-padding: 1.0 1.0 1.0 1.0;*/
+	-fx-border-color: -neutral-dark-gray-2;
+	-fx-background-color: -neutral-light-gray-2;
+	/*-fx-max-width: 380.0;*/
+	/*-fx-max-height: 250.0;*/
+	-fx-pref-width: 380.0;
+	/*-fx-pref-height: 250.0;*/
+}
+
+.column-selection-graphic-entry:selected {
+	-fx-border-color: -brand-secondary;
+	-fx-background-color: -brand-tertiary;
+}
+
+/* Label */
+.column-selection-graphic-entry .graphic-header {
+	-fx-background-color: -neutral-light-gray-1;
+	-fx-padding: 7.0 5.0;
+	-fx-alignment: center-left;
+	-fx-text-alignment: left;
+	-fx-spacing: 5.0;
+}
+
+.column-selection-graphic-entry:selected .graphic-header {
+	-fx-background-color: -brand-secondary;
+}
+
+/* VBox */
+.column-selection-graphic-entry .graphic-content {
+	-fx-padding: 5.0 5.0 5.0 5.0;
+	-fx-spacing: 10.0;
+	-fx-alignment: center-left;
+	-fx-min-width: 200.0;
+}
+
+.column-selection-graphic .graphic-content .scroll-pane,
+.column-selection-graphic .graphic-content .scroll-pane:selected,
+.column-selection-graphic .graphic-content .scroll-pane:focused {
+	-fx-background-color: transparent;
+}
+
+/* GridPane */
+.column-selection-graphic-entry .graphic-content .label-box {
+	-fx-background-color: transparent;
+	-fx-alignment: center;
+	-fx-hgap: 10.0;
+	-fx-vgap: 5.0;
+}
+
+.column-selection-graphic-entry .graphic-content .label-box:selected,
+.column-selection-graphic-entry .graphic-content .label-box:focused {
+	-fx-background-color: transparent;
+}
+
+.column-selection-graphic-entry .graphic-content .label-box .tile-label {
+	-fx-text-alignment: right; /* left, center, right, justify */
+	-fx-text-origin: baseline; /* baseline, top, bottom */
+}
+
+.column-selection-graphic-entry .graphic-content .label-box .tile-value {
+	-fx-text-alignment: left; /* left, center, right, justify */
+	-fx-text-origin: baseline; /* baseline, top, bottom */
+}
+
+/* Pane */
+.column-selection-graphic-entry .graphic-content .tile-canvas-container {
+	/* -fx-background-color: antiquewhite, -neutral-white; */
+    /* -fx-background-insets: 0.0, 10.0; */
+    /*-fx-padding: 10.0;*/
+}
+
+/* VBox */
+.column-selection-graphic-entry .button-container {
+	-fx-padding: 5.0 1.0;
+	-fx-spacing: 5.0;
+}
+
+/*
+ * Column Input page
+ */
+
+.column-input-container {
+	-fx-spacing: 5;
+	-fx-fill-width: true;
+}
+
+.column-input-container .column-input-line {
+	-fx-spacing: 5;
+	-fx-alignment: center-left;  /*top-left, top-center, top-right, center-left, center, center-right, bottom-left, bottom-center, bottom-right, baseline-left, baseline-center, baseline-right*/
+	-fx-fill-height: true;
+	/*-fx-min-height: 35;
+	-fx-max-height: 100;*/
+}
+
+.column-input-container .column-input-line.large {
+	-fx-min-height: 35;
+	-fx-max-height: 100;
+}
+
+.column-input-container .column-input-line.top-indent {
+	-fx-padding: 20 0 0 0;
+}
+
+.column-input-container .column-input-line:disabled * {
+	-fx-opacity: 0.4;
+}
+
+.column-input-container .column-input-line .column-input-label {
+	-fx-pref-width: 300;
+	/*-fx-min-height: 35;*/
+	-fx-wrap-text: true;
+	-fx-text-alignment: right; /*left, center, right, justify*/
+	-fx-alignment: center-right; /*top-left, top-center, top-right, center-left, center, center-right, bottom-left, bottom-center, bottom-right, baseline-left, baseline-center, baseline-right*/
+	/*-fx-text-overrun: ellipsis;*/	/*center-ellipsis, center-word-ellipsis, clip, ellipsis, leading-ellipsis, leading-word-ellipsis, word-ellipsis*/
+}
+.column-input-container .column-input-line .column-input-label.left {
+	-fx-text-alignment: left;
+	-fx-alignment: center-left;
+}
+
+.column-input-container .column-input-line .column-input-varunit {
+	-fx-pref-width: 30;
+	-fx-text-alignment: left; /*left, center, right, justify*/
+	-fx-wrap-text: true;
+}
+
+.column-input-container .column-input-line .column-input-varunit.large {
+	-fx-pref-width: 50;
+}
+
+.column-input-container .column-input-line .column-input-value {
+	-fx-pref-width: 300;
+	-fx-wrap-text: true;
+}
+
+.column-input-container .column-input-line .column-input-value.short {
+	-fx-pref-width: 112;
+	-fx-wrap-text: true;
+}
+
+.column-input-container .column-input-line .column-input-value.box {
+	-fx-spacing: 5;
+	/*-fx-min-height: 100;*/
+}
+
+/* 
+ * FlowPane wrapped in a TextFlow - uses same values as 
+ * .column-input-container .column-input-line .column-input-varunit
+ */
+.adaptive-text-flow {
+	-fx-pref-width: 30;
+	-fx-text-alignment: left; /*left, center, right, justify*/
+	-fx-wrap-text: true;
+}
+
+/*
+ * Default text appearances (bold, colored, large, small, ...)
+ */
+
+.heading-primary {
+	-fx-text-fill: -brand-secondary;
+	-fx-font-weight: bold;
+}
+
+.heading-secondary {
+	-fx-text-fill: -neutral-black;
+	-fx-font-weight: bold;
+}
+
+.content-text-default {
+	-fx-bounds-type: logical_vertical_center;
+	-fx-text-fill: -neutral-black;
+}
+
+.content-text-white {
+	-fx-bounds-type: logical_vertical_center;
+	-fx-text-fill: -neutral-white;
+}
+
+.content-text-bold {
+	-fx-font-weight: bold;
+}
+
+.content-text-big {
+	-fx-font-size: 1.2em;
+}
+
+.content-text-large {
+	-fx-font-size: 1.2em;
+}
+
+.content-text-xlarge {
+	-fx-font-size: 1.4em;
+}
+
+.content-text-xxlarge {
+	-fx-font-size: 1.6em;
+}
+
+.content-text-xxxlarge {
+	-fx-font-size: 1.8em;
+}
+
+.content-text-xxxxlarge {
+	-fx-font-size: 2.0em;
+}
+
+.content-text-small {
+	-fx-font-size: 0.8em;
+}
+
+.content-text-xsmall {
+	-fx-font-size: 0.6em;
+}
+
+.content-text-sup {
+	-fx-font-size: 0.6em;
+	-fx-translate-y: -0.6em;
+}
+
+.content-text-sub {
+	-fx-font-size: 0.6em;
+	-fx-translate-y: 0.3em;
+}
+
+/*
+ * specific Buttons, which should appear as transparent
+ */
+
+.button-transparent {
+	-fx-background-radius: 0.0px;
+	-fx-background-color: transparent;
+	-fx-border-radius: 0.0px;
+	-fx-border-color: transparent;
+}
+
+.button-transparent:pressed {
+	-fx-background-color: -brand-tertiary;
+}
+
+.button-transparent.show-hide-pane-button > StackPane .image-view {
+	-fx-image: url("./img/icon_minus_round.png");
+}
+
+.toggle-button-transparent {
+	-fx-background-radius: 0.0px;
+	-fx-background-color: transparent;
+	-fx-border-radius: 0.0px;
+	-fx-border-color: transparent;
+}
+
+.toggle-button-transparent:selected,
+.toggle-button-transparent:armed,
+.toggle-button-transparent:pressed {
+	-fx-background-color: none;
+    -fx-background-insets: -0.2, 1, 2, -1.4, 2.6;
+    -fx-background-radius: 0, 0, 0, 0, 0;
+	-fx-border-color: -brand-tertiary;
+}
+
+/*
+ * Buttons with icons
+ */
+
+.button-arrow-up {
+	-fx-content-display: graphic-only; /*top, right, bottom, left, center, right, graphic-only, text-only*/
+	-fx-graphic-text-gap: 0.0px;
+	-fx-graphic: url("./img/arrow_up.png");
+}
+
+.button-arrow-down {
+	-fx-content-display: graphic-only; /*top, right, bottom, left, center, right, graphic-only, text-only*/
+	-fx-graphic-text-gap: 0.0px;
+	-fx-graphic: url("./img/arrow_down.png");
+}
+
+.button-arrow-left {
+	-fx-content-display: graphic-only; /*top, right, bottom, left, center, right, graphic-only, text-only*/
+	-fx-graphic-text-gap: 0.0px;
+	-fx-graphic: url("./img/arrow_left.png");
+}
+
+.button-arrow-right {
+	-fx-content-display: graphic-only; /*top, right, bottom, left, center, right, graphic-only, text-only*/
+	-fx-graphic-text-gap: 0.0px;
+	-fx-graphic: url("./img/arrow_right.png");
+}
+
+.button-calculate {
+	-fx-content-display: graphic-only; /*top, right, bottom, left, center, right, graphic-only, text-only*/
+	-fx-graphic-text-gap: 0.0px;
+}
+
+/*
+ * ImageView with preloaded icon
+ */
+
+.image-calculate {
+	-fx-image: url("./img/calc2.png");
+}
+
+/*
+ * Header for column input
+ */
+
+.pagination-box {
+	-fx-background-color: transparent;
+}
+
+.pagination-label {
+	-fx-background-radius: 0.0px;
+	-fx-background-color: transparent;
+	-fx-border-radius: 0.0px;
+	-fx-border-color: transparent;
+	-fx-bounds-type: logical_vertical_center;
+	-fx-content-display: right; /*top, right, bottom, left, center, right, graphic-only, text-only*/
+}
+
+.pagination-label:pressed {
+	-fx-background-color: none;
+}
+
+.pagination-label-done {
+	-fx-graphic: url("./img/tick.png");
+}
+
+.pagination-label-reopened {
+	-fx-graphic: url("./img/question_mark.png");
+}
+
+.pagination-label:open {
+	-fx-text-fill: -neutral-black;
+	-fx-background-color: -brand-primary;
+}
+
+.pagination-label:current {
+	-fx-text-fill: -neutral-white;
+	-fx-background-color: -brand-primary;
+}
+
+.pagination-label:done {
+	-fx-border-color: transparent transparent -brand-primary transparent;
+}
+
+.pagination-label:current-reopened {
+	-fx-text-fill: -neutral-white;
+	-fx-background-color: -util-warning;
+}
+
+.pagination-label:done-reopened {
+	-fx-border-color: transparent transparent -util-warning transparent;
+}
+
+/*
+ * Ellipsis Character
+ */
+
+.mid-ellipsis {
+	-fx-text-overrun: center-ellipsis; 
+	-fx-ellipsis-string: ' … ';
+}
+
+/*
+ * Dual Column CSS Styles, as used in the ProjectData FXML
+ */
+
+.dual-column-container {
+	-fx-spacing: 10px;
+}
+
+.dual-column-container .column {
+	-fx-spacing: 0px; /* TODO: Maybe add negative spacing? */
+}
+
+.dual-column-container .column HBox {
+	-fx-alignment: center-left;
+	-fx-spacing: 10px;
+	-fx-min-height: 35px;
+	-fx-pref-height: 35px;
+}
+
+.dual-column-container .column HBox.top {
+	-fx-alignment: top-right;
+}
+
+.dual-column-container .column HBox.top .label {
+	-fx-pref-width: 175px;
+}
+
+.dual-column-container .column .label {
+	-fx-pref-width: 175px;
+	-fx-alignment: center-right;
+}
+
+.dual-column-container .column .label-top-inset {
+	-fx-padding: 10 0 0 0;
+	-fx-pref-width: 120px;
+	-fx-alignment: center-right;
+}
+
+.dual-column-container .column HBox.compound {
+	-fx-pref-width: 150px;
+	-fx-spacing: 0px;
+}
+
+.dual-column-container .column .field {
+	-fx-pref-width: 150px;
+	-fx-alignment: center-left;
+	-fx-pref-height: 25px;
+}
+
+.dual-column-container .column .tiny-field {
+	-fx-pref-width: 100px;
+	-fx-alignment: center-left;
+	-fx-pref-height: 25px;
+}
+
+.dual-column-container .column .tiny-label {
+	-fx-pref-width: 50px;
+	-fx-alignment: center-right;
+}
+
+.dual-column-container .column .field-double {
+	-fx-pref-width: 270px;
+	-fx-alignment: center-left;
+	-fx-pref-height: 25px;
+}
+
+/* 
+ * the breadcrumb container
+ */
+ 
+.breadcrumb-container {
+	-fx-background-color: -neutral-white;
+	-fx-alignment: center;
+}
+
+/* default buttons in the breadcrumb-container */
+
+.breadcrumb-container .button,
+.breadcrumb-container .toggle-button {
+    -fx-background-color: -neutral-white;
+    -fx-border-color: -brand-secondary;
+    -fx-text-fill: -brand-secondary;
+}
+
+.breadcrumb-container .button:hover,
+.breadcrumb-container .toggle-button:hover {
+    -fx-border-color: -brand-tertiary;
+    -fx-text-fill: -brand-tertiary;
+}
+
+.breadcrumb-container .button:armed,
+.breadcrumb-container .button:pressed,
+.breadcrumb-container .button:selected,
+.breadcrumb-container .toggle-button:armed,
+.breadcrumb-container .toggle-button:pressed,
+.breadcrumb-container .toggle-button:selected {
+    -fx-border-color: -brand-primary;
+    -fx-text-fill: -brand-primary;
+}
+
+.breadcrumb-container .button:disabled,
+.breadcrumb-container .toggle-button:disabled {
+    -fx-border-color: -neutral-dark-gray-1;
+    -fx-text-fill: -neutral-dark-gray-1;
+}
+
+/* backward and forward button */
+
+.breadcrumb-container .button-back {
+	-fx-max-height: 10000;
+    -fx-content-display: graphic-only; /*top, right, bottom, left, center, right, graphic-only, text-only*/
+	-fx-graphic-text-gap: 0.0px;
+	-fx-graphic: url("./img/arrow_left.png");
+}
+
+.breadcrumb-container .button-forward {
+	-fx-max-height: 10000;
+	-fx-content-display: graphic-only; /*top, right, bottom, left, center, right, graphic-only, text-only*/
+	-fx-graphic-text-gap: 0.0px;
+	-fx-graphic: url("./img/arrow_right.png");
+}
+
+.breadcrumb-container .button-back,
+.breadcrumb-container .button-forward {
+	-fx-background-color: -neutral-white;
+    -fx-border-color: -neutral-white;
+    -fx-text-fill: -brand-secondary;
+}
+
+.breadcrumb-container .button-back:hover,
+.breadcrumb-container .button-forward:hover {
+    -fx-text-fill: -neutral-dark-gray-2;
+}
+
+.breadcrumb-container .button-back:armed,
+.breadcrumb-container .button-back:pressed,
+.breadcrumb-container .button-back:selected,
+.breadcrumb-container .button-forward:armed,
+.breadcrumb-container .button-forward:pressed,
+.breadcrumb-container .button-forward:selected {
+    -fx-text-fill: -neutral-dark-gray-1;
+}
+
+.breadcrumb-container .button-back:disabled,
+.breadcrumb-container .button-forward:disabled {
+	-fx-opacity: 1.0;
+	-fx-background-color: -neutral-dark-gray-2;
+    -fx-text-fill: -neutral-white;
+}
+
+/* breadcrumb box */
+
+.breadcrumb-container .breadcrumb-box {
+	-fx-background-color: -neutral-white;
+	-fx-alignment: center-left;
+}
+
+/* default buttons in the breadcrumb-box */
+
+.breadcrumb-container .breadcrumb-box .button,
+.breadcrumb-container .breadcrumb-box .toggle-button {
+    -fx-background-color: -brand-secondary;
+    -fx-text-fill: -neutral-white;
+}
+
+.breadcrumb-container .breadcrumb-box .button:hover,
+.breadcrumb-container .breadcrumb-box .toggle-button:hover {
+	-fx-background-color: derive(-brand-tertiary, -5%);
+}
+
+.breadcrumb-container .breadcrumb-box .button:armed,
+.breadcrumb-container .breadcrumb-box .button:pressed,
+.breadcrumb-container .breadcrumb-box .button:selected,
+.breadcrumb-container .breadcrumb-box .toggle-button:armed,
+.breadcrumb-container .breadcrumb-box .toggle-button:pressed,
+.breadcrumb-container .breadcrumb-box .toggle-button:selected {
+    -fx-background-color: -brand-primary;
+}
+
+.breadcrumb-container .breadcrumb-box .button:disabled,
+.breadcrumb-container .breadcrumb-box .toggle-button:disabled {
+    -fx-background-color: -neutral-dark-gray-1;
+}
+
+/* breadcrumb buttons */
+
+.breadcrumb-container .breadcrumb-box .breadcrumb {
+	-fx-max-height: 10000;
+	-fx-padding: 0.0 10.0 0.0 15.0;
+	-fx-content-display: right;
+}
+
+.breadcrumb-container .breadcrumb-box .breadcrumb.first {
+	-fx-padding: 0.0 10.0 0.0 5.0;
+}

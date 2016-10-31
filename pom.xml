@@ -15,9 +15,8 @@
 	<packaging>pom</packaging>
 
 	<scm>
-        	<connection>scm:git:git@github.com:bgmf/poc.git</connection>
-        </scm>
-
+		<connection>scm:git:git@github.com:bgmf/poc.git</connection>
+	</scm>
 
 	<organization>
 		<name>private</name>
@@ -44,9 +43,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<main.basedir>${basedir}/../..</main.basedir>
 		<java.version>1.8</java.version>
+		
 		<maven.compile.java.version>1.8</maven.compile.java.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<tool.base>eu.dzim.poc</tool.base>
+		<tool.version>0.0.0</tool.version>
 
 		<version.junit>4.12</version.junit>
 		<version.guice>4.1.0</version.guice>
@@ -114,19 +117,19 @@
 			</plugin>
 
 			<!-- get the build number - use property ${buildNumber}, when needed -->
-                        <plugin>
-                                <groupId>org.codehaus.mojo</groupId>
-                                <artifactId>buildnumber-maven-plugin</artifactId>
-                                <version>1.4</version>
-                                <executions>
-                                        <execution>
-                                                <phase>validate</phase>
-                                                <goals>
-                                                        <goal>create</goal>
-                                                </goals>
-                                        </execution>
-                                </executions>
-                        </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<!-- correctly populate java's manifest files -->
 			<plugin>
@@ -143,8 +146,7 @@
 						</manifest>
 						<manifestEntries>
 							<!-- custom or other manifest entries -->
-							<Tool-Branding>${tool.branding}</Tool-Branding>
-							<Tool-Country-Code>${tool.country.code}</Tool-Country-Code>
+							<Tool-Base>${tool.base}</Tool-Base>
 							<Tool-Version>${tool.version}</Tool-Version>
 						</manifestEntries>
 					</archive>
@@ -153,131 +155,129 @@
 			
 			<!-- shady - with more manifest entries-->
 			<plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-shade-plugin</artifactId>
-                                <version>2.4.3</version>
-                                <configuration>
-                                </configuration>
-                                <executions>
-                                        <execution>
-                                                <phase>package</phase>
-                                                <goals>
-                                                        <goal>shade</goal>
-                                                </goals>
-                                        </execution>
-                                        <execution>
-                                                <id>shade-startable</id>
-                                                <phase>package</phase>
-                                                <goals>
-                                                        <goal>shade</goal>
-                                                </goals>
-                                                <configuration>
-                                                        <finalName>${project.artifactId}-${project.version}-starter</finalName>
-                                                        <transformers>
-                                                                <transformer
-                                                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                                                        <mainClass>${app.main.class}</mainClass>
-                                                                        <!-- or: <manifestEntries> <Main-Class>${app.main.class}</Main-Class>
-                                                                                <Build-Number>123</Build-Number> </manifestEntries> -->
-                                                                        <manifestEntries>
-                                                                                <Specification-Vendor>${app.vendor}</Specification-Vendor>
-                                                                                <Specification-Version>${app.version}</Specification-Version>
-                                                                                <Specification-Title>${app.title}</Specification-Title>
-                                                                                <Implementation-Vendor>${app.vendor}</Implementation-Vendor>
-                                                                                <Implementation-Version>${buildNumber}</Implementation-Version>
-                                                                                <Implementation-Title>${app.title}</Implementation-Title>
-                                                                        </manifestEntries>
-                                                                </transformer>
-                                                        </transformers>
-                                                </configuration>
-                                        </execution>
-                                </executions>
-                        </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>shade-startable</id>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<finalName>${project.artifactId}-${project.version}-starter</finalName>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>${app.main.class}</mainClass>
+									<!-- or: <manifestEntries> <Main-Class>${app.main.class}</Main-Class>
+									        <Build-Number>123</Build-Number> </manifestEntries> -->
+									<manifestEntries>
+									        <Specification-Vendor>${app.vendor}</Specification-Vendor>
+									        <Specification-Version>${app.version}</Specification-Version>
+									        <Specification-Title>${app.title}</Specification-Title>
+									        <Implementation-Vendor>${app.vendor}</Implementation-Vendor>
+									        <Implementation-Version>${buildNumber}</Implementation-Version>
+									        <Implementation-Title>${app.title}</Implementation-Title>
+									</manifestEntries>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
 			<!-- if you ever need to copy something -->
 			<!--
 			<plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-resources-plugin</artifactId>
-                                <version>3.0.1</version>
-                                <executions>
-                                        <execution>
-                                                <id>copy-appCtx</id>
-                                                <phase>install</phase>
-                                                <goals>
-                                                        <goal>copy-resources</goal>
-                                                </goals>
-                                                <configuration>
-                                                        <outputDirectory>${project.build.directory}/target-dir</outputDirectory>
-                                                        <overwrite>true</overwrite>
-                                                        <resources>
-                                                                <resource>
-                                                                        <directory>${basedir}/../source-dir</directory>
-                                                                        <includes>
-                                                                                <include>file-*-pattern.ext</include>
-                                                                        </includes>
-                                                                </resource>
-                                                        </resources>
-                                                </configuration>
-                                        </execution>
-                                </executions>
-                        </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>copy-appCtx</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/target-dir</outputDirectory>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									<directory>${basedir}/../source-dir</directory>
+									<includes>
+										<include>file-*-pattern.ext</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			-->
 
 			<!-- call javapackager directly -->
 			<!--
 			<plugin>
-                                <groupId>org.codehaus.mojo</groupId>
-                                <artifactId>exec-maven-plugin</artifactId>
-                                <version>1.5.0</version>
-                                <executions>
-                                        <execution>
-                                                <id>package-jar</id>
-                                                <phase>package</phase>
-                                                <goals>
-                                                        <goal>exec</goal>
-                                                </goals>
-                                                <configuration>
-
-                                                        <!- - skip for now - ->
-                                                        <!- - <skip>true</skip> - ->
-                                                        
-                                                        <executable>${env.JAVA_HOME}/bin/javapackager</executable>
-                                                        <!- - http://docs.oracle.com/javase/8/docs/technotes/tools/unix/javapackager.html - ->
-                                                        <arguments>
-                                                                <argument>-deploy</argument>
-                                                                <argument>-BappVersion=${app.version}</argument>
-                                                                
-                                                                <argument>-native</argument>
-                                                                <argument>image</argument>
-                                                                <!- - <argument>installer</argument> - ->
-                                                                
-                                                                <argument>-appclass</argument>
-                                                                <argument>${app.main.class}</argument>
-                                                                
-                                                                <argument>-srcfiles</argument>
-                                                                <argument>${project.build.directory}/${project.artifactId}-${project.version}-starter.jar</argument>
-                                                                
-                                                                <argument>-outdir</argument>
-                                                                <argument>${project.build.directory}/native</argument>
-                                                                <argument>-outfile</argument>
-                                                                <argument>${project.artifactId}-app</argument>
-                                                                <argument>-name</argument>
-                                                                <argument>${project.artifactId}-app</argument>
-                                                                
-                                                                <argument>-title</argument>
-                                                                <argument>${project.name}</argument>
-                                                                <argument>-vendor</argument>
-                                                                <argument>${app.vendor}</argument>
-                                                                <argument>-description</argument>
-                                                                <argument>${project.description}</argument>
-                                                                
-                                                                <!- - <argument>-v</argument> - ->
-                                                        </arguments>
-                                                </configuration>
-                                        </execution>
-                                </executions>
-                        </plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<executions>
+					<execution>
+						<id>package-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<!- - skip for now - ->
+							<!- - <skip>true</skip> - ->
+							
+							<executable>${env.JAVA_HOME}/bin/javapackager</executable>
+							<!- - http://docs.oracle.com/javase/8/docs/technotes/tools/unix/javapackager.html - ->
+							<arguments>
+								<argument>-deploy</argument>
+								<argument>-BappVersion=${app.version}</argument>
+								
+								<argument>-native</argument>
+								<argument>image</argument>
+								<!- - <argument>installer</argument> - ->
+								
+								<argument>-appclass</argument>
+								<argument>${app.main.class}</argument>
+								
+								<argument>-srcfiles</argument>
+								<argument>${project.build.directory}/${project.artifactId}-${project.version}-starter.jar</argument>
+								
+								<argument>-outdir</argument>
+								<argument>${project.build.directory}/native</argument>
+								<argument>-outfile</argument>
+								<argument>${project.artifactId}-app</argument>
+								<argument>-name</argument>
+								<argument>${project.artifactId}-app</argument>
+								
+								<argument>-title</argument>
+								<argument>${project.name}</argument>
+								<argument>-vendor</argument>
+								<argument>${app.vendor}</argument>
+								<argument>-description</argument>
+								<argument>${project.description}</argument>
+								
+								<!- - <argument>-v</argument> - ->
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			-->
 
 		</plugins>
@@ -353,9 +353,10 @@
 	</dependencyManagement>
 
 	<modules>
-
-	<module>simple-tests-fx</module>
-	<module>guice-fx</module>
-	<module>kotlin-java-mix</module>
+		<module>shared</module>
+		<module>simple-tests-fx</module>
+		<module>guice-fx</module>
+		<module>kotlin-java-mix</module>
+		<!-- <module>spring-boot-fx</module> -->
 	</modules>
 </project>

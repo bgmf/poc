@@ -1,0 +1,12 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+
+component Empty styledwith [ "../css/core.css" ] {
+
+	BorderPane {
+		styleClass : [
+			"transparent-pane"
+		]
+	}
+}

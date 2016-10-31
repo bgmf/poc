@@ -1,0 +1,38 @@
+package fxml
+
+import javafx.scene.layout.HBox
+import javafx.scene.control.Button
+import javafx.scene.control.ToggleGroup
+import java.lang.Double
+import javafx.scene.control.Label
+import eu.dzim.shared.fx.ui.controller.BreadcrumbController
+
+component BreadcrumbBar styledwith [ "../css/core.css" ] controlledby BreadcrumbController {
+
+	define ToggleGroup id breadcrumpToggleGroup
+
+	HBox id container {
+		styleClass : [ "breadcrumb-container" ],
+		Button id back {
+			styleClass : [ "button-back" ],
+			onAction : controllermethod handleBack
+		},
+		Label id spacerLeft {
+			maxWidth : const Double#MAX_VALUE,
+			static hgrow : "ALWAYS"
+		},
+		HBox id breadcrumbBox {
+			styleClass : [ "breadcrumb-box" ],
+			maxWidth : const Double#MAX_VALUE,
+			static hgrow : "ALWAYS"
+		},
+		Label id spacerRight {
+			maxWidth : const Double#MAX_VALUE,
+			static hgrow : "ALWAYS"
+		},
+		Button id forward {
+			styleClass : [ "button-forward" ],
+			onAction : controllermethod handleForward
+		}
+	}
+}

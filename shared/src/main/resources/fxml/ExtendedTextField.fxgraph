@@ -1,0 +1,32 @@
+package fxml
+
+import javafx.scene.layout.HBox
+import javafx.scene.layout.VBox
+import javafx.scene.control.TextField
+
+dynamic component ExtendedTextField styledwith [ "../css/core.css" ] {
+	HBox {
+		styleClass : [
+			"text-field",
+			"extended"
+		],
+		maxHeight : bind textField#height,
+		alignment : "CENTER",
+		VBox id boxLeft {
+			alignment : "CENTER",
+			visible : false,
+			managed : false
+		},
+		TextField id textField {
+			styleClass : [
+				"embedded"
+			],
+			static hgrow : "ALWAYS"
+		},
+		VBox id boxRight {
+			alignment : "CENTER",
+			visible : false,
+			managed : false
+		}
+	}
+}

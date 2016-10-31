@@ -1,0 +1,78 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.HBox
+import javafx.scene.layout.VBox
+import javafx.scene.control.Label
+import javafx.geometry.Insets
+import javafx.scene.paint.Color
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
+import javafx.scene.control.Separator
+import eu.dzim.shared.fx.ui.controller.SimpleDialogController
+
+component SimpleDialog styledwith [ "../css/core.css" ] controlledby SimpleDialogController {
+
+	BorderPane {
+		preview style : "-fx-background-color: -brand-secondary;",
+		styleClass : [
+			"transparent-pane"
+		],
+		top : HBox id headerContainer {
+			spacing : 10,
+			VBox id iconContainer {
+				spacing : 5,
+				MaterialDesignIconView id icon {
+					glyphName : const MaterialDesignIcon#COMMENT_QUESTION_OUTLINE,
+					glyphSize : 50,
+					fill : const Color#WHITE
+				}
+			},
+			VBox id titleContainer {
+				alignment : "CENTER_LEFT",
+				spacing : 5,
+				Label id title {
+					styleClass : [
+						"content-text-white",
+						"content-text-large",
+						"content-text-bold"
+					],
+					preview text : "Title"
+				},
+				Label id subTitle {
+					styleClass : [
+						"content-text-white",
+						"content-text-small",
+						"content-text-bold"
+					],
+					preview text : "Sub-Title",
+					visible : false,
+					managed : false
+				}
+			},
+			static margin : Insets {
+				top : 5,
+				right : 5,
+				bottom : 5,
+				left : 5
+			}
+		},
+		center : VBox id contentContainer {
+			Separator,
+			Label id messageText {
+				styleClass : [
+					"content-text-white",
+					"content-text-bold"
+				],
+				wrapText : true,
+				preview text : "Message",
+				static margin : Insets {
+					top : 5,
+					right : 5,
+					bottom : 5,
+					left : 7
+				}
+			}
+		}
+	}
+}
