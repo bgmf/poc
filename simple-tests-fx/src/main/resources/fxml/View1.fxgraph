@@ -1,0 +1,35 @@
+package fxml
+
+import javafx.scene.layout.VBox
+import javafx.scene.control.Label
+import javafx.scene.control.TextField
+import javafx.geometry.Insets
+import eu.dzim.tests.fx.View1Controller
+
+component View1 controlledby View1Controller {
+	VBox {
+		padding : Insets {
+			top : 10, right : 10, bottom : 10, left : 10
+		},
+		spacing : 10,
+		Label {
+			text : "Name"
+		},
+		TextField {
+			promptText : "enter Name here..."
+		},
+		Label {
+			text : "Bla"
+		},
+		TextField {
+			promptText : "enter Bla here..."
+		}
+		,
+		Label {
+			text : "Blub"
+		},
+		TextField {
+			promptText : "enter Blub here..."
+		}
+	}
+}
