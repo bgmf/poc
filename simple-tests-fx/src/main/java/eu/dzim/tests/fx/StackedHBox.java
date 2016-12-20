@@ -61,6 +61,9 @@ public class StackedHBox extends HBox {
 				entries.removeListener(entry.customListener);
 				entry.customListener = null;
 			}
+			if (entry.colorListener != null) {
+				entry.colorListener = null;
+			}
 			panes.remove(pane);
 		}
 	}
@@ -115,7 +118,7 @@ public class StackedHBox extends HBox {
 	
 	private Color getColor(Entry entry) {
 		int index = entries.indexOf(entry);
-		Color color = entry.color.get() == null ? DEFAULT_COLORS[index % entries.size()] : entry.color.get();
+		Color color = entry.color.get() == null ? DEFAULT_COLORS[index % DEFAULT_COLORS.length] : entry.color.get();
 		return color;
 	}
 	
