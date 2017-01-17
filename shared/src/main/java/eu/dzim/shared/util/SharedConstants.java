@@ -49,6 +49,21 @@ public class SharedConstants {
 	
 	public static final int MAX_RECENTS_FILE = 10;
 	
+	public static final int TEXT_SIZE_XSMALL = -2;
+	public static final int TEXT_SIZE_SMALL = -1;
+	public static final int TEXT_SIZE_DEFAULT = 0;
+	public static final int TEXT_SIZE_LARGE = 1;
+	public static final int TEXT_SIZE_XLARGE = 2;
+	
+	public static final String SC_TEXT_XSMALL = "content-text-xsmall";
+	public static final String SC_TEXT_SMALL = "content-text-small";
+	public static final String SC_TEXT_DEFAULT = "content-text-default";
+	public static final String SC_TEXT_LARGE = "content-text-large";
+	public static final String SC_TEXT_XLARGE = "content-text-xlarge";
+	public static final String SC_TEXT_XXLARGE = "content-text-xxlarge";
+	public static final String SC_TEXT_XXXLARGE = "content-text-xxxlarge";
+	public static final String SC_TEXT_XXXXLARGE = "content-text-xxxxlarge";
+	
 	static {
 		DEFAULT_JSON_DATE_TIME_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
 		DEFAULT_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));

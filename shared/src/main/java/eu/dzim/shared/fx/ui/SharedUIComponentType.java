@@ -8,10 +8,10 @@ public enum SharedUIComponentType implements UIComponentType {
 	
 	//@formatter:off
 	BREADCRUMB_BAR("BreadcrumbBar", true),
-	COLLAPSIBLE_BUTTON("CollapsibleButton", true),
 	EMPTY("Empty", true),
 	EXTENDED_TEXT_FIELD("ExtendedTextField", true),
 	SIMPLE_DIALOG("SimpleDialog", true),
+	SWIPE_PANE("SwipePane", true),
 	;
 	//@formatter:on
 	

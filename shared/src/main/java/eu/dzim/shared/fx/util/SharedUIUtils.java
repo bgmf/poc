@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,10 +23,12 @@ import eu.dzim.shared.fx.text.TextFlowService;
 import eu.dzim.shared.fx.ui.LighweightDialog;
 import eu.dzim.shared.fx.ui.SharedUIComponentType;
 import eu.dzim.shared.fx.ui.controller.SimpleDialogController;
+import eu.dzim.shared.fx.ui.model.FontData;
 import eu.dzim.shared.resource.BaseResource;
 import eu.dzim.shared.resource.Resource;
 import eu.dzim.shared.util.BaseEnumType;
 import eu.dzim.shared.util.IconEnumType;
+import eu.dzim.shared.util.SharedConstants;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.IntegerBinding;
@@ -39,6 +42,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonBase;
@@ -49,6 +54,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
@@ -57,6 +63,9 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -67,6 +76,10 @@ import javafx.util.Duration;
 public class SharedUIUtils {
 	
 	private static final Logger LOG = LogManager.getLogger(SharedUIUtils.class);
+	
+	private static final List<String> SC_TO_REMOVE = Arrays.asList(SharedConstants.SC_TEXT_XSMALL, SharedConstants.SC_TEXT_SMALL,
+			SharedConstants.SC_TEXT_DEFAULT, SharedConstants.SC_TEXT_LARGE, SharedConstants.SC_TEXT_XLARGE, SharedConstants.SC_TEXT_XXLARGE,
+			SharedConstants.SC_TEXT_XXXLARGE, SharedConstants.SC_TEXT_XXXXLARGE);
 	
 	protected SharedUIUtils() {
 		// sonar
@@ -346,6 +359,283 @@ public class SharedUIUtils {
 			Tooltip tooltip = new Tooltip();
 			tooltip.textProperty().bind(resource.getBinding(((BaseEnumType) iconType).getKey()));
 			node.setTooltip(tooltip);
+		}
+	}
+	
+	public static ArrayList<Node> getAllResizableNodes(Parent root) {
+		return getAllNodes(root, true);
+	}
+	
+	public static ArrayList<Node> getAllNodes(Parent root, boolean resizable) {
+		ArrayList<Node> nodes = new ArrayList<Node>();
+		addAllDescendents(root, nodes, resizable);
+		return nodes;
+	}
+	
+	private static void addAllDescendents(Parent parent, ArrayList<Node> nodes, boolean resizable) {
+		for (Node node : parent.getChildrenUnmodifiable()) {
+			if (resizable && (node.getStyleClass().contains(SharedConstants.SC_TEXT_XSMALL)
+					|| node.getStyleClass().contains(SharedConstants.SC_TEXT_SMALL) || node.getStyleClass().contains(SharedConstants.SC_TEXT_DEFAULT)
+					|| node.getStyleClass().contains(SharedConstants.SC_TEXT_LARGE) || node.getStyleClass().contains(SharedConstants.SC_TEXT_XLARGE)
+					|| node.getStyleClass().contains(SharedConstants.SC_TEXT_XXLARGE)
+					|| node.getStyleClass().contains(SharedConstants.SC_TEXT_XXXLARGE)
+					|| node.getStyleClass().contains(SharedConstants.SC_TEXT_XXXXLARGE))) {
+				nodes.add(node);
+			} else if (resizable && node.getUserData() instanceof FontData) {
+				nodes.add(node);
+			} else if (resizable && node.getUserData() instanceof Integer) {
+				nodes.add(node);
+			} else if (!resizable) {
+				nodes.add(node);
+			}
+			if (node instanceof Parent)
+				addAllDescendents((Parent) node, nodes, resizable);
+		}
+	}
+	
+	public static void ensureVisible(ScrollPane pane, Node node) {
+		
+		Node content = pane.getContent();
+		
+		// double width = pane.getContent().getBoundsInLocal().getWidth();
+		double height;
+		if (content instanceof Pane) {
+			height = ((Pane) content).getHeight();
+		} else {
+			height = node.getBoundsInLocal().getHeight();
+		}
+		
+		// double x = node.getBoundsInParent().getMaxX();
+		double y;
+		if (content instanceof Pane) {
+			y = node.getLayoutY();
+		} else {
+			y = node.getBoundsInParent().getMaxY();
+		}
+		
+		double val = y / height;
+		// scrolling values range from 0 to 1
+		pane.setVvalue(val);
+		// pane.setHvalue(x / width);
+		
+		// just for usability
+		node.requestFocus();
+	}
+	
+	public static void handleTextSizeChange(Integer initialTextSize, Integer newValue, Node... items) {
+		
+		if (initialTextSize != null) {
+			LOG.info("Initiating text size.");
+			for (Node l : items)
+				updateTextSize(l, initialTextSize);
+			return;
+		}
+		
+		for (Node l : items)
+			updateTextSize(l, newValue);
+	}
+	
+	public static void updateTextSize(Node labeled, Integer value) {
+		
+		if (value == null) {
+			LOG.warn("Not updating labeled. The value is 'null'.");
+			return;
+		}
+		
+		setTextSizeStyleClass(labeled, value);
+	}
+	
+	private static final void setTextSizeStyleClass(Node labeled, Integer value) {
+		
+		if (labeled == null)
+			return;
+		
+		if (value == null)
+			value = SharedConstants.TEXT_SIZE_DEFAULT;
+		
+		List<String> scCopy = new ArrayList<>(labeled.getStyleClass());
+		List<String> styleClasses = new ArrayList<>();
+		for (String sc : scCopy) {
+			if (SC_TO_REMOVE.contains(sc))
+				continue;
+			styleClasses.add(sc);
+		}
+		
+		Labeled label = null;
+		Text text = null;
+		Font font = null;
+		if (labeled instanceof Labeled) {
+			label = (Labeled) labeled;
+			font = label.getFont();
+		} else if (labeled instanceof Text) {
+			text = (Text) labeled;
+			font = text.getFont();
+		}
+		FontData data = null;
+		if (labeled.getUserData() instanceof Integer) {
+			data = new FontData();
+			data.setSize((Integer) labeled.getUserData());
+		} else if (labeled.getUserData() instanceof FontData) {
+			data = (FontData) labeled.getUserData();
+		} else {
+			data = new FontData();
+			data.setSize(12);
+		}
+		
+		if (font != null) {
+			switch (value) {
+			case SharedConstants.TEXT_SIZE_SMALL: {
+				Font f = Font.font(font.getFamily(), data.getWeight(), data.getPosture(), data.getSize() - 2);
+				if (label != null)
+					label.setFont(f);
+				else if (text != null)
+					text.setFont(f);
+				break;
+			}
+			case SharedConstants.TEXT_SIZE_DEFAULT: {
+				Font f = Font.font(font.getFamily(), data.getWeight(), data.getPosture(), data.getSize());
+				if (label != null)
+					label.setFont(f);
+				else if (text != null)
+					text.setFont(f);
+				break;
+			}
+			case SharedConstants.TEXT_SIZE_LARGE: {
+				Font f = Font.font(font.getFamily(), data.getWeight(), data.getPosture(), data.getSize() + 2);
+				if (label != null)
+					label.setFont(f);
+				else if (text != null)
+					text.setFont(f);
+				break;
+			}
+			default:
+				break;
+			}
+			// PlatformHelper.run(() -> labeled.getParent().layout());
+			
+		} else if (labeled.getUserData() instanceof String) {
+			
+			if (SharedConstants.SC_TEXT_XSMALL.equalsIgnoreCase((String) labeled.getUserData())) {
+				switch (value) {
+				case SharedConstants.TEXT_SIZE_SMALL:
+					styleClasses.add(SharedConstants.SC_TEXT_XSMALL);
+					break;
+				case SharedConstants.TEXT_SIZE_DEFAULT:
+					styleClasses.add(SharedConstants.SC_TEXT_XSMALL);
+					break;
+				case SharedConstants.TEXT_SIZE_LARGE:
+					styleClasses.add(SharedConstants.SC_TEXT_SMALL);
+					break;
+				default:
+					break;
+				}
+			} else if (SharedConstants.SC_TEXT_SMALL.equalsIgnoreCase((String) labeled.getUserData())) {
+				switch (value) {
+				case SharedConstants.TEXT_SIZE_SMALL:
+					styleClasses.add(SharedConstants.SC_TEXT_XSMALL);
+					break;
+				case SharedConstants.TEXT_SIZE_DEFAULT:
+					styleClasses.add(SharedConstants.SC_TEXT_SMALL);
+					break;
+				case SharedConstants.TEXT_SIZE_LARGE:
+					styleClasses.add(SharedConstants.SC_TEXT_DEFAULT);
+					break;
+				default:
+					break;
+				}
+			} else if (SharedConstants.SC_TEXT_DEFAULT.equalsIgnoreCase((String) labeled.getUserData())) {
+				switch (value) {
+				case SharedConstants.TEXT_SIZE_SMALL:
+					styleClasses.add(SharedConstants.SC_TEXT_SMALL);
+					break;
+				case SharedConstants.TEXT_SIZE_DEFAULT:
+					styleClasses.add(SharedConstants.SC_TEXT_DEFAULT);
+					break;
+				case SharedConstants.TEXT_SIZE_LARGE:
+					styleClasses.add(SharedConstants.SC_TEXT_LARGE);
+					break;
+				default:
+					break;
+				}
+			} else if (SharedConstants.SC_TEXT_LARGE.equalsIgnoreCase((String) labeled.getUserData())) {
+				switch (value) {
+				case SharedConstants.TEXT_SIZE_SMALL:
+					styleClasses.add(SharedConstants.SC_TEXT_DEFAULT);
+					break;
+				case SharedConstants.TEXT_SIZE_DEFAULT:
+					styleClasses.add(SharedConstants.SC_TEXT_LARGE);
+					break;
+				case SharedConstants.TEXT_SIZE_LARGE:
+					styleClasses.add(SharedConstants.SC_TEXT_XLARGE);
+					break;
+				default:
+					break;
+				}
+			} else if (SharedConstants.SC_TEXT_XLARGE.equalsIgnoreCase((String) labeled.getUserData())) {
+				switch (value) {
+				case SharedConstants.TEXT_SIZE_SMALL:
+					styleClasses.add(SharedConstants.SC_TEXT_LARGE);
+					break;
+				case SharedConstants.TEXT_SIZE_DEFAULT:
+					styleClasses.add(SharedConstants.SC_TEXT_XLARGE);
+					break;
+				case SharedConstants.TEXT_SIZE_LARGE:
+					styleClasses.add(SharedConstants.SC_TEXT_XXLARGE);
+					break;
+				default:
+					break;
+				}
+			} else if (SharedConstants.SC_TEXT_XXLARGE.equalsIgnoreCase((String) labeled.getUserData())) {
+				switch (value) {
+				case SharedConstants.TEXT_SIZE_SMALL:
+					styleClasses.add(SharedConstants.SC_TEXT_XLARGE);
+					break;
+				case SharedConstants.TEXT_SIZE_DEFAULT:
+					styleClasses.add(SharedConstants.SC_TEXT_XXLARGE);
+					break;
+				case SharedConstants.TEXT_SIZE_LARGE:
+					styleClasses.add(SharedConstants.SC_TEXT_XXXLARGE);
+					break;
+				default:
+					break;
+				}
+			} else if (SharedConstants.SC_TEXT_XXXLARGE.equalsIgnoreCase((String) labeled.getUserData())) {
+				switch (value) {
+				case SharedConstants.TEXT_SIZE_SMALL:
+					styleClasses.add(SharedConstants.SC_TEXT_XXLARGE);
+					break;
+				case SharedConstants.TEXT_SIZE_DEFAULT:
+					styleClasses.add(SharedConstants.SC_TEXT_XXXLARGE);
+					break;
+				case SharedConstants.TEXT_SIZE_LARGE:
+					styleClasses.add(SharedConstants.SC_TEXT_XXXXLARGE);
+					break;
+				default:
+					break;
+				}
+			} else if (SharedConstants.SC_TEXT_XXXXLARGE.equalsIgnoreCase((String) labeled.getUserData())) {
+				switch (value) {
+				case SharedConstants.TEXT_SIZE_SMALL:
+					styleClasses.add(SharedConstants.SC_TEXT_XXXLARGE);
+					break;
+				case SharedConstants.TEXT_SIZE_DEFAULT:
+					styleClasses.add(SharedConstants.SC_TEXT_XXXXLARGE);
+					break;
+				case SharedConstants.TEXT_SIZE_LARGE:
+					styleClasses.add(SharedConstants.SC_TEXT_XXXXLARGE);
+					break;
+				default:
+					break;
+				}
+			} else {
+				LOG.info("Not updating labeled. It seems not to contain one of the stylable classes.");
+			}
+			// labeled.getStyleClass().setAll(styleClasses);
+			
+			PlatformHelper.run(() -> {
+				labeled.getStyleClass().setAll(styleClasses);
+				labeled.getParent().layout();
+			});
 		}
 	}
 }

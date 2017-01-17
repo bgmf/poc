@@ -802,6 +802,88 @@
 }
 
 /*
+ * Swipe Pane
+ */
+/* extended StackPane */
+.swipe-pane {
+	-fx-alignment: center;
+}
+/* HBox */
+.swipe-pane .pagination {
+	-fx-spacing: 10;
+	-fx-alignment: bottom-center;
+	-fx-max-height: 25;
+	-fx-padding: 0.0 0.0 5.0 0.0; /* bottom padding only */
+}
+.swipe-pane .pagination .circle {
+	-fx-border-radius: 20.0;
+	-fx-border-color: -neutral-dark-gray-2;
+	-fx-border-width: 2.0;
+	-fx-background-radius: 20.0;
+	-fx-background-color: transparent;
+	-fx-max-height: 20.0;
+	-fx-min-height: 20.0;
+	-fx-max-width: 20.0;
+	-fx-min-width: 20.0;
+	-fx-content-display: graphic-only;
+	-fx-graphic-text-gap: 0.0;
+	-fx-text-fill: black;
+}
+.swipe-pane .pagination .circle:hover {
+	-fx-fill: derive(-neutral-dark-gray-2, +30%);
+	-fx-background-color: derive(-neutral-dark-gray-2, +30%);
+}
+.swipe-pane .pagination .circle:armed,
+.swipe-pane .pagination .circle:pressed,
+.swipe-pane .pagination .circle:selected {
+	-fx-background-color: -neutral-dark-gray-2;
+}
+.swipe-pane .pagination .circle:disabled {
+	-fx-opacity: 0.75;
+	-fx-fill: derive(-neutral-dark-gray-2, -30%);
+	-fx-background-color: derive(-neutral-dark-gray-2, -30%);
+}
+
+/* ProgressIndicator */
+.progress-indicator {
+	-fx-progress-color: -brand-secondary;
+}
+
+/* ProgressBar */
+.progress-bar {
+	-fx-indeterminate-bar-length: 50;
+    -fx-indeterminate-bar-escape: true;
+    -fx-indeterminate-bar-flip: false;
+    -fx-indeterminate-bar-animation-time: 2;
+}
+.progress-bar > .bar {
+    -fx-background-color: -brand-secondary; /*linear-gradient(to bottom, derive(-fx-accent, -7%), derive(-fx-accent, 0%), derive(-fx-accent, -3%), derive(-fx-accent, -9%) );*/
+    -fx-background-insets: 0 0 0 0;/*3 3 4 3;*/
+    /*-fx-background-radius: 0.583em; *//* 7 */
+    -fx-background-radius: 0;
+    -fx-padding: 0.1em;
+}
+.progress-bar:indeterminate > .bar {
+    -fx-background-color: -brand-secondary; /*linear-gradient(to left, transparent, -fx-accent);*/
+}
+.progress-bar > .track {
+	-fx-background-color: -neutral-dark-gray-2;
+	/*
+		-fx-shadow-highlight-color,
+		linear-gradient(to bottom, derive(-fx-text-box-border, -10%), -fx-text-box-border),
+		linear-gradient(to bottom,
+		  derive(-fx-control-inner-background, -7%),
+		  derive(-fx-control-inner-background, 0%),
+		  derive(-fx-control-inner-background, -3%),
+		  derive(-fx-control-inner-background, -9%)
+		);
+	 */
+	/* -fx-background-insets: 0, 0 0 1 0, 1 1 2 1; */
+	/* -fx-background-radius: 4, 3, 2; */ /* 10, 9, 8 */
+	-fx-background-radius: 0;
+}
+
+/*
  * Toolbar
  */
 

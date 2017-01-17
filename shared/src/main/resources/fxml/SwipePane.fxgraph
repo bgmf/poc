@@ -1,0 +1,63 @@
+package ch.cnlab.aschwanden.ui
+
+import javafx.scene.layout.StackPane
+import javafx.scene.control.ProgressBar
+import java.lang.Double
+import javafx.scene.layout.HBox
+import javafx.scene.shape.Circle
+import javafx.scene.paint.Color
+import javafx.scene.control.Button
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
+import javafx.geometry.Insets
+import eu.dzim.shared.fx.ui.SwipePaneCircleButton
+
+dynamic component SwipePane styledwith [ "../css/core.css" ] {
+	StackPane {
+		styleClass : [ "swipe-pane" ],
+		ProgressBar id progress {
+			static alignment : "TOP_CENTER",
+			maxWidth : const Double#MAX_VALUE,
+			preview progress : 0.5
+		},
+		HBox id circleBox {
+			styleClass : [ "pagination" ],
+			static alignment : "BOTTOM_CENTER",
+			preview children : [
+				SwipePaneCircleButton,
+				SwipePaneCircleButton,
+				SwipePaneCircleButton
+			]
+		},
+		Button id back {
+			styleClass : [ "button-transparent" ],
+			static alignment : "TOP_LEFT",
+			graphicTextGap : 0.0,
+			contentDisplay : "GRAPHIC_ONLY",
+			maxHeight : 30,
+			maxWidth : 30,
+			minHeight : 30,
+			minWidth : 30,
+			translateY : 3,
+			graphic : MaterialDesignIconView {
+				glyphName : const MaterialDesignIcon#CHEVRON_LEFT,
+				glyphSize : 30
+			}
+		},
+		Button id close {
+			styleClass : [ "button-transparent" ],
+			static alignment : "TOP_RIGHT",
+			graphicTextGap : 0.0,
+			contentDisplay : "GRAPHIC_ONLY",
+			maxHeight : 30,
+			maxWidth : 30,
+			minHeight : 30,
+			minWidth : 30,
+			translateY : 3,
+			graphic : MaterialDesignIconView {
+				glyphName : const MaterialDesignIcon#WINDOW_CLOSE,
+				glyphSize : 25
+			}
+		}
+	}
+}
