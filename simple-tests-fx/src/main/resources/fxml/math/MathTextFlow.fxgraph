@@ -1,0 +1,20 @@
+package fxml.math
+
+import eu.dzim.tests.fx.math.MathTextFlowController
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.FlowPane
+import javafx.scene.control.TextField
+import javafx.scene.text.TextFlow
+import javafx.scene.text.Text
+import com.sun.javafx.scene.text.TextLayout
+
+component MathTextFlow styledwith [ "/fxml/math/math.css" ] controlledby MathTextFlowController {
+	BorderPane id root {
+		center : TextFlow id flow {
+			styleClass : [ "math-text-flow" ],
+			TextField id input {
+				promptText : ""
+			}
+		}
+	}
+}

@@ -19,5 +19,10 @@
   		<artifactId>OpenViewerFX</artifactId>
   		<version>7.5.30</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.scilab.forge</groupId>
+  		<artifactId>jlatexmath</artifactId>
+  		<version>1.0.4</version>
+  	</dependency>
   </dependencies>
 </project>
