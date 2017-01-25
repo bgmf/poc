@@ -11,6 +11,13 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tray;
 import org.eclipse.swt.widgets.TrayItem;
 
+/**
+ * Note to myself: to add JavaFX, don't forget something like "javafx toolkit not initialized"<br>
+ * <br>
+ * see http://stackoverflow.com/questions/11273773/javafx-2-1-toolkit-not-initialized<br>
+ * see https://rterp.wordpress.com/2015/04/04/javafx-toolkit-not-initialized-solved/<br>
+ * ...
+ */
 public class SWTSystemTrayIconPopup {
 	
 	public static void main(String[] args) {
