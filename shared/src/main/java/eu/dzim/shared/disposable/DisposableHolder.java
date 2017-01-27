@@ -13,4 +13,11 @@ public class DisposableHolder {
 	public List<Disposable> getDisposables() {
 		return disposables;
 	}
+	
+	public void disposeAll() {
+		Collections.synchronizedList(new ArrayList<>(disposables)).stream().forEach(disposable -> {
+			if (disposable != null)
+				disposable.dispose();
+		});
+	}
 }
