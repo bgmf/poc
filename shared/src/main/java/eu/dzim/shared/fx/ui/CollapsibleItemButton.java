@@ -23,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -200,6 +201,22 @@ public class CollapsibleItemButton extends HBox {
 	}
 	
 	/*
+	 * glyph 90: fill
+	 */
+	
+	public final ObjectProperty<Paint> glyph90FillProperty() {
+		return this.mdiv90.fillProperty();
+	}
+	
+	public final Paint getGlyph90Fill() {
+		return this.glyph90FillProperty().get();
+	}
+	
+	public final void setGlyph90Fill(final Paint fill) {
+		this.glyph90FillProperty().set(fill);
+	}
+	
+	/*
 	 * glyph 180: name
 	 */
 	
@@ -245,6 +262,22 @@ public class CollapsibleItemButton extends HBox {
 	
 	public final void setGlyph180Visible(final boolean glyph180Visible) {
 		this.glyph180VisbleProperty().set(glyph180Visible);
+	}
+	
+	/*
+	 * glyph 180: fill
+	 */
+	
+	public final ObjectProperty<Paint> glyph180FillProperty() {
+		return this.mdiv180.fillProperty();
+	}
+	
+	public final Paint getGlyph180Fill() {
+		return this.glyph180FillProperty().get();
+	}
+	
+	public final void setGlyph180Fill(final Paint fill) {
+		this.glyph180FillProperty().set(fill);
 	}
 	
 	/*
