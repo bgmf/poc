@@ -1,4 +1,4 @@
-package ch.cnlab.aschwanden.ui
+package fxml
 
 import javafx.scene.layout.StackPane
 import javafx.scene.control.ProgressBar
