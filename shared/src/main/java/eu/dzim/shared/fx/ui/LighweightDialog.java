@@ -72,7 +72,7 @@ public class LighweightDialog {
 	 * 
 	 **************************************************************************/
 	
-	protected static final URL DIALOGS_CSS_URL = LighweightDialog.class.getResource("/ch/cnlab/aschwanden/ui/dialogs.css");
+	protected static final URL DIALOGS_CSS_URL = LighweightDialog.class.getResource("/css/dialogs.css");
 	protected static final int HEADER_HEIGHT = 28;
 	
 	/*
