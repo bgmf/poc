@@ -15,6 +15,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -38,6 +39,7 @@ public class CollapsibleItemButton extends HBox {
 	private MaterialDesignIconView mdiv90;
 	private MaterialDesignIconView mdiv180;
 	private Button button;
+	private HBox additionalContent;
 	private Button title;
 	
 	private ObjectProperty<Pane> content = new SimpleObjectProperty<>();
@@ -56,6 +58,7 @@ public class CollapsibleItemButton extends HBox {
 		setAlignment(Pos.CENTER_LEFT);
 		
 		title = new Button();
+		title.setFocusTraversable(true); // XXX don't show up as traversable
 		title.setAlignment(Pos.CENTER_LEFT);
 		title.getStyleClass().addAll("transparent", "no-effect");
 		title.setFont(new Font(title.getFont().getName(), 12));
@@ -69,7 +72,13 @@ public class CollapsibleItemButton extends HBox {
 		title.setWrapText(true);
 		HBox.setHgrow(title, Priority.ALWAYS);
 		
+		additionalContent = new HBox();
+		additionalContent.setAlignment(Pos.CENTER_RIGHT);
+		additionalContent.managedProperty().bind(additionalContent.visibleProperty());
+		HBox.setMargin(additionalContent, new Insets(0.0, 5.0, 0.0, 0.0));
+		
 		button = new Button();
+		button.setFocusTraversable(true); // XXX don't show up as traversable
 		button.getStyleClass().addAll("transparent");
 		button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		mdiv90 = new MaterialDesignIconView(MaterialDesignIcon.MINUS);
@@ -81,7 +90,7 @@ public class CollapsibleItemButton extends HBox {
 		button.setGraphic(new StackPane(mdiv90, mdiv180));
 		button.setOnAction(this::handleButton);
 		
-		getChildren().addAll(title, button);
+		getChildren().addAll(title, additionalContent, button);
 		
 		initialize();
 	}
@@ -134,6 +143,10 @@ public class CollapsibleItemButton extends HBox {
 		if (onActionAcceptor == null)
 			onActionAcceptor = getDefaultOnActionAcceptor();
 		this.onActionAcceptor = onActionAcceptor;
+	}
+	
+	public ObservableList<Node> getAdditionalContent() {
+		return additionalContent.getChildren();
 	}
 	
 	/*
@@ -321,7 +334,34 @@ public class CollapsibleItemButton extends HBox {
 	}
 	
 	public final void setTitleUserData(final Object userData) {
+		if (userData instanceof FontData) {
+			title.setFont(new Font(title.getFont().getName(), ((FontData) userData).getSize()));
+		}
 		this.title.setUserData(userData);
+	}
+	
+	/*
+	 * Title: style classes
+	 */
+	
+	public final ObservableList<String> getTitleStyleClass() {
+		return title.getStyleClass();
+	}
+	
+	/*
+	 * Title: focus traversable
+	 */
+	
+	public final BooleanProperty titleTraversableProperty() {
+		return this.button.focusTraversableProperty();
+	}
+	
+	public final boolean isTitleTraversable() {
+		return this.titleTraversableProperty().get();
+	}
+	
+	public final void setTitleTraversable(final boolean buttonTraversable) {
+		this.titleTraversableProperty().set(buttonTraversable);
 	}
 	
 	/*
@@ -340,6 +380,10 @@ public class CollapsibleItemButton extends HBox {
 		this.buttonStyleProperty().set(style);
 	}
 	
+	/*
+	 * Button: content visible
+	 */
+	
 	public final BooleanProperty contentVisibleProperty() {
 		return this.visible;
 	}
@@ -353,12 +397,24 @@ public class CollapsibleItemButton extends HBox {
 	}
 	
 	/*
-	 * Title: style classes
+	 * Button: focus traversable
 	 */
 	
-	public final ObservableList<String> getTitleStyleClass() {
-		return title.getStyleClass();
+	public final BooleanProperty buttonTraversableProperty() {
+		return this.button.focusTraversableProperty();
 	}
+	
+	public final boolean isButtonTraversable() {
+		return this.buttonTraversableProperty().get();
+	}
+	
+	public final void setButtonTraversable(final boolean buttonTraversable) {
+		this.buttonTraversableProperty().set(buttonTraversable);
+	}
+	
+	/*
+	 * other properties
+	 */
 	
 	public boolean isContentShown() {
 		final Node toRotate;

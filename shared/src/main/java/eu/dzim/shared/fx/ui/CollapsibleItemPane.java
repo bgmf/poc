@@ -130,6 +130,10 @@ public class CollapsibleItemPane extends BorderPane {
 		collapsibleButton.setOnActionAcceptor(onActionAcceptor);
 	}
 	
+	public ObservableList<Node> getAdditionalContent() {
+		return collapsibleButton.getAdditionalContent();
+	}
+	
 	public Pane getConstructedContent() {
 		return constructedContent;
 	}
@@ -144,22 +148,6 @@ public class CollapsibleItemPane extends BorderPane {
 	
 	public void setFxmlContent(String fxmlContent) {
 		this.fxmlContent = fxmlContent;
-	}
-	
-	/*
-	 * hide top node
-	 */
-	
-	public final BooleanProperty titleVisbleProperty() {
-		return this.collapsibleButton.visibleProperty();
-	}
-	
-	public final boolean getTitleVisible() {
-		return this.titleVisbleProperty().get();
-	}
-	
-	public final void setTitleVisible(final boolean visible) {
-		this.titleVisbleProperty().set(visible);
 	}
 	
 	/*
@@ -291,6 +279,22 @@ public class CollapsibleItemPane extends BorderPane {
 	}
 	
 	/*
+	 * Title: hide top node
+	 */
+	
+	public final BooleanProperty titleVisbleProperty() {
+		return this.collapsibleButton.visibleProperty();
+	}
+	
+	public final boolean getTitleVisible() {
+		return this.titleVisbleProperty().get();
+	}
+	
+	public final void setTitleVisible(final boolean visible) {
+		this.titleVisbleProperty().set(visible);
+	}
+	
+	/*
 	 * Title: text
 	 */
 	
@@ -335,6 +339,30 @@ public class CollapsibleItemPane extends BorderPane {
 	}
 	
 	/*
+	 * Title: style classes
+	 */
+	
+	public final ObservableList<String> getTitleStyleClass() {
+		return collapsibleButton.getTitleStyleClass();
+	}
+	
+	/*
+	 * Title: focus traversable
+	 */
+	
+	public final BooleanProperty titleTraversableProperty() {
+		return this.collapsibleButton.titleTraversableProperty();
+	}
+	
+	public final boolean isTitleTraversable() {
+		return this.titleTraversableProperty().get();
+	}
+	
+	public final void setTitleTraversable(final boolean buttonTraversable) {
+		this.titleTraversableProperty().set(buttonTraversable);
+	}
+	
+	/*
 	 * Button: style
 	 */
 	
@@ -351,11 +379,19 @@ public class CollapsibleItemPane extends BorderPane {
 	}
 	
 	/*
-	 * Title: style classes
+	 * Button: focus traversable
 	 */
 	
-	public final ObservableList<String> getTitleStyleClass() {
-		return collapsibleButton.getTitleStyleClass();
+	public final BooleanProperty buttonTraversableProperty() {
+		return this.collapsibleButton.buttonTraversableProperty();
+	}
+	
+	public final boolean isButtonTraversable() {
+		return this.buttonTraversableProperty().get();
+	}
+	
+	public final void setButtonTraversable(final boolean buttonTraversable) {
+		this.buttonTraversableProperty().set(buttonTraversable);
 	}
 	
 	/*
