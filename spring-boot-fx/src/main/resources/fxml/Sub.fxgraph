@@ -1,0 +1,14 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.control.Button
+import eu.dzim.poc.fx.controller.SubController
+
+component Sub controlledby SubController {
+	BorderPane {
+		center : Button id button {
+			text : "Click me!",
+			onAction : controllermethod handleButton
+		}
+	}
+}
