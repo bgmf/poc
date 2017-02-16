@@ -184,6 +184,22 @@ public class CollapsibleItemPane extends BorderPane {
 	}
 	
 	/*
+	 * Selection Background: toggle
+	 */
+	
+	public final BooleanProperty toggleBackgroundProperty() {
+		return this.collapsibleButton.toggleBackgroundProperty();
+	}
+	
+	public final boolean isToggleBackground() {
+		return this.toggleBackgroundProperty().get();
+	}
+	
+	public final void setToggleBackground(final boolean toggleBackground) {
+		this.toggleBackgroundProperty().set(toggleBackground);
+	}
+	
+	/*
 	 * glyph 90: name
 	 */
 	

@@ -57,6 +57,8 @@ public class CollapsibleItemButton extends HBox {
 	private ObjectProperty<Position> buttonPosition = new SimpleObjectProperty<>(Position.RIGHT);
 	private ObjectProperty<Position> additionalContentPosition = new SimpleObjectProperty<>(Position.RIGHT);
 	
+	private BooleanProperty toggleBackground = new SimpleBooleanProperty(true);
+	
 	public CollapsibleItemButton() {
 		buildUI();
 	}
@@ -221,6 +223,22 @@ public class CollapsibleItemButton extends HBox {
 	
 	public final void setButtonPosition(final Position buttonPosition) {
 		this.buttonPositionProperty().set(buttonPosition);
+	}
+	
+	/*
+	 * Selection Background: toggle
+	 */
+	
+	public final BooleanProperty toggleBackgroundProperty() {
+		return this.toggleBackground;
+	}
+	
+	public final boolean isToggleBackground() {
+		return this.toggleBackgroundProperty().get();
+	}
+	
+	public final void setToggleBackground(final boolean toggleBackground) {
+		this.toggleBackgroundProperty().set(toggleBackground);
 	}
 	
 	/*
@@ -500,9 +518,15 @@ public class CollapsibleItemButton extends HBox {
 	}
 	
 	protected void updatePseudoClasses(boolean show) {
-		title.pseudoClassStateChanged(SELECTED, show);
-		this.pseudoClassStateChanged(SELECTED_BG, show);
-		getContent().pseudoClassStateChanged(SELECTED_BG_ALT, show);
+		if (isToggleBackground()) {
+			title.pseudoClassStateChanged(SELECTED, show);
+			this.pseudoClassStateChanged(SELECTED_BG, show);
+			getContent().pseudoClassStateChanged(SELECTED_BG_ALT, show);
+		} else {
+			title.pseudoClassStateChanged(SELECTED, false);
+			this.pseudoClassStateChanged(SELECTED_BG, false);
+			getContent().pseudoClassStateChanged(SELECTED_BG_ALT, false);
+		}
 	}
 	
 	protected void rotateButtonWithPaneAsUserData(ActionEvent event) {
@@ -528,9 +552,7 @@ public class CollapsibleItemButton extends HBox {
 		}
 		final boolean _show = Math.abs(toRotate.getRotate()) > 0.0 ? true : false;
 		// title.setTextFill(_show ? ColorConstants.RED : ColorConstants.HEADER);
-		title.pseudoClassStateChanged(SELECTED, _show);
-		this.pseudoClassStateChanged(SELECTED_BG, _show);
-		getContent().pseudoClassStateChanged(SELECTED_BG_ALT, _show);
+		updatePseudoClasses(_show);
 		toRotate.setRotate(Math.abs(toRotate.getRotate()) > 0.0 ? 0.0 : angle);
 		// ((MaterialDesignIconView) toRotate).setFill(_show ? ColorConstants.RED : ColorConstants.HEADER);
 		if (toRotate180 != null && toRotate180.isVisible()) {
