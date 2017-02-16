@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.inject.Inject;
 
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
+import eu.dzim.shared.fx.ui.CollapsibleItemButton.Position;
 import eu.dzim.shared.fx.ui.model.BaseApplicationModel;
 import eu.dzim.shared.fx.util.SharedUIUtils;
 import eu.dzim.shared.util.DualAcceptor;
@@ -148,6 +149,38 @@ public class CollapsibleItemPane extends BorderPane {
 	
 	public void setFxmlContent(String fxmlContent) {
 		this.fxmlContent = fxmlContent;
+	}
+	
+	/*
+	 * Additional Content: Position
+	 */
+	
+	public final ObjectProperty<Position> additionalContentPositionProperty() {
+		return this.collapsibleButton.additionalContentPositionProperty();
+	}
+	
+	public final Position getAdditionalContentPosition() {
+		return this.additionalContentPositionProperty().get();
+	}
+	
+	public final void setAdditionalContentPosition(final Position additionalContentPosition) {
+		this.additionalContentPositionProperty().set(additionalContentPosition);
+	}
+	
+	/*
+	 * Button: Position
+	 */
+	
+	public final ObjectProperty<Position> buttonPositionProperty() {
+		return this.collapsibleButton.buttonPositionProperty();
+	}
+	
+	public final Position getButtonPosition() {
+		return this.buttonPositionProperty().get();
+	}
+	
+	public final void setButtonPosition(final Position buttonPosition) {
+		this.buttonPositionProperty().set(buttonPosition);
 	}
 	
 	/*

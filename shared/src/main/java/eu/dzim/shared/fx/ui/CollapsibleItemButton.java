@@ -1,5 +1,7 @@
 package eu.dzim.shared.fx.ui;
 
+import java.util.Optional;
+
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import eu.dzim.shared.fx.ui.model.FontData;
@@ -32,6 +34,10 @@ public class CollapsibleItemButton extends HBox {
 	
 	// private static final Logger LOG = Logger.getLogger(CollapsibleItemButton.class.getName());
 	
+	public enum Position {
+		LEFT, RIGHT
+	}
+	
 	private static final PseudoClass SELECTED = PseudoClass.getPseudoClass("selected");
 	private static final PseudoClass SELECTED_BG = PseudoClass.getPseudoClass("selected-bg");
 	private static final PseudoClass SELECTED_BG_ALT = PseudoClass.getPseudoClass("selected-bg-alt");
@@ -47,6 +53,9 @@ public class CollapsibleItemButton extends HBox {
 	private ChangeListener<Boolean> onActionListener = this::handleActionChanges;
 	private BooleanProperty visible = new SimpleBooleanProperty(false);
 	private DualAcceptor<CollapsibleItemButton, Boolean> onActionAcceptor = getDefaultOnActionAcceptor();
+	
+	private ObjectProperty<Position> buttonPosition = new SimpleObjectProperty<>(Position.RIGHT);
+	private ObjectProperty<Position> additionalContentPosition = new SimpleObjectProperty<>(Position.RIGHT);
 	
 	public CollapsibleItemButton() {
 		buildUI();
@@ -90,7 +99,7 @@ public class CollapsibleItemButton extends HBox {
 		button.setGraphic(new StackPane(mdiv90, mdiv180));
 		button.setOnAction(this::handleButton);
 		
-		getChildren().addAll(title, additionalContent, button);
+		handlePositioning(null, null, null);
 		
 		initialize();
 	}
@@ -121,6 +130,23 @@ public class CollapsibleItemButton extends HBox {
 	
 	private void handleActionChanges(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
 		onActionAcceptor.accept(this, n);
+	}
+	
+	private void handlePositioning(ObservableValue<? extends Position> obs, Position o, Position n) {
+		
+		Position buttonPos = Optional.ofNullable(getButtonPosition()).orElse(Position.RIGHT);
+		Position addContentPos = Optional.ofNullable(getAdditionalContentPosition()).orElse(Position.RIGHT);
+		
+		if (title != null && !getChildren().contains(title))
+			getChildren().add(title);
+		
+		if (additionalContent != null)
+			getChildren().remove(additionalContent);
+		getChildren().add(Position.LEFT == addContentPos ? 0 : getChildren().indexOf(title) + 1, additionalContent);
+		
+		if (button != null)
+			getChildren().remove(button);
+		getChildren().add(Position.LEFT == buttonPos ? 0 : getChildren().indexOf(additionalContent) + 1, button);
 	}
 	
 	/*
@@ -163,6 +189,38 @@ public class CollapsibleItemButton extends HBox {
 	
 	public final void setContent(final Pane content) {
 		this.contentProperty().set(content);
+	}
+	
+	/*
+	 * Additional Content: Position
+	 */
+	
+	public final ObjectProperty<Position> additionalContentPositionProperty() {
+		return this.additionalContentPosition;
+	}
+	
+	public final Position getAdditionalContentPosition() {
+		return this.additionalContentPositionProperty().get();
+	}
+	
+	public final void setAdditionalContentPosition(final Position additionalContentPosition) {
+		this.additionalContentPositionProperty().set(additionalContentPosition);
+	}
+	
+	/*
+	 * Button: Position
+	 */
+	
+	public final ObjectProperty<Position> buttonPositionProperty() {
+		return this.buttonPosition;
+	}
+	
+	public final Position getButtonPosition() {
+		return this.buttonPositionProperty().get();
+	}
+	
+	public final void setButtonPosition(final Position buttonPosition) {
+		this.buttonPositionProperty().set(buttonPosition);
 	}
 	
 	/*
