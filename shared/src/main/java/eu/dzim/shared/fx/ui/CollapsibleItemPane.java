@@ -11,18 +11,25 @@ import eu.dzim.shared.fx.ui.model.BaseApplicationModel;
 import eu.dzim.shared.fx.util.SharedUIUtils;
 import eu.dzim.shared.util.DualAcceptor;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 
@@ -33,9 +40,16 @@ public class CollapsibleItemPane extends BorderPane {
 	@Inject private BaseApplicationModel applicationModel; // XXX for text resizing
 	
 	private CollapsibleItemButton collapsibleButton;
+	private final VBox topBox = new VBox(5.0);
+	private final Separator separator = new Separator();
 	
 	private ObjectProperty<Pane> content = new SimpleObjectProperty<>(this, "content", buildDefaultContent());
 	private ObjectProperty<Duration> duration = new SimpleObjectProperty<>(this, "duration", Duration.millis(1));
+	
+	private BooleanProperty showSeparator = new SimpleBooleanProperty(false);
+	private DoubleProperty separatorMargin = new SimpleDoubleProperty(0.0);
+	
+	private ChangeListener<Number> separatorMarginListener = (obs, o, n) -> VBox.setMargin(separator, new Insets(0.0, 0.0, n.doubleValue(), 0.0));
 	
 	private Pane constructedContent = null;
 	private String fxmlContent = null;
@@ -57,7 +71,13 @@ public class CollapsibleItemPane extends BorderPane {
 		collapsibleButton.setGlyph90Name(MaterialDesignIcon.MENU_DOWN.name());
 		collapsibleButton.setGlyph90Size(30);
 		collapsibleButton.setGlyph180Visible(false);
-		setTop(collapsibleButton);
+		// setTop(collapsibleButton);
+		
+		separator.managedProperty().bind(separator.visibleProperty());
+		separator.visibleProperty().bind(showSeparator);
+		separatorMargin.addListener(separatorMarginListener);
+		topBox.getChildren().addAll(collapsibleButton, separator);
+		setTop(topBox);
 		
 		initialize();
 	}
@@ -473,5 +493,33 @@ public class CollapsibleItemPane extends BorderPane {
 	
 	public final void setDuration(final Duration duration) {
 		this.durationProperty().set(duration);
+	}
+	
+	/*
+	 * Separator related
+	 */
+	
+	public final BooleanProperty showSeparatorProperty() {
+		return this.showSeparator;
+	}
+	
+	public final boolean isShowSeparator() {
+		return this.showSeparatorProperty().get();
+	}
+	
+	public final void setShowSeparator(final boolean showSeparator) {
+		this.showSeparatorProperty().set(showSeparator);
+	}
+	
+	public final DoubleProperty separatorMarginProperty() {
+		return this.separatorMargin;
+	}
+	
+	public final double getSeparatorMargin() {
+		return this.separatorMarginProperty().get();
+	}
+	
+	public final void setSeparatorMargin(final double separatorMargin) {
+		this.separatorMarginProperty().set(separatorMargin);
 	}
 }
