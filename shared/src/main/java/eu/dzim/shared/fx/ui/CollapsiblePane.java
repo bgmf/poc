@@ -22,6 +22,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
@@ -139,6 +140,14 @@ public class CollapsiblePane extends BorderPane {
 	
 	public CollapsibleButton getCollapsibleButton() {
 		return collapsibleButton;
+	}
+	
+	public Button getTitle() {
+		return collapsibleButton.getTitle();
+	}
+	
+	public Button getButton() {
+		return collapsibleButton.getButton();
 	}
 	
 	public DualAcceptor<CollapsibleButton, Boolean> getOnActionAcceptor() {

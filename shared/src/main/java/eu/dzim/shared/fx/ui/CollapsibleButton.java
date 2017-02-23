@@ -25,7 +25,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -43,7 +42,7 @@ public class CollapsibleButton extends HBox {
 	private MaterialDesignIconView mdiv180;
 	private Button button;
 	private HBox additionalContent;
-	private Label title;
+	private Button title;
 	
 	private ObjectProperty<Pane> content = new SimpleObjectProperty<>();
 	private ObjectProperty<Duration> duration = new SimpleObjectProperty<>(Duration.millis(100));
@@ -77,13 +76,14 @@ public class CollapsibleButton extends HBox {
 		// title.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		// title.setWrapText(true);
 		
-		title = new Label();
+		title = new Button();
 		title.setFocusTraversable(true); // XXX don't show up as traversable
 		title.setAlignment(Pos.CENTER_LEFT);
-		title.getStyleClass().addAll("heading-primary", "content-text-big");
+		title.getStyleClass().addAll("transparent", "no-effect", "heading-primary", "content-text-big");
 		title.setMinHeight(40.0);
 		title.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		title.setWrapText(true);
+		title.setOnAction(this::handleButton);
 		HBox.setHgrow(title, Priority.ALWAYS);
 		
 		additionalContent = new HBox();
@@ -150,6 +150,14 @@ public class CollapsibleButton extends HBox {
 	
 	public ObservableList<Node> getAdditionalContent() {
 		return additionalContent.getChildren();
+	}
+	
+	public Button getTitle() {
+		return title;
+	}
+	
+	public Button getButton() {
+		return button;
 	}
 	
 	/*
@@ -465,7 +473,7 @@ public class CollapsibleButton extends HBox {
 			contentBox.setManaged(show);
 			return;
 		} else if (event.getSource() instanceof Button) {
-			Button button = (Button) event.getSource();
+			// Button button = (Button) event.getSource();
 			double angle = 0.0;
 			double angle2 = 0.0;
 			Node toRotate = button.getGraphic().lookup("#to-rotate-90");
