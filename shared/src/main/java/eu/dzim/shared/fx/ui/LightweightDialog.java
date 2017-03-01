@@ -63,7 +63,7 @@ import javafx.util.Duration;
  * @see http://grepcode.com/file/repo1.maven.org/maven2/org.controlsfx/controlsfx/8.0.5/org/controlsfx/dialog/FXDialog.java#FXDialog
  * @see http://grepcode.com/file/repo1.maven.org/maven2/org.controlsfx/controlsfx/8.0.5/org/controlsfx/dialog/dialogs.css?av=f
  */
-public class LighweightDialog {
+public class LightweightDialog {
 	
 	/*
 	 **************************************************************************
@@ -72,7 +72,7 @@ public class LighweightDialog {
 	 * 
 	 **************************************************************************/
 	
-	protected static final URL DIALOGS_CSS_URL = LighweightDialog.class.getResource("/css/dialogs.css");
+	protected static final URL DIALOGS_CSS_URL = LightweightDialog.class.getResource("/css/dialogs.css");
 	protected static final int HEADER_HEIGHT = 28;
 	
 	/*
@@ -84,7 +84,7 @@ public class LighweightDialog {
 	 * 
 	 **************************************************************************/
 	
-	private static final ObservableMap<Stage, ObservableList<LighweightDialog>> OPEN_DIALOGS = FXCollections.observableHashMap();
+	private static final ObservableMap<Stage, ObservableList<LightweightDialog>> OPEN_DIALOGS = FXCollections.observableHashMap();
 	
 	/*
 	 ***************************************************************************
@@ -171,7 +171,7 @@ public class LighweightDialog {
 	 * @param buttonTypes
 	 *            the {@link Button}s of the {@link ButtonBar}, <code>null</code> for none.
 	 */
-	public LighweightDialog(final String title, final Object incomingOwner, ButtonType... buttonTypes) {
+	public LightweightDialog(final String title, final Object incomingOwner, ButtonType... buttonTypes) {
 		
 		Object _owner = incomingOwner;
 		
@@ -302,8 +302,8 @@ public class LighweightDialog {
 	/**
 	 * @return all open lightweight dialogs from all {@link Stage}s
 	 */
-	public static ObservableList<LighweightDialog> getOpenDialogs() {
-		ObservableList<LighweightDialog> clone = FXCollections.observableArrayList();
+	public static ObservableList<LightweightDialog> getOpenDialogs() {
+		ObservableList<LightweightDialog> clone = FXCollections.observableArrayList();
 		OPEN_DIALOGS.values().forEach(clone::addAll);
 		return FXCollections.unmodifiableObservableList(clone);
 	}
@@ -313,7 +313,7 @@ public class LighweightDialog {
 	 *            the {@link Stage} to query the open lightweight dialogs for
 	 * @return all open lightweight dialogs from the specified {@link Stage}
 	 */
-	public static ObservableList<LighweightDialog> getOpenDialogs(Stage stage) {
+	public static ObservableList<LightweightDialog> getOpenDialogs(Stage stage) {
 		if (OPEN_DIALOGS.get(stage) == null)
 			return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList());
 		return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(OPEN_DIALOGS.get(stage)));
@@ -523,7 +523,7 @@ public class LighweightDialog {
 	}
 	
 	private void addToOpenDialogs() {
-		ObservableList<LighweightDialog> list = OPEN_DIALOGS.get(myStage);
+		ObservableList<LightweightDialog> list = OPEN_DIALOGS.get(myStage);
 		if (list == null) {
 			list = FXCollections.observableArrayList();
 			OPEN_DIALOGS.put(myStage, list);
@@ -532,7 +532,7 @@ public class LighweightDialog {
 	}
 	
 	private void removeFromOpenDialogs() {
-		ObservableList<LighweightDialog> list = OPEN_DIALOGS.get(myStage);
+		ObservableList<LightweightDialog> list = OPEN_DIALOGS.get(myStage);
 		if (list == null) {
 			list = FXCollections.observableArrayList();
 			OPEN_DIALOGS.put(myStage, list);
@@ -578,7 +578,7 @@ public class LighweightDialog {
 				buttonBar.getButtons().add(button);
 				button.setOnAction(buttonEvent -> {
 					result.set(type);
-					LighweightDialog.this.hide();
+					LightweightDialog.this.hide();
 				});
 			});
 			BorderPane.setMargin(buttonBar, new Insets(5.0, 0.0, 0.0, 0.0));
@@ -649,7 +649,7 @@ public class LighweightDialog {
 		closeButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				LighweightDialog.this.hide();
+				LightweightDialog.this.hide();
 			}
 		});
 		minButton = new WindowButton("minimize");

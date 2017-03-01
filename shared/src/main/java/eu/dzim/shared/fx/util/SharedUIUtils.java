@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 import com.google.inject.Injector;
 
 import eu.dzim.shared.fx.text.TextFlowService;
-import eu.dzim.shared.fx.ui.LighweightDialog;
+import eu.dzim.shared.fx.ui.LightweightDialog;
 import eu.dzim.shared.fx.ui.SharedUIComponentType;
 import eu.dzim.shared.fx.ui.controller.SimpleDialogController;
 import eu.dzim.shared.fx.ui.model.FontData;
@@ -173,7 +173,7 @@ public class SharedUIUtils {
 		ButtonType cancelType = new ButtonType(cancel, ButtonData.CANCEL_CLOSE);
 		
 		List<ButtonType> buttons = cancel != null ? Arrays.asList(yesType, noType, cancelType) : Arrays.asList(yesType, noType);
-		final LighweightDialog dialog = new LighweightDialog(title, stage, buttons.stream().toArray(size -> new ButtonType[size]));
+		final LightweightDialog dialog = new LightweightDialog(title, stage, buttons.stream().toArray(size -> new ButtonType[size]));
 		dialog.setResizable(false);
 		dialog.setDraggable(false);
 		dialog.setChromeVisible(false);
@@ -207,7 +207,7 @@ public class SharedUIUtils {
 			return;
 		}
 		
-		final LighweightDialog dialog = new LighweightDialog(title, stage, ButtonType.OK);
+		final LightweightDialog dialog = new LightweightDialog(title, stage, ButtonType.OK);
 		dialog.setResizable(false);
 		dialog.setDraggable(false);
 		dialog.setChromeVisible(false);
