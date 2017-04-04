@@ -31,6 +31,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 public class CollapsibleItemPane extends BorderPane {
@@ -377,6 +378,22 @@ public class CollapsibleItemPane extends BorderPane {
 	
 	public final void setTitleText(final String text) {
 		this.titleTextProperty().set(text);
+	}
+	
+	/*
+	 * Title: font
+	 */
+	
+	public final ObjectProperty<Font> titleFontProperty() {
+		return this.collapsibleButton.getTitle().fontProperty();
+	}
+	
+	public final Font getTitleFont() {
+		return this.titleFontProperty().get();
+	}
+	
+	public final void setTitleFont(final Font font) {
+		this.titleFontProperty().set(font);
 	}
 	
 	/*
