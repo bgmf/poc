@@ -121,6 +121,14 @@ public class SwipePanePlaceholder<T> extends AnchorPane {
 		this.dataProperty().set(data);
 	}
 	
+	public Pane getContent() {
+		return content;
+	}
+	
+	public Object getController() {
+		return controller;
+	}
+	
 	private void init() {
 		show.addListener(this::handleShowChanges);
 	}
