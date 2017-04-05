@@ -10,6 +10,7 @@ public class FontData {
 	private double size = 12;
 	private FontWeight weight = FontWeight.NORMAL;
 	private FontPosture posture = FontPosture.REGULAR;
+	private String fontFamily = "";
 	
 	public FontData() {
 		// sonar
@@ -39,8 +40,16 @@ public class FontData {
 		this.posture = posture;
 	}
 	
+	public String getFontFamily() {
+		return fontFamily;
+	}
+	
+	public void setFontFamily(String fontFamily) {
+		this.fontFamily = fontFamily;
+	}
+	
 	@Override
 	public String toString() {
-		return String.format(Locale.ROOT, "FontData[size=%.2f, weight=%s, posture=%s]", size, weight, posture);
+		return String.format(Locale.ROOT, "FontData[size=%.2f, weight=%s, posture=%s, font-family='%s']", size, weight, posture, fontFamily);
 	}
 }

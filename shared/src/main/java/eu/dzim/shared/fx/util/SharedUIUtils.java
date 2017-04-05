@@ -65,6 +65,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
@@ -483,9 +485,21 @@ public class SharedUIUtils {
 		}
 		
 		if (font != null) {
+			if (data.getSize() < 0) {
+				data.setSize(font.getSize());
+			}
+			if (data.getWeight() == null) {
+				data.setWeight(FontWeight.NORMAL);
+			}
+			if (data.getPosture() == null) {
+				data.setPosture(FontPosture.REGULAR);
+			}
+			if (data.getFontFamily() == null || data.getFontFamily().isEmpty()) {
+				data.setFontFamily(font.getFamily());
+			}
 			switch (value) {
 			case SharedConstants.TEXT_SIZE_SMALL: {
-				Font f = Font.font(font.getFamily(), data.getWeight(), data.getPosture(), data.getSize() - 2);
+				Font f = Font.font(data.getFontFamily(), data.getWeight(), data.getPosture(), data.getSize() - 2);
 				if (label != null)
 					label.setFont(f);
 				else if (text != null)
@@ -493,7 +507,7 @@ public class SharedUIUtils {
 				break;
 			}
 			case SharedConstants.TEXT_SIZE_DEFAULT: {
-				Font f = Font.font(font.getFamily(), data.getWeight(), data.getPosture(), data.getSize());
+				Font f = Font.font(data.getFontFamily(), data.getWeight(), data.getPosture(), data.getSize());
 				if (label != null)
 					label.setFont(f);
 				else if (text != null)
@@ -501,7 +515,7 @@ public class SharedUIUtils {
 				break;
 			}
 			case SharedConstants.TEXT_SIZE_LARGE: {
-				Font f = Font.font(font.getFamily(), data.getWeight(), data.getPosture(), data.getSize() + 2);
+				Font f = Font.font(data.getFontFamily(), data.getWeight(), data.getPosture(), data.getSize() + 2);
 				if (label != null)
 					label.setFont(f);
 				else if (text != null)
