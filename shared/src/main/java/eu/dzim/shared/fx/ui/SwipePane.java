@@ -434,14 +434,16 @@ public class SwipePane extends StackPane {
 		
 		parallel.setOnFinished(e -> {
 			int index = n.intValue();
-			for (int i = 0; i < panes.size(); i++) {
-				// panes.get(i).setShow(i == index - 1 || i == index || i == index + 1);
-				// panes.get(i).setShow(i == index);
-				panes.get(i).setShow(showPageOnIndex(index, i));
-				panes.get(i).setCache(i == index ? false : true);
-				panes.get(i).setCacheHint(i == index ? CacheHint.DEFAULT : CacheHint.SPEED);
+			if (panes.size() > 0) {
+				for (int i = 0; i < panes.size(); i++) {
+					// panes.get(i).setShow(i == index - 1 || i == index || i == index + 1);
+					// panes.get(i).setShow(i == index);
+					panes.get(i).setShow(showPageOnIndex(index, i));
+					panes.get(i).setCache(i == index ? false : true);
+					panes.get(i).setCacheHint(i == index ? CacheHint.DEFAULT : CacheHint.SPEED);
+				}
+				panes.get(index).requestFocus();
 			}
-			panes.get(index).requestFocus();
 		});
 	}
 	
