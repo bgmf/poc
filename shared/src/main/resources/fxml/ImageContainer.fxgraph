@@ -1,0 +1,47 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.VBox
+import javafx.scene.layout.HBox
+import javafx.scene.image.ImageView
+import javafx.scene.control.ScrollPane
+import javafx.geometry.Insets
+import javafx.scene.layout.Region
+import eu.dzim.shared.fx.ui.controller.ImageContainerController
+
+component ImageContainer styledwith [ "../css/core.css" ] controlledby ImageContainerController {
+	HBox id box {
+		ScrollPane id scroll {
+			styleClass : [
+				"grey-scroll-pane"
+			],
+			fitToHeight : true,
+			fitToWidth : true,
+			maxHeight : const Double#MAX_VALUE,
+			static hgrow : "ALWAYS",
+			content : HBox id box {
+				Region {
+					focusTraversable : false,
+					static hgrow : "ALWAYS"
+				},
+				VBox {
+					Region {
+						focusTraversable : false,
+						static vgrow : "ALWAYS"
+					},
+					ImageView id iv {
+						preserveRatio : true
+					},
+					Region {
+						focusTraversable : false,
+						static vgrow : "ALWAYS"
+					}
+				},
+				Region {
+					focusTraversable : false,
+					static hgrow : "ALWAYS"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,242 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.HBox
+import javafx.scene.control.Button
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon
+import javafx.scene.control.Separator
+import javafx.scene.layout.Region
+import javafx.scene.control.TextField
+import javafx.scene.control.Label
+import javafx.scene.control.ScrollPane
+import javafx.scene.layout.VBox
+import javafx.geometry.Insets
+import javafx.scene.layout.StackPane
+import java.lang.Double
+import javafx.scene.control.ScrollBar
+import javafx.scene.control.ToggleGroup
+import javafx.scene.control.ToggleButton
+import javafx.scene.control.ProgressIndicator
+import eu.dzim.shared.fx.ui.SwipePane
+import eu.dzim.shared.fx.ui.SwipePanePlaceholder
+
+dynamic component CustomPdfViewer styledwith [ "../css/core.css" ] {
+	BorderPane {
+		padding : Insets {
+			top : 5, right : 5, bottom : 5, left : 5
+		},
+		top : HBox {
+			spacing : 5,
+			alignment : "CENTER_LEFT",
+			HBox id fileImportBox {
+				Button id fileImportButton {
+					styleClass : [
+						"button-transparent"
+					],
+					graphic : MaterialDesignIconView {
+						glyphName : const MaterialDesignIcon#FILE_IMPORT,
+						glyphSize : 16
+					},
+					onAction : controllermethod loadFile
+				},
+				Separator {
+					focusTraversable : false,
+					orientation : "VERTICAL"
+				}
+			},
+			Button id fileSaveButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : MaterialDesignIconView {
+					focusTraversable : false,
+					glyphName : const MaterialDesignIcon#FLOPPY,
+					glyphSize : 16
+				},
+				onAction : controllermethod saveFile
+			},
+			Button id fileSaveAndOpenButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : MaterialDesignIconView {
+					focusTraversable : false,
+					glyphName : const MaterialDesignIcon#FILE_PDF_BOX,
+					glyphSize : 16
+				},
+				onAction : controllermethod openFile
+			},
+			Region {
+				focusTraversable : false,
+				static hgrow : "ALWAYS"
+			},
+			Button id zoomFitPageButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : MaterialDesignIconView {
+					focusTraversable : false,
+					glyphName : const MaterialDesignIcon#ARROW_EXPAND,
+					glyphSize : 16
+				},
+				onAction : controllermethod zoomFit
+			},
+			Button id zoomFitWidthButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : StackPane {
+					MaterialDesignIconView {
+						focusTraversable : false,
+						glyphName : const MaterialDesignIcon#KEYBOARD_BACKSPACE,
+						glyphSize : 16,
+						translateX : -2
+					},
+					MaterialDesignIconView {
+						focusTraversable : false,
+						glyphName : const MaterialDesignIcon#KEYBOARD_BACKSPACE,
+						glyphSize : 16,
+						rotate : 180,
+						translateX : 2
+					}
+				},	
+				onAction : controllermethod zoomWidth
+			},
+			Separator {
+				focusTraversable : false,
+				orientation : "VERTICAL"
+			},
+			Button id zoomMinusButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : MaterialDesignIconView {
+					focusTraversable : false,
+					glyphName : const MaterialDesignIcon#MINUS,
+					glyphSize : 16
+				},
+				onAction : controllermethod zoomOut
+			},
+			Label id zoomAmountLabel {
+				focusTraversable : false,
+				text : "X %"
+			},
+			Button id zoomPlusButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : MaterialDesignIconView {
+					focusTraversable : false,
+					glyphName : const MaterialDesignIcon#PLUS,
+					glyphSize : 16
+				},
+				onAction : controllermethod zoomIn
+			}
+		},
+		center : StackPane id contentStackPane {
+			static margin : Insets {
+				top : 5,
+				bottom : 5,
+				left : 5,
+				right : 5
+			},
+			HBox id contentSwipeParent {
+				SwipePane id contentSwipePane {
+					styleClass : [
+						"grey-scroll-pane"
+					], // "transparent-scroll-pane"
+					closeVisible : false,
+					backVisible : false,
+					circlesVisible : false,
+					progressVisible : false,
+					useControlOpacity : false,
+					usePanelOpacity : false,
+					usePanelClipping : true,
+					orientation : "VERTICAL",
+					maxWidth : const Double#MAX_VALUE,
+					static hgrow : "ALWAYS",
+					preview panes : [
+						SwipePanePlaceholder < Object > {
+							style : "-fx-background-color: red;"
+						},
+						SwipePanePlaceholder < Object > {
+							style : "-fx-background-color: green;"
+						},
+						SwipePanePlaceholder < Object > {
+							style : "-fx-background-color: blue;"
+						}
+					]
+				}
+			},
+			ProgressIndicator id contentLoadingProgress {
+				focusTraversable : false,
+				maxWidth : 100,
+				maxHeight : 100
+			}
+		},
+		bottom : HBox {
+			spacing : 5,
+			alignment : "CENTER_LEFT",
+			Button id firstPageButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : MaterialDesignIconView {
+					focusTraversable : false,
+					glyphName : const MaterialDesignIcon#CHEVRON_DOUBLE_LEFT,
+					glyphSize : 16
+				},
+				onAction : controllermethod pageFirst
+			},
+			Button id pageBackButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : MaterialDesignIconView {
+					focusTraversable : false,
+					glyphName : const MaterialDesignIcon#CHEVRON_LEFT,
+					glyphSize : 16
+				},
+				onAction : controllermethod pageBack
+			},
+			TextField id pageSelectionText {
+				maxWidth : 50
+			},
+			Label id pageSelectionSeparatorLabel {
+				focusTraversable : false,
+				text : " / "
+			},
+			Label id pageNumberLabel {
+				focusTraversable : false,
+				text : "X"
+			},
+			Button id pageForwardButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : MaterialDesignIconView {
+					focusTraversable : false,
+					glyphName : const MaterialDesignIcon#CHEVRON_RIGHT,
+					glyphSize : 16
+				},
+				onAction : controllermethod pageNext
+			},
+			Button id lastPageButton {
+				styleClass : [
+					"button-transparent"
+				],
+				graphic : MaterialDesignIconView {
+					focusTraversable : false,
+					glyphName : const MaterialDesignIcon#CHEVRON_DOUBLE_RIGHT,
+					glyphSize : 16
+				},
+				onAction : controllermethod pageLast
+			},
+			Region {
+				focusTraversable : false,
+				static hgrow : "ALWAYS"
+			}
+		}
+	}
+}
