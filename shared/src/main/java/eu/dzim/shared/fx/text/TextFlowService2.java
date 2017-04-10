@@ -17,9 +17,23 @@ public interface TextFlowService2 {
 		ITALIC,
 		UNDERLINED,
 		SUPERTEXT,
-		SUBTEXT;
+		SUBTEXT,
+		SMALL,
+		LARGE,
+		COLOR_BLACK,
+		COLOR_WHITE,
+		COLOR_PRIMARY,
+		COLOR_SECONDARY,
+		COLOR_TERTIARY,
+		COLOR_ERROR,
+		COLOR_POSITIVE,
+		COLOR_WARNING,
+		COLOR_NEUTRAL,
+		;
 		//@formatter:on
 	}
+	
+	Text fromString(String text, Set<TextFlowStyle> defaultStyles, Set<TextFlowStyle> styles, String... additionalStyleClass);
 	
 	Text fromString(String text, Set<TextFlowStyle> styles, String... additionalStyleClass);
 	

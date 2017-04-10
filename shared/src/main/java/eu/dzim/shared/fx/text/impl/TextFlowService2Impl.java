@@ -22,19 +22,35 @@ import javafx.scene.text.TextFlow;
 
 public class TextFlowService2Impl implements TextFlowService2 {
 	
-	private static final Logger LOG = LogManager.getLogger(TextFlowService2Impl.class);
+private static final Logger LOG = LogManager.getLogger(TextFlowService2Impl.class);
 	
 	private static final String STYLECLASS_FLOW_PANE = "adaptive-text-flow";
 	
-	private static final String STYLECLASS_TEXT_DEFAULT = "content-text-default";
-	private static final String STYLECLASS_TEXT_BOLD = "content-text-bold";
-	private static final String STYLECLASS_TEXT_ITALIC = "content-text-italic";
-	private static final String STYLECLASS_TEXT_UNDERLINED = "content-text-underlined";
-	private static final String STYLECLASS_TEXT_SUP = "content-text-sup";
-	private static final String STYLECLASS_TEXT_SUB = "content-text-sub";
+	private static final String SC_TEXT_DEFAULT = "content-text-default";
+	private static final String SC_TEXT_BOLD = "content-text-bold";
+	private static final String SC_TEXT_ITALIC = "content-text-italic";
+	private static final String SC_TEXT_UNDERLINED = "content-text-underlined";
+	private static final String SC_TEXT_SUP = "content-text-sup";
+	private static final String SC_TEXT_SUB = "content-text-sub";
+	private static final String SC_TEXT_SMALL = "content-text-small";
+	private static final String SC_TEXT_LARGE = "content-text-large";
+	private static final String SC_TEXT_BLACK = "textflow-black";
+	private static final String SC_TEXT_WHITE = "textflow-white";
+	private static final String SC_TEXT_PRIMARY = "textflow-primary";
+	private static final String SC_TEXT_SECONDARY = "textflow-secondary";
+	private static final String SC_TEXT_TERTIARY = "textflow-tertiary";
+	private static final String SC_TEXT_ERROR = "textflow-error";
+	private static final String SC_TEXT_POSITIVE = "textflow-positive";
+	private static final String SC_TEXT_WARNING = "textflow-warning";
+	private static final String SC_TEXT_NEUTRAL = "textflow-neutral";
 	
-	// ([^\<\>]+)|(<m>([^\<\>]+)</m>)|(<m(?: t="([biuhl]*){0,1}")>([^\<\>]+)</m>)
-	private static final String PATTERN = "([^\\<\\>]+)|(<m>([^\\<\\>]+)</m>)|(<m(?: t=\"([biuhl]*){0,1}\")>([^\\<\\>]+)</m>)";
+	// (<M(?:\s+t="([biuhl\-\+091234567]*){0,1}"\s*)/>).*
+	private static final String DEFAULT_PATTERN = "(<M(?:\\s+t=\"([biuhl\\-\\+091234567]*){0,1}\"\\s*)/>).*";
+	private static final int GROUP_DEFAULT_TAG = 1;
+	private static final int GROUP_DEFAULT_ATTR = 2;
+	
+	// ([^\<\>]+)|(<m>([^\<\>]+)</m>)|(<m(?:\s+t="([biuhl\-\+091234567]*){0,1}")\s*>([^\<\>]+)</m>)
+	private static final String PATTERN = "([^\\<\\>]+)|(<m>([^\\<\\>]+)</m>)|(<m(?:\\s+t=\"([biuhl\\-\\+091234567]*){0,1}\")\\s*>([^\\<\\>]+)</m>)";
 	private static final int GROUP_SIMPLE_CONTENT = 1;
 	private static final int GROUP_M_EMPTY = 2;
 	private static final int GROUP_M_EMPTY_CONTENT = 3;
@@ -57,45 +73,98 @@ public class TextFlowService2Impl implements TextFlowService2 {
 	private static final String HTML_REG = "&reg;";
 	
 	private boolean initiated = false;
+	private Pattern defaultPattern = null;
 	private Pattern varPattern = null;
 	
 	private void initiate() {
 		if (initiated)
 			return;
 		try {
-			varPattern = Pattern.compile(PATTERN, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CHARACTER_CLASS);
-			initiated = true;
+			defaultPattern = Pattern.compile(DEFAULT_PATTERN);
 		} catch (NumberFormatException e) {
 			LOG.error(e);
+			return;
+		}
+		try {
+			varPattern = Pattern.compile(PATTERN, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CHARACTER_CLASS);
+		} catch (NumberFormatException e) {
+			LOG.error(e);
+			return;
+		}
+		initiated = true;
+	}
+	
+	@Override
+	public Text fromString(String string, Set<TextFlowStyle> defaultStyles, Set<TextFlowStyle> styles, String... additionalStyleClass) {
+		if (!initiated)
+			initiate();
+		Text text = new Text(replaceHtmlEntities(string));
+		addStyles(text, defaultStyles);
+		addStyles(text, styles);
+		if (additionalStyleClass != null && additionalStyleClass.length > 0)
+			text.getStyleClass().addAll(additionalStyleClass);
+		return text;
+	}
+	
+	private void addStyles(Text text, Set<TextFlowStyle> styles) {
+		if (text == null || styles == null || styles.isEmpty())
+			return;
+		if (styles.contains(TextFlowStyle.DEFAULT)) {
+			text.getStyleClass().add(SC_TEXT_DEFAULT);
+		}
+		if (styles.contains(TextFlowStyle.BOLD)) {
+			text.getStyleClass().add(SC_TEXT_BOLD);
+		}
+		if (styles.contains(TextFlowStyle.ITALIC)) {
+			text.getStyleClass().add(SC_TEXT_ITALIC);
+		}
+		if (styles.contains(TextFlowStyle.UNDERLINED)) {
+			text.getStyleClass().add(SC_TEXT_UNDERLINED);
+		}
+		if (styles.contains(TextFlowStyle.SUPERTEXT)) {
+			text.getStyleClass().add(SC_TEXT_SUP);
+		}
+		if (styles.contains(TextFlowStyle.SUBTEXT)) {
+			text.getStyleClass().add(SC_TEXT_SUB);
+		}
+		if (styles.contains(TextFlowStyle.SMALL)) {
+			text.getStyleClass().add(SC_TEXT_SMALL);
+		}
+		if (styles.contains(TextFlowStyle.LARGE)) {
+			text.getStyleClass().add(SC_TEXT_LARGE);
+		}
+		if (styles.contains(TextFlowStyle.COLOR_BLACK)) {
+			text.getStyleClass().add(SC_TEXT_BLACK);
+		}
+		if (styles.contains(TextFlowStyle.COLOR_WHITE)) {
+			text.getStyleClass().add(SC_TEXT_WHITE);
+		}
+		if (styles.contains(TextFlowStyle.COLOR_PRIMARY)) {
+			text.getStyleClass().add(SC_TEXT_PRIMARY);
+		}
+		if (styles.contains(TextFlowStyle.COLOR_SECONDARY)) {
+			text.getStyleClass().add(SC_TEXT_SECONDARY);
+		}
+		if (styles.contains(TextFlowStyle.COLOR_TERTIARY)) {
+			text.getStyleClass().add(SC_TEXT_TERTIARY);
+		}
+		if (styles.contains(TextFlowStyle.COLOR_ERROR)) {
+			text.getStyleClass().add(SC_TEXT_ERROR);
+		}
+		if (styles.contains(TextFlowStyle.COLOR_POSITIVE)) {
+			text.getStyleClass().add(SC_TEXT_POSITIVE);
+		}
+		if (styles.contains(TextFlowStyle.COLOR_WARNING)) {
+			text.getStyleClass().add(SC_TEXT_WARNING);
+		}
+		if (styles.contains(TextFlowStyle.COLOR_NEUTRAL)) {
+			text.getStyleClass().add(SC_TEXT_NEUTRAL);
 		}
 	}
 	
 	@Override
 	public Text fromString(String string, Set<TextFlowStyle> styles, String... additionalStyleClass) {
-		if (!initiated)
-			initiate();
-		Text text = new Text(replaceHtmlEntities(string));
-		if (styles.contains(TextFlowStyle.DEFAULT)) {
-			text.getStyleClass().add(STYLECLASS_TEXT_DEFAULT);
-		}
-		if (styles.contains(TextFlowStyle.BOLD)) {
-			text.getStyleClass().add(STYLECLASS_TEXT_BOLD);
-		}
-		if (styles.contains(TextFlowStyle.ITALIC)) {
-			text.getStyleClass().add(STYLECLASS_TEXT_ITALIC);
-		}
-		if (styles.contains(TextFlowStyle.UNDERLINED)) {
-			text.getStyleClass().add(STYLECLASS_TEXT_UNDERLINED);
-		}
-		if (styles.contains(TextFlowStyle.SUPERTEXT)) {
-			text.getStyleClass().add(STYLECLASS_TEXT_SUP);
-		}
-		if (styles.contains(TextFlowStyle.SUBTEXT)) {
-			text.getStyleClass().add(STYLECLASS_TEXT_SUB);
-		}
-		if (additionalStyleClass != null && additionalStyleClass.length > 0)
-			text.getStyleClass().addAll(additionalStyleClass);
-		return text;
+		return fromString(string, null, styles, additionalStyleClass);
 	}
 	
 	@Override
@@ -118,17 +187,25 @@ public class TextFlowService2Impl implements TextFlowService2 {
 	
 	@Override
 	public FlowPane flowPaneFromString(String string, String... additionalStyleClass) {
-		FlowPane flowPane = new FlowPane(Orientation.HORIZONTAL, listFromString(string).stream().toArray(size -> new Node[size]));
+		FlowPane flowPane = new FlowPane(Orientation.HORIZONTAL,
+				listFromString(string, additionalStyleClass).stream().toArray(size -> new Node[size]));
 		flowPane.setAlignment(Pos.CENTER_LEFT);
 		flowPane.getStyleClass().add(STYLECLASS_FLOW_PANE);
 		return flowPane;
 	}
 	
 	private void appendTextToList(String string, ObservableList<Node> container, String... additionalStyleClass) {
+		Set<TextFlowStyle> defaultStyles = null;
+		Matcher md = defaultPattern.matcher(string);
+		if (md.matches()) {
+			String tag = md.group(GROUP_DEFAULT_TAG);
+			defaultStyles = fromAttributes(md.group(GROUP_DEFAULT_ATTR));
+			string = string.replace(tag, "");
+		}
 		Matcher m = varPattern.matcher(string);
 		while (m.find()) {
 			String content = contentfromMatcher(m);
-			container.add(fromString(content, fromMatcher(m), additionalStyleClass));
+			container.add(fromString(content, defaultStyles, fromMatcher(m), additionalStyleClass));
 		}
 	}
 	
@@ -141,24 +218,63 @@ public class TextFlowService2Impl implements TextFlowService2 {
 			styles.add(TextFlowStyle.DEFAULT);
 		} else if (m.group(GROUP_M) != null) {
 			String attr = m.group(GROUP_M_ATTR);
-			attr = attr.toLowerCase(Locale.ROOT);
-			if (attr.contains("b")) {
-				styles.add(TextFlowStyle.BOLD);
-			}
-			if (attr.contains("i")) {
-				styles.add(TextFlowStyle.ITALIC);
-			}
-			if (attr.contains("u")) {
-				styles.add(TextFlowStyle.UNDERLINED);
-			}
-			if (attr.contains("h")) {
-				styles.add(TextFlowStyle.SUPERTEXT);
-			}
-			if (attr.contains("l")) {
-				styles.add(TextFlowStyle.SUBTEXT);
-			}
+			styles.addAll(fromAttributes(attr));
 		}
 		// XXX append other styles here, if necessary
+		return styles;
+	}
+	
+	private Set<TextFlowStyle> fromAttributes(String attributes) {
+		Set<TextFlowStyle> styles = new HashSet<>();
+		String attr = attributes.toLowerCase(Locale.ROOT);
+		if (attr.contains("b")) {
+			styles.add(TextFlowStyle.BOLD);
+		}
+		if (attr.contains("i")) {
+			styles.add(TextFlowStyle.ITALIC);
+		}
+		if (attr.contains("u")) {
+			styles.add(TextFlowStyle.UNDERLINED);
+		}
+		if (attr.contains("h")) {
+			styles.add(TextFlowStyle.SUPERTEXT);
+		}
+		if (attr.contains("l")) {
+			styles.add(TextFlowStyle.SUBTEXT);
+		}
+		if (attr.contains("-")) {
+			styles.add(TextFlowStyle.SMALL);
+		}
+		if (attr.contains("+")) {
+			styles.add(TextFlowStyle.LARGE);
+		}
+		if (attr.contains("0")) {
+			styles.add(TextFlowStyle.COLOR_BLACK);
+		}
+		if (attr.contains("9")) {
+			styles.add(TextFlowStyle.COLOR_WHITE);
+		}
+		if (attr.contains("1")) {
+			styles.add(TextFlowStyle.COLOR_PRIMARY);
+		}
+		if (attr.contains("2")) {
+			styles.add(TextFlowStyle.COLOR_SECONDARY);
+		}
+		if (attr.contains("3")) {
+			styles.add(TextFlowStyle.COLOR_TERTIARY);
+		}
+		if (attr.contains("4")) {
+			styles.add(TextFlowStyle.COLOR_ERROR);
+		}
+		if (attr.contains("5")) {
+			styles.add(TextFlowStyle.COLOR_POSITIVE);
+		}
+		if (attr.contains("6")) {
+			styles.add(TextFlowStyle.COLOR_WARNING);
+		}
+		if (attr.contains("7")) {
+			styles.add(TextFlowStyle.COLOR_NEUTRAL);
+		}
 		return styles;
 	}
 	
