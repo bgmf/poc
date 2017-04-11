@@ -22,7 +22,7 @@ import javafx.scene.text.TextFlow;
 
 public class TextFlowService2Impl implements TextFlowService2 {
 	
-private static final Logger LOG = LogManager.getLogger(TextFlowService2Impl.class);
+	private static final Logger LOG = LogManager.getLogger(TextFlowService2Impl.class);
 	
 	private static final String STYLECLASS_FLOW_PANE = "adaptive-text-flow";
 	
@@ -44,13 +44,17 @@ private static final Logger LOG = LogManager.getLogger(TextFlowService2Impl.clas
 	private static final String SC_TEXT_WARNING = "textflow-warning";
 	private static final String SC_TEXT_NEUTRAL = "textflow-neutral";
 	
-	// (<M(?:\s+t="([biuhl\-\+091234567]*){0,1}"\s*)/>).*
-	private static final String DEFAULT_PATTERN = "(<M(?:\\s+t=\"([biuhl\\-\\+091234567]*){0,1}\"\\s*)/>).*";
+	// (?s)
+	// -> http://www.regular-expressions.info/modifiers.html
+	// -> for "single line mode" makes the dot match all characters, including line breaks
+	
+	// (?s)(<M(?:\s+t="([biuhl\-\+091234567]*){0,1}"\s*)/>).*
+	private static final String DEFAULT_PATTERN = "(?s)(<M(?:\\s+t=\"([biuhl\\-\\+091234567]*){0,1}\"\\s*)/>).*";
 	private static final int GROUP_DEFAULT_TAG = 1;
 	private static final int GROUP_DEFAULT_ATTR = 2;
 	
-	// ([^\<\>]+)|(<m>([^\<\>]+)</m>)|(<m(?:\s+t="([biuhl\-\+091234567]*){0,1}")\s*>([^\<\>]+)</m>)
-	private static final String PATTERN = "([^\\<\\>]+)|(<m>([^\\<\\>]+)</m>)|(<m(?:\\s+t=\"([biuhl\\-\\+091234567]*){0,1}\")\\s*>([^\\<\\>]+)</m>)";
+	// (?s)([^\<\>]+)|(<m>([^\<\>]+)</m>)|(<m(?:\s+t="([biuhl\-\+091234567]*){0,1}")\s*>([^\<\>]+)</m>)
+	private static final String PATTERN = "(?s)([^\\<\\>]+)|(<m>([^\\<\\>]+)</m>)|(<m(?:\\s+t=\"([biuhl\\-\\+091234567]*){0,1}\")\\s*>([^\\<\\>]+)</m>)";
 	private static final int GROUP_SIMPLE_CONTENT = 1;
 	private static final int GROUP_M_EMPTY = 2;
 	private static final int GROUP_M_EMPTY_CONTENT = 3;
