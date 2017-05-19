@@ -1,0 +1,12 @@
+package fxml
+
+import javafx.scene.layout.BorderPane
+import javafx.scene.control.ListView
+import eu.dzim.tests.fx.TableTestObject
+import eu.dzim.tests.fx.ListTestController
+
+component TableTest controlledby ListTestController {
+	BorderPane {
+		center : ListView < TableTestObject > id list
+	}
+}

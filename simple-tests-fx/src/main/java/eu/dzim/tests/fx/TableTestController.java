@@ -3,6 +3,7 @@ package eu.dzim.tests.fx;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -65,7 +66,7 @@ public class TableTestController {
 		tableView.setItems(data);
 		
 		tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldObject, newObject) -> {
-			// do something
+			System.err.printf(Locale.ROOT, "selection: t[%s], f[%b], p[%d]%n", newObject.getText(), newObject.isFlag(), newObject.getPoints());
 		});
 		
 		tableColumnText.setCellValueFactory(new PropertyValueFactory<>("text"));

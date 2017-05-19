@@ -12,7 +12,7 @@ public class Main extends Application {
 		
 		stage.setTitle("Window");
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TableTest2.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ListTest.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root, 1200, 800);
 		
