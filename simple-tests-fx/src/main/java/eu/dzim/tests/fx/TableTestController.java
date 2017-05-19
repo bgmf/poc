@@ -64,6 +64,10 @@ public class TableTestController {
 		
 		tableView.setItems(data);
 		
+		tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldObject, newObject) -> {
+			// do something
+		});
+		
 		tableColumnText.setCellValueFactory(new PropertyValueFactory<>("text"));
 		tableColumnFlag.setCellValueFactory(param -> new SimpleObjectProperty<TableTestObject>(param.getValue()));
 		tableColumnAncestor.setCellValueFactory(param -> new SimpleObjectProperty<TableTestObject>(param.getValue()));
