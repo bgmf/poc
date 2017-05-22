@@ -138,6 +138,50 @@ public class CustomPdfViewer extends BorderPane implements Disposable {
 		validationSupport = new ValidationSupport();
 	}
 	
+	public Button getFileImportButton() {
+		return fileImportButton;
+	}
+	
+	public Button getFileSaveButton() {
+		return fileSaveButton;
+	}
+	
+	public Button getFileSaveAndOpenButton() {
+		return fileSaveAndOpenButton;
+	}
+	
+	public Button getZoomFitPageButton() {
+		return zoomFitPageButton;
+	}
+	
+	public Button getZoomFitWidthButton() {
+		return zoomFitWidthButton;
+	}
+	
+	public Button getZoomMinusButton() {
+		return zoomMinusButton;
+	}
+	
+	public Button getZoomPlusButton() {
+		return zoomPlusButton;
+	}
+	
+	public Button getFirstPageButton() {
+		return firstPageButton;
+	}
+	
+	public Button getPageBackButton() {
+		return pageBackButton;
+	}
+	
+	public Button getPageForwardButton() {
+		return pageForwardButton;
+	}
+	
+	public Button getLastPageButton() {
+		return lastPageButton;
+	}
+	
 	private FXMLLoader getLoader(UIComponentType component) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(component.getAbsoluteLocation()));
 		loader.setRoot(this);
@@ -253,8 +297,6 @@ public class CustomPdfViewer extends BorderPane implements Disposable {
 				} catch (NumberFormatException e) {}
 			}
 		});
-		
-		// TODO translate, if resource is set
 	}
 	
 	private void createAndConfigureImageLoadService() {
@@ -283,9 +325,15 @@ public class CustomPdfViewer extends BorderPane implements Disposable {
 				@Override
 				protected Pair<PDFFile, List<Image>> call() throws Exception {
 					
+					ByteBuffer buffer = null;
+					
 					try (RandomAccessFile raf = new RandomAccessFile(file, "r"); FileChannel channel = raf.getChannel()) {
+						// Moved from Memory Mapping to just plain old reads...
+						buffer = ByteBuffer.allocate((int) channel.size());
+						channel.read(buffer);
+						buffer.flip();
 						
-						ByteBuffer buffer = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());
+						// Create PDFFile Object
 						PDFFile pdfFile = new PDFFile(buffer);
 						
 						List<Image> pages = new ArrayList<>();
@@ -319,7 +367,6 @@ public class CustomPdfViewer extends BorderPane implements Disposable {
 				loading.set(false);
 			});
 			loadFileTask.setOnFailed(e -> {
-				// showErrorMessage("Could not load file " + file.getName(), loadFileTask.getException());
 				LOG.warn("Could not load file " + file.getName(), e.getSource().getException());
 				pdfFilePages.clear();
 				pdfFile.set(null);
