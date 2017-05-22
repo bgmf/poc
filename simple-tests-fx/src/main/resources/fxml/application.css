@@ -1,0 +1,119 @@
+.root {
+	
+	-brand-primary: #004893;
+	-brand-secondary: #009EE3;
+	-brand-tertiary: #99D8F4;
+	
+	-neutral-dark-gray-1: #505050;
+	-neutral-dark-gray-2: #999999;
+	-neutral-light-gray-1: #E0E0E0;
+	-neutral-light-gray-2: #F3F3F3;
+	
+	-util-error: #EF3C2F;
+	-util-positive: #00BD76;
+	-util-warning: #EEBA2B;
+	-util-neutral: #009EE3;
+}
+
+/*
+ * Colum Selection Container
+ */
+
+.column-selection {
+	-fx-background-color: white;
+}
+
+/*
+ * Table Entry, Static left content
+ */
+
+.pseudo-table-entry-first {
+	/*-fx-border-color: black;*/
+	-fx-border-color: black transparent black black;  
+	-fx-border-style: dotted;
+}
+
+/* .pseudo-table-entry-first * */
+.pseudo-table-entry-first .label,
+.pseudo-table-entry-first TextFlow {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: dotted;
+	-fx-min-height: 32;
+	-fx-padding: 0 0 0 16;
+}
+
+.pseudo-table-entry-first > .first {
+	-fx-border-color: transparent transparent black transparent;
+	-fx-background-color: -neutral-light-gray-1;
+}
+
+.pseudo-table-entry-first > .last {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: dotted;
+	/*-fx-min-height: 34;*/
+}
+
+.pseudo-table-entry-first VBox > .first {
+	-fx-border-color: transparent; 
+}
+
+.pseudo-table-entry-first VBox > .last {
+	-fx-border-color: black transparent transparent transparent; 
+}
+
+/*
+ * Table Entry Container
+ */
+
+.pseudo-table-container {
+	-fx-border-color: transparent transparent transparent black; 
+	-fx-border-style: dotted;
+	-fx-padding: 0 -1 0 0;
+}
+
+/*
+ * Table Entry
+ */
+
+.pseudo-table-entry {
+	-fx-border-color: black black black transparent; 
+	-fx-border-style: dotted;
+}
+
+.pseudo-table-entry:selected {
+	-fx-border-color: -brand-primary;
+	-fx-border-style: solid;
+}
+
+/* .pseudo-table-entry * */
+.pseudo-table-entry .label,
+.pseudo-table-entry TextFlow {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: dotted;
+	-fx-min-height: 32;
+}
+
+.pseudo-table-entry > .first {
+	-fx-border-color: transparent transparent black transparent; 
+	-fx-background-color: -neutral-light-gray-1;
+	-fx-background-insets: 0 0 0 -1;
+}
+
+.pseudo-table-entry:selected  > .first {
+	-fx-background-color: -brand-tertiary;
+	-fx-background-insets: 0 0 0 0;
+}
+
+.pseudo-table-entry > .last {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: dotted;
+	-fx-min-height: 32;
+}
+
+.pseudo-table-entry VBox > .first {
+	-fx-border-color: transparent; 
+}
+
+.pseudo-table-entry VBox > .last {
+	-fx-border-color: black transparent transparent transparent; 
+}
