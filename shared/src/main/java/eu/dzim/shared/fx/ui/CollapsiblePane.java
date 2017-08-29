@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -40,10 +41,12 @@ public class CollapsiblePane extends BorderPane {
 	@Inject private BaseApplicationModel applicationModel; // XXX for text resizing
 	
 	private CollapsibleButton collapsibleButton;
-	private final VBox topBox = new VBox(5.0);
+	private final VBox topBox = new VBox();
 	private final Separator separator = new Separator();
 	
 	private ObjectProperty<Pane> content = new SimpleObjectProperty<>(this, "content", buildDefaultContent());
+	
+	private DoubleProperty topSpacing = new SimpleDoubleProperty(5.0);
 	
 	private BooleanProperty showSeparator = new SimpleBooleanProperty(true);
 	private DoubleProperty separatorMargin = new SimpleDoubleProperty(5.0);
@@ -76,6 +79,7 @@ public class CollapsiblePane extends BorderPane {
 		separator.managedProperty().bind(separator.visibleProperty());
 		separator.visibleProperty().bind(showSeparator);
 		separatorMargin.addListener(separatorMarginListener);
+		topBox.spacingProperty().bind(topSpacing);
 		topBox.getChildren().addAll(collapsibleButton, separator);
 		setTop(topBox);
 		
@@ -93,8 +97,14 @@ public class CollapsiblePane extends BorderPane {
 	}
 	
 	private void handleContentVisibleChange(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
-		if (n == null || !n)
+		if (n == null)
 			return;
+		if (!n) {
+			VBox.setMargin(separator, new Insets(0.0, 0.0, 0.0, 0.0));
+			return;
+		} else {
+			VBox.setMargin(separator, new Insets(0.0, 0.0, separatorMargin.doubleValue(), 0.0));
+		}
 		if (constructedContent != null && content.get() != constructedContent) {
 			showConstructedContent();
 		} else if (fxmlContent != null && constructedContent == null) {
@@ -157,6 +167,10 @@ public class CollapsiblePane extends BorderPane {
 	
 	public void setOnActionAcceptor(DualAcceptor<CollapsibleButton, Boolean> onActionAcceptor) {
 		collapsibleButton.setOnActionAcceptor(onActionAcceptor);
+	}
+	
+	public HBox getAdditionalContentBox() {
+		return collapsibleButton.getAdditionalContentBox();
 	}
 	
 	public ObservableList<Node> getAdditionalContent() {
@@ -457,6 +471,21 @@ public class CollapsiblePane extends BorderPane {
 	
 	public final void setDuration(final Duration duration) {
 		this.durationProperty().set(duration);
+	}
+	
+	/*
+	 * Spacing of the top components
+	 */
+	public final DoubleProperty topSpacingProperty() {
+		return this.topSpacing;
+	}
+	
+	public final double getTopSpacing() {
+		return this.topSpacingProperty().get();
+	}
+	
+	public final void setTopSpacing(final double topSpacing) {
+		this.topSpacingProperty().set(topSpacing);
 	}
 	
 	/*

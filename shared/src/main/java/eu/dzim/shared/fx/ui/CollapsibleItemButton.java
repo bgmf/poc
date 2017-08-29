@@ -7,9 +7,13 @@ import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import eu.dzim.shared.fx.ui.model.FontData;
 import eu.dzim.shared.fx.util.ColorConstants;
 import eu.dzim.shared.util.DualAcceptor;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -29,6 +33,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 public class CollapsibleItemButton extends HBox {
 	
@@ -50,6 +55,8 @@ public class CollapsibleItemButton extends HBox {
 	
 	private ObjectProperty<Pane> content = new SimpleObjectProperty<>();
 	
+	private DoubleProperty contentSpacing = new SimpleDoubleProperty(5.0);
+	
 	private ChangeListener<Boolean> onActionListener = this::handleActionChanges;
 	private BooleanProperty visible = new SimpleBooleanProperty(false);
 	private DualAcceptor<CollapsibleItemButton, Boolean> onActionAcceptor = getDefaultOnActionAcceptor();
@@ -59,6 +66,9 @@ public class CollapsibleItemButton extends HBox {
 	
 	private BooleanProperty toggleBackground = new SimpleBooleanProperty(true);
 	
+	private BooleanProperty useAniamtedButton = new SimpleBooleanProperty(false);
+	private ObjectProperty<Duration> duration = new SimpleObjectProperty<>(Duration.millis(100));
+	
 	public CollapsibleItemButton() {
 		buildUI();
 	}
@@ -67,6 +77,8 @@ public class CollapsibleItemButton extends HBox {
 		
 		setMaxHeight(Double.MAX_VALUE);
 		setAlignment(Pos.CENTER_LEFT);
+		
+		spacingProperty().bind(contentSpacing);
 		
 		title = new Button();
 		title.setFocusTraversable(true); // XXX don't show up as traversable
@@ -120,6 +132,9 @@ public class CollapsibleItemButton extends HBox {
 		
 		handleContentChange(content, null, content.get());
 		content.addListener(this::handleContentChange);
+		
+		buttonPosition.addListener(this::handlePositioning);
+		additionalContentPosition.addListener(this::handlePositioning);
 	}
 	
 	private void handleContentChange(ObservableValue<? extends Pane> obs, Pane o, Pane n) {
@@ -177,6 +192,10 @@ public class CollapsibleItemButton extends HBox {
 		return additionalContent.getChildren();
 	}
 	
+	public HBox getAdditionalContentBox() {
+		return additionalContent;
+	}
+	
 	/*
 	 * Content: Pane
 	 */
@@ -191,6 +210,21 @@ public class CollapsibleItemButton extends HBox {
 	
 	public final void setContent(final Pane content) {
 		this.contentProperty().set(content);
+	}
+	
+	/*
+	 * Spacing of the content components
+	 */
+	public final DoubleProperty contentSpacingProperty() {
+		return this.contentSpacing;
+	}
+	
+	public final double getContentSpacing() {
+		return this.contentSpacingProperty().get();
+	}
+	
+	public final void setContentSpacing(final double contentSpacing) {
+		this.contentSpacingProperty().set(contentSpacing);
 	}
 	
 	/*
@@ -489,6 +523,38 @@ public class CollapsibleItemButton extends HBox {
 	}
 	
 	/*
+	 * Use Animation 
+	 */
+	
+	public final BooleanProperty useAniamtedButtonProperty() {
+		return this.useAniamtedButton;
+	}
+	
+	public final boolean isUseAniamtedButton() {
+		return this.useAniamtedButtonProperty().get();
+	}
+	
+	public final void setUseAniamtedButton(final boolean useAniamtedButtonProperty) {
+		this.useAniamtedButtonProperty().set(useAniamtedButtonProperty);
+	}
+	
+	/*
+	 * Duration: animation duration
+	 */
+	
+	public final ObjectProperty<Duration> durationProperty() {
+		return this.duration;
+	}
+	
+	public final Duration getDuration() {
+		return this.durationProperty().get();
+	}
+	
+	public final void setDuration(final Duration duration) {
+		this.durationProperty().set(duration);
+	}
+	
+	/*
 	 * other properties
 	 */
 	
@@ -511,6 +577,10 @@ public class CollapsibleItemButton extends HBox {
 	public void hideContent() {
 		if (!isContentShown())
 			handleButton(new ActionEvent(button, null));
+	}
+	
+	public void toggleContent() {
+		handleButton(new ActionEvent(button, null));
 	}
 	
 	private void handleButton(ActionEvent event) {
@@ -553,11 +623,28 @@ public class CollapsibleItemButton extends HBox {
 		final boolean _show = Math.abs(toRotate.getRotate()) > 0.0 ? true : false;
 		// title.setTextFill(_show ? ColorConstants.RED : ColorConstants.HEADER);
 		updatePseudoClasses(_show);
-		toRotate.setRotate(Math.abs(toRotate.getRotate()) > 0.0 ? 0.0 : angle);
-		// ((MaterialDesignIconView) toRotate).setFill(_show ? ColorConstants.RED : ColorConstants.HEADER);
-		if (toRotate180 != null && toRotate180.isVisible()) {
-			toRotate180.setRotate(Math.abs(toRotate180.getRotate()) > 0.0 ? 0.0 : angle2);
-			// ((MaterialDesignIconView) toRotate180).setFill(_show ? ColorConstants.RED : ColorConstants.HEADER);
+		if (!useAniamtedButton.get()) {
+			toRotate.setRotate(Math.abs(toRotate.getRotate()) > 0.0 ? 0.0 : angle);
+			// ((MaterialDesignIconView) toRotate).setFill(_show ? ColorConstants.RED : ColorConstants.HEADER);
+			if (toRotate180 != null && toRotate180.isVisible()) {
+				toRotate180.setRotate(Math.abs(toRotate180.getRotate()) > 0.0 ? 0.0 : angle2);
+				// ((MaterialDesignIconView) toRotate180).setFill(_show ? ColorConstants.RED : ColorConstants.HEADER);
+			}
+		} else {
+			Duration duration = this.duration.get();
+			if (duration == null)
+				duration = Duration.millis(100);
+			RotateTransition rotate = new RotateTransition(duration, toRotate);
+			rotate.setToAngle(Math.abs(toRotate.getRotate()) > 0.0 ? 0.0 : angle);
+			ParallelTransition parallel = new ParallelTransition(rotate);
+			if (toRotate180 != null) {
+				RotateTransition rotate180 = new RotateTransition(duration, toRotate180);
+				rotate180.setToAngle(Math.abs(toRotate180.getRotate()) > 0.0 ? 0.0 : angle2);
+				parallel.getChildren().add(rotate180);
+			}
+			parallel.setAutoReverse(false);
+			parallel.setCycleCount(1);
+			parallel.play();
 		}
 		getContent().setVisible(_show);
 		getContent().setManaged(_show);

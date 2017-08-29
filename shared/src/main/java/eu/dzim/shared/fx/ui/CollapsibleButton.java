@@ -62,22 +62,8 @@ public class CollapsibleButton extends HBox {
 		setMaxHeight(Double.MAX_VALUE);
 		setAlignment(Pos.CENTER_LEFT);
 		
-		// title = new Button();
-		// title.setFocusTraversable(true); // XXX don't show up as traversable
-		// title.setAlignment(Pos.CENTER_LEFT);
-		// title.getStyleClass().addAll("transparent", "no-effect");
-		// title.setFont(new Font(title.getFont().getName(), 12));
-		// FontData titleFD = new FontData();
-		// titleFD.setSize(12);
-		// titleFD.setWeight(FontWeight.BOLD);
-		// title.setUserData(titleFD);
-		// title.setStyle("-fx-label-padding: 0 0 0 -9;");
-		// title.setMinHeight(40.0);
-		// title.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		// title.setWrapText(true);
-		
 		title = new Button();
-		title.setFocusTraversable(true); // XXX don't show up as traversable
+		title.setFocusTraversable(false); // XXX don't show up as traversable
 		title.setAlignment(Pos.CENTER_LEFT);
 		title.getStyleClass().addAll("transparent", "no-effect", "heading-primary", "content-text-big");
 		title.setMinHeight(40.0);
@@ -92,7 +78,7 @@ public class CollapsibleButton extends HBox {
 		HBox.setMargin(additionalContent, new Insets(0.0, 5.0, 0.0, 0.0));
 		
 		button = new Button();
-		button.setFocusTraversable(true); // XXX don't show up as traversable
+		button.setFocusTraversable(true);
 		button.getStyleClass().addAll("button-transparent", "show-hide-pane-button");
 		button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		mdiv90 = new MaterialDesignIconView(MaterialDesignIcon.MINUS);
@@ -146,6 +132,10 @@ public class CollapsibleButton extends HBox {
 		if (onActionAcceptor == null)
 			onActionAcceptor = getDefaultOnActionAcceptor();
 		this.onActionAcceptor = onActionAcceptor;
+	}
+	
+	public HBox getAdditionalContentBox() {
+		return additionalContent;
 	}
 	
 	public ObservableList<Node> getAdditionalContent() {
@@ -449,6 +439,10 @@ public class CollapsibleButton extends HBox {
 	public void hideContent() {
 		if (!isContentShown())
 			handleButton(new ActionEvent(button, null));
+	}
+	
+	public void toggleContent() {
+		handleButton(new ActionEvent(button, null));
 	}
 	
 	protected void updatePseudoClasses(boolean show) {

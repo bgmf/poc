@@ -24,9 +24,11 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -45,7 +47,8 @@ public class CollapsibleItemPane extends BorderPane {
 	private final Separator separator = new Separator();
 	
 	private ObjectProperty<Pane> content = new SimpleObjectProperty<>(this, "content", buildDefaultContent());
-	private ObjectProperty<Duration> duration = new SimpleObjectProperty<>(this, "duration", Duration.millis(1));
+	
+	private DoubleProperty topSpacing = new SimpleDoubleProperty(5.0);
 	
 	private BooleanProperty showSeparator = new SimpleBooleanProperty(false);
 	private DoubleProperty separatorMargin = new SimpleDoubleProperty(0.0);
@@ -72,11 +75,13 @@ public class CollapsibleItemPane extends BorderPane {
 		collapsibleButton.setGlyph90Name(MaterialDesignIcon.MENU_DOWN.name());
 		collapsibleButton.setGlyph90Size(30);
 		collapsibleButton.setGlyph180Visible(false);
+		collapsibleButton.setGlyph180Size(30);
 		// setTop(collapsibleButton);
 		
 		separator.managedProperty().bind(separator.visibleProperty());
 		separator.visibleProperty().bind(showSeparator);
 		separatorMargin.addListener(separatorMarginListener);
+		topBox.spacingProperty().bind(topSpacing);
 		topBox.getChildren().addAll(collapsibleButton, separator);
 		setTop(topBox);
 		
@@ -144,6 +149,14 @@ public class CollapsibleItemPane extends BorderPane {
 		return collapsibleButton;
 	}
 	
+	public Button getTitle() {
+		return collapsibleButton.getTitle();
+	}
+	
+	public Button getButton() {
+		return collapsibleButton.getButton();
+	}
+	
 	public DualAcceptor<CollapsibleItemButton, Boolean> getOnActionAcceptor() {
 		return collapsibleButton.getOnActionAcceptor();
 	}
@@ -154,6 +167,10 @@ public class CollapsibleItemPane extends BorderPane {
 	
 	public ObservableList<Node> getAdditionalContent() {
 		return collapsibleButton.getAdditionalContent();
+	}
+	
+	public HBox getAdditionalContentBox() {
+		return collapsibleButton.getAdditionalContentBox();
 	}
 	
 	public Pane getConstructedContent() {
@@ -497,19 +514,65 @@ public class CollapsibleItemPane extends BorderPane {
 	}
 	
 	/*
+	 * Use Animation
+	 */
+	
+	public final BooleanProperty useAniamtedButtonProperty() {
+		return this.collapsibleButton.useAniamtedButtonProperty();
+	}
+	
+	public final boolean isUseAniamtedButton() {
+		return this.useAniamtedButtonProperty().get();
+	}
+	
+	public final void setUseAniamtedButton(final boolean useAniamtedButtonProperty) {
+		this.useAniamtedButtonProperty().set(useAniamtedButtonProperty);
+	}
+	
+	/*
 	 * Duration: animation duration
 	 */
 	
-	public final ObjectProperty<Duration> durationProperty() {
-		return this.duration;
+	public final ObjectProperty<Duration> animatedButtonDurationProperty() {
+		return this.collapsibleButton.durationProperty();
 	}
 	
-	public final Duration getDuration() {
-		return this.durationProperty().get();
+	public final Duration getAnimatedButtonDuration() {
+		return this.animatedButtonDurationProperty().get();
 	}
 	
-	public final void setDuration(final Duration duration) {
-		this.durationProperty().set(duration);
+	public final void setAnimatedButtonDuration(final Duration animatedButtonDuration) {
+		this.animatedButtonDurationProperty().set(animatedButtonDuration);
+	}
+	
+	/*
+	 * Spacing of the content components
+	 */
+	public final DoubleProperty contentSpacingProperty() {
+		return this.collapsibleButton.contentSpacingProperty();
+	}
+	
+	public final double getContentSpacing() {
+		return this.contentSpacingProperty().get();
+	}
+	
+	public final void setContentSpacing(final double contentSpacing) {
+		this.contentSpacingProperty().set(contentSpacing);
+	}
+	
+	/*
+	 * Spacing of the top components
+	 */
+	public final DoubleProperty topSpacingProperty() {
+		return this.topSpacing;
+	}
+	
+	public final double getTopSpacing() {
+		return this.topSpacingProperty().get();
+	}
+	
+	public final void setTopSpacing(final double topSpacing) {
+		this.topSpacingProperty().set(topSpacing);
 	}
 	
 	/*
