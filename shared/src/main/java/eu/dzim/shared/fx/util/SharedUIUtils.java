@@ -40,6 +40,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -85,6 +86,25 @@ public class SharedUIUtils {
 	
 	protected SharedUIUtils() {
 		// sonar
+	}
+	
+	public static void startSleepThread(long sleep, Runnable onSucceeded) {
+		Task<Void> t = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				Thread.sleep(10);
+				return null;
+			}
+		};
+		t.setOnSucceeded(s -> {
+			if (onSucceeded != null)
+				onSucceeded.run();
+		});
+		new Thread(t).start();
+	}
+	
+	public static void startSleepThread(Runnable onSucceeded) {
+		startSleepThread(10, onSucceeded);
 	}
 	
 	public static final void appendIcon(final Labeled node, final Path path) {
