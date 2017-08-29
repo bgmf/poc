@@ -1,0 +1,54 @@
+/* StackPane, overlay */
+.simple-dialog-overlay-pane {
+	/* code-defaults */
+	/*-fx-background-color: #000000B2;*/ /* 44 (~.25) -> B2 (~.7) */
+}
+
+/* StackPane, content */
+.simple-dialog-overlay-pane .content-holder {
+	/* code-defaults */
+	/*-fx-background-color: -brand-secondary;
+	-fx-background-radius: 2.0;*/
+}
+
+/* BorderPane, on content-pane, wraps content */
+.simple-dialog-overlay-pane .dialog-decoration {
+	-fx-background-radius: 2.0;
+}
+/* HBox */
+.simple-dialog-overlay-pane .dialog-decoration .toolbar {
+	-fx-background-color: -neutral-white;
+	-fx-background-radius: 2.0 2.0 0.0 0.0;
+	-fx-alignment: center;
+	-fx-padding: 0.0 0.0 0.0 5.0;
+}
+/* Label */
+.simple-dialog-overlay-pane .dialog-decoration .toolbar .title {
+	-fx-bounds-type: logical_vertical_center;
+	-fx-text-fill: -neutral-dark-gray-2;
+	-fx-font-weight: bold;
+	-fx-font-size: 1.3em;
+}
+/* Button */
+.simple-dialog-overlay-pane .dialog-decoration .toolbar .close {
+	-fx-background-radius: 0.0px;
+	-fx-background-color: transparent;
+	-fx-border-radius: 0.0px;
+	-fx-border-color: transparent;
+}
+/* MaterialDesignIconView - contained within a StackPane, which in turn is set to the buttons graphic node */
+.simple-dialog-overlay-pane .dialog-decoration .toolbar .close .icon {
+	-fx-fill: -neutral-dark-gray-2;
+}
+.simple-dialog-overlay-pane .dialog-decoration .toolbar .close:hover .icon {
+	-fx-fill: -util-error;
+}
+
+/* StackPane */
+.simple-dialog-overlay-pane .dialog-decoration .content {
+	-fx-padding: 5.0;
+}
+/* Rectangle  */
+.simple-dialog-overlay-pane .dialog-decoration .content .window-resize-corner {
+	-fx-fill: transparent;
+}
