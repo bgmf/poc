@@ -36,6 +36,7 @@ import com.sun.pdfview.PDFPage;
 import eu.dzim.shared.disposable.Disposable;
 import eu.dzim.shared.fx.fxml.FXMLLoaderService;
 import eu.dzim.shared.fx.ui.controller.ImageContainerController;
+import eu.dzim.shared.fx.util.ColorConstants;
 import eu.dzim.shared.fx.util.PlatformHelper;
 import eu.dzim.shared.fx.util.UIComponentType;
 import eu.dzim.shared.resource.BaseResource;
@@ -55,6 +56,9 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -69,8 +73,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.util.Duration;
 import javafx.util.Pair;
 
 public class CustomPdfViewer extends BorderPane implements Disposable {
@@ -88,6 +96,7 @@ public class CustomPdfViewer extends BorderPane implements Disposable {
 	private ValidationSupport validationSupport;
 	
 	private Path projectPath;
+	private StackPane dialogOverlay;
 	
 	@FXML private HBox fileImportBox;
 	@FXML private Button fileImportButton;
@@ -219,6 +228,14 @@ public class CustomPdfViewer extends BorderPane implements Disposable {
 	
 	public void setProjectPath(Path projectPath) {
 		this.projectPath = projectPath;
+	}
+	
+	public StackPane getDialogOverlay() {
+		return dialogOverlay;
+	}
+	
+	public void setDialogOverlay(StackPane dialogOverlay) {
+		this.dialogOverlay = dialogOverlay;
 	}
 	
 	public final BooleanProperty allowFileLoadingProperty() {
@@ -431,22 +448,77 @@ public class CustomPdfViewer extends BorderPane implements Disposable {
 	
 	@FXML
 	private void saveFile(ActionEvent event) {
-		if (pdfFilePath.get() == null)
+		if (pdfFilePath.get() == null) {
+			LOG.warn("No PDF file to save!");
 			return;
-		if (projectPath == null)
+		}
+		if (projectPath == null) {
+			showDialog(baseResource.getGuaranteedString("pdf.viewer.save.fail"), baseResource.getGuaranteedString("pdf.viewer.save.fail.msg.format"));
+			LOG.warn("No Path to store the file to is set!");
 			return;
+		}
 		Path target = projectPath.resolve(pdfFilePath.get().getFileName().toString());
+		LOG.info("Path to save the PDF to: " + target);
 		try {
 			Files.copy(pdfFilePath.get(), target, StandardCopyOption.REPLACE_EXISTING);
+			showDialog(baseResource.getGuaranteedString("pdf.viewer.save.success"),
+					baseResource.getGuaranteedString("pdf.viewer.save.success.msg.format"), target.toString());
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
+			showDialog(baseResource.getGuaranteedString("pdf.viewer.save.fail"), baseResource.getGuaranteedString("pdf.viewer.save.fail.msg.format"));
 		}
+	}
+	
+	private void showDialog(String title, String messageFormat, Object... parameter) {
+		if (dialogOverlay == null) {
+			LOG.warn("No overlay specified to show the dialog on!");
+			return;
+		}
+		SimpleDialog dialog = new SimpleDialog();
+		dialog.setAnimationStrategy(SimpleDialog.AnimationStrategy.FADE);
+		dialog.setAnimationDuration(Duration.millis(400));
+		dialog.setDialogBackground(ColorConstants.WHITE);
+		dialog.setOverlayClose(false);
+		dialog.setUseDecoration(true);
+		dialog.setDecoratedDialogPosition(Pos.CENTER);
+		dialog.setDraggable(true);
+		dialog.setResizableDialog(false);
+		dialog.setModal(true);
+		dialog.setOverlayBackground(Color.TRANSPARENT);
+		
+		dialog.setTitle(title);
+		
+		VBox box = new VBox(5.0);
+		box.setAlignment(Pos.CENTER);
+		box.setPadding(new Insets(0.0, 10.0, 10.0, 10.0));
+		box.addEventFilter(KeyEvent.ANY, e -> {
+			if (e.getCode().equals(KeyCode.ESCAPE) && KeyEvent.KEY_RELEASED == e.getEventType()) {
+				dialog.close();
+				e.consume();
+			}
+		});
+		
+		Label message = new Label(String.format(Locale.ROOT, messageFormat, parameter));
+		message.setAlignment(Pos.CENTER);
+		message.setTextAlignment(TextAlignment.LEFT);
+		message.setWrapText(true);
+		box.getChildren().add(message);
+		
+		dialog.setContent(box);
+		
+		dialog.setOnBeforeShow(e -> ((Node) e.getTarget()).setEffect(SimpleDialog.DEFAULT_EFFECT));
+		dialog.setOnDialogOpened(e -> {});
+		dialog.setOnDialogClosed(e -> {});
+		
+		dialog.show(dialogOverlay);
 	}
 	
 	@FXML
 	private void openFile(ActionEvent event) {
-		if (pdfFilePath.get() == null)
+		if (pdfFilePath.get() == null) {
+			LOG.warn("No PDF file to open with the systems viewer!");
 			return;
+		}
 		SwingUtilities.invokeLater(() -> {
 			try {
 				Desktop.getDesktop().open(pdfFilePath.get().toFile());
