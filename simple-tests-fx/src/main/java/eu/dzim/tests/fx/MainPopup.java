@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-public class PopupMain extends Application {
+public class MainPopup extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		
