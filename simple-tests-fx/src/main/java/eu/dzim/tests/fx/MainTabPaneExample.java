@@ -6,13 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class MainTabPaneExample extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		
 		stage.setTitle("Window");
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ListTest.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TabPaneExample.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root, 1200, 800);
 		
