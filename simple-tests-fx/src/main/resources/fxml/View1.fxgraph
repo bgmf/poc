@@ -5,6 +5,8 @@ import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.geometry.Insets
 import eu.dzim.tests.fx.View1Controller
+import javafx.scene.control.Separator
+import javafx.scene.control.SplitMenuButton
 
 component View1 controlledby View1Controller {
 	VBox {
@@ -30,6 +32,10 @@ component View1 controlledby View1Controller {
 		},
 		TextField {
 			promptText : "enter Blub here..."
+		},
+		Separator,
+		SplitMenuButton {
+			text : "Bla"
 		}
 	}
 }

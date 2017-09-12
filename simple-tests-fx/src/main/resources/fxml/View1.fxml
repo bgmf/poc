@@ -6,6 +6,8 @@
 <?import java.lang.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
@@ -17,6 +19,8 @@
 	<TextField promptText="enter Bla here..."/> 
 	<Label text="Blub"/> 
 	<TextField promptText="enter Blub here..."/> 
+	<Separator/> 
+	<SplitMenuButton text="Bla"/> 
 	<padding>
 		<Insets top="10" right="10" bottom="10" left="10"/> 
 	</padding>
