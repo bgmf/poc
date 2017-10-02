@@ -6,3 +6,4 @@ target/
 .classpath
 *.log
 dependency-reduced-pom.xml
+**/sjjb_icons/

@@ -87,13 +87,16 @@
 		<version.guice>4.1.0</version.guice>
 		<version.guava>23.0</version.guava>
 		<version.log4j>2.8.2</version.log4j>
+		<version.apache.commons.cli>1.4</version.apache.commons.cli>
+		<version.jackson>2.9.0</version.jackson>
+		
 		<version.jasperreports>6.4.1</version.jasperreports>
+		
+		<version.org.swinglabs.pdfrenderer>1.0.5</version.org.swinglabs.pdfrenderer>
+
 		<version.controlsfx>8.40.13</version.controlsfx>
 		<version.tornadofx.controls>1.7.9</version.tornadofx.controls>
 		<version.org.jfoenix>1.7.0</version.org.jfoenix>
-		<version.jackson>2.9.0</version.jackson>
-		<version.apache.commons.cli>1.4</version.apache.commons.cli>
-		<version.org.swinglabs.pdfrenderer>1.0.5</version.org.swinglabs.pdfrenderer>
 		
 		<version.fontawesomfx>8.15</version.fontawesomfx>
 		<version.fontawesomfx.eo>2.2.7-2</version.fontawesomfx.eo>
@@ -151,7 +154,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.7.0</version>
 				<configuration>
 					<!-- Java Versions -->
 					<source>1.8</source>
@@ -178,7 +181,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
+				<version>3.0.2</version>
 				<inherited>true</inherited>
 				<configuration>
 					<archive>
@@ -200,7 +203,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.4.3</version>
+				<version>3.1.0</version>
 				<configuration>
 				</configuration>
 				<executions>

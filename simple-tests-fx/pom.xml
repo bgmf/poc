@@ -84,17 +84,22 @@
 		<dependency>
 			<groupId>org.jpedal</groupId>
 			<artifactId>OpenViewerFX</artifactId>
-			<version>7.5.30</version>
+			<version>7.9.26</version>
 		</dependency>
 		<dependency>
 			<groupId>org.scilab.forge</groupId>
 			<artifactId>jlatexmath</artifactId>
-			<version>1.0.4</version>
+			<version>1.0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.swt</groupId>
 			<artifactId>${swt.artifactId}</artifactId>
 			<version>4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.dorkbox</groupId>
+			<artifactId>SystemTray</artifactId>
+			<version>3.9</version>
 		</dependency>
 	</dependencies>
 </project>
