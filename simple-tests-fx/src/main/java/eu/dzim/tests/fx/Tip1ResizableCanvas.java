@@ -1,5 +1,6 @@
 package eu.dzim.tests.fx;
 
+import eu.dzim.tests.fx.controls.ResizableCanvas;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;

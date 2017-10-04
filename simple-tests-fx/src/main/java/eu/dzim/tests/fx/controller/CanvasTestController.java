@@ -1,6 +1,6 @@
 package eu.dzim.tests.fx.controller;
 
-import eu.dzim.tests.fx.ResizableCanvas;
+import eu.dzim.tests.fx.controls.ResizableCanvas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
