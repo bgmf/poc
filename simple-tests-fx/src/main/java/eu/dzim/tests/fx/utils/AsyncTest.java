@@ -1,4 +1,4 @@
-package eu.dzim.tests.fx;
+package eu.dzim.tests.fx.utils;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
