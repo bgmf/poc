@@ -5,6 +5,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
+import eu.dzim.tests.fx.model.ExampleInterface;
+import eu.dzim.tests.fx.model.ExampleModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -4,7 +4,7 @@ import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
 import eu.dzim.tests.fx.SwingInteropControllerInterface;
-import eu.dzim.tests.fx.SwingInteropModel;
+import eu.dzim.tests.fx.model.SwingInteropModel;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;

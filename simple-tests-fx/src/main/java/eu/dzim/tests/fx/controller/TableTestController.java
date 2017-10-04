@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import eu.dzim.tests.fx.TableTestObject;
+import eu.dzim.tests.fx.model.TableTestObject;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;

@@ -1,7 +1,7 @@
 package eu.dzim.tests.fx.controller;
 
-import eu.dzim.tests.fx.ExampleInterface;
-import eu.dzim.tests.fx.ExampleModel;
+import eu.dzim.tests.fx.model.ExampleInterface;
+import eu.dzim.tests.fx.model.ExampleModel;
 import javafx.fxml.FXML;
 
 public class View2Controller implements ExampleInterface {

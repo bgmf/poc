@@ -1,4 +1,4 @@
-package eu.dzim.tests.fx;
+package eu.dzim.tests.fx.model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

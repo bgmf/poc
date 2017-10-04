@@ -2,7 +2,7 @@ package eu.dzim.tests.fx.controller;
 
 import java.util.Locale;
 
-import eu.dzim.tests.fx.TableTestObject;
+import eu.dzim.tests.fx.model.TableTestObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
