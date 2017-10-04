@@ -1,4 +1,4 @@
-package eu.dzim.tests.fx;
+package eu.dzim.tests.fx.controls;
 
 import java.util.ArrayList;
 import java.util.List;
