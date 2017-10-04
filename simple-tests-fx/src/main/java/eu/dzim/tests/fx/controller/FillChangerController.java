@@ -15,13 +15,10 @@ import javafx.util.Duration;
 
 public class FillChangerController {
 	
-	@FXML
-	private BorderPane root;
-	@FXML
-	private VBox center;
+	@FXML private BorderPane root;
+	@FXML private VBox center;
 	
-	@FXML
-	private Rectangle rect;
+	@FXML private Rectangle rect;
 	
 	@FXML
 	protected void initialize() {

@@ -173,18 +173,18 @@ public class PseudoTableController {
 		final GridPane pane = loader.load();
 		pane.setUserData(o);
 		pane.setOnMouseClicked(this::handleMouseClickOnEntry);
-
+		
 		final Label fixLine1Label = (Label) pane.lookup("#fixLine1Label");
 		// fixLine1Label.textProperty().bind(to-some-property);
-
+		
 		final ScrollPane innerScrollPane = (ScrollPane) pane.lookup("#innerScrollPane");
-
+		
 		innerScrollPane.vminProperty().bindBidirectional(innerLeftScrollBar.minProperty());
 		innerScrollPane.vmaxProperty().bindBidirectional(innerLeftScrollBar.maxProperty());
 		innerScrollPane.vvalueProperty().bindBidirectional(innerLeftScrollBar.valueProperty());
-
+		
 		final VBox innerScrollContent = (VBox) innerScrollPane.getContent();
-
+		
 		final Label line1Label = (Label) innerScrollContent.lookup("#line1Label");
 		final Label line2Label = (Label) innerScrollContent.lookup("#line2Label");
 		final Label line3Label = (Label) innerScrollContent.lookup("#line3Label");
@@ -196,14 +196,14 @@ public class PseudoTableController {
 		final Label line9Label = (Label) innerScrollContent.lookup("#line9Label");
 		final Label line10Label = (Label) innerScrollContent.lookup("#line10Label");
 		// TODO bind the text for each label to the actual content
-
+		
 		final Button copyButton = (Button) pane.lookup("#actionCopy");
 		copyButton.setUserData(o);
 		// copyButton.setOnAction(this::handleCopy);
 		final Button deleteButton = (Button) pane.lookup("#actionDelete");
 		deleteButton.setUserData(o);
 		// deleteButton.setOnAction(this::handleDelete);
-
+		
 		return pane;
 	}
 	

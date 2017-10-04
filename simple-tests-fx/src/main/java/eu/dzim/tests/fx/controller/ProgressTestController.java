@@ -13,12 +13,9 @@ import javafx.scene.control.ProgressIndicator;
 
 public class ProgressTestController {
 	
-	@FXML
-	private Button readButton;
-	@FXML
-	private ProgressBar progressBar;
-	@FXML
-	private ProgressIndicator progressIndicator;
+	@FXML private Button readButton;
+	@FXML private ProgressBar progressBar;
+	@FXML private ProgressIndicator progressIndicator;
 	
 	private MyFancyService service = null;
 	

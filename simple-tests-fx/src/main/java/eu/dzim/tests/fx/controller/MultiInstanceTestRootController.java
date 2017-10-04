@@ -10,10 +10,8 @@ import javafx.scene.layout.Pane;
 
 public class MultiInstanceTestRootController {
 	
-	@FXML
-	private BorderPane rootPane;
-	@FXML
-	private SplitPane contentPane;
+	@FXML private BorderPane rootPane;
+	@FXML private SplitPane contentPane;
 	
 	@FXML
 	protected void initialize() {

@@ -18,18 +18,12 @@ import javafx.util.Duration;
 
 public class MediaTestController {
 	
-	@FXML
-	private BorderPane root;
-	@FXML
-	private MediaView mediaView;
-	@FXML
-	private Button buttonPlay;
-	@FXML
-	private Button buttonStop;
-	@FXML
-	private Label label;
-	@FXML
-	private Slider slider;
+	@FXML private BorderPane root;
+	@FXML private MediaView mediaView;
+	@FXML private Button buttonPlay;
+	@FXML private Button buttonStop;
+	@FXML private Label label;
+	@FXML private Slider slider;
 	
 	private MediaPlayer mediaPlayer;
 	

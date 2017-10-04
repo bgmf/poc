@@ -7,24 +7,19 @@ import netscape.javascript.JSObject;
 
 public class WebViewTestController {
 	
-	@FXML
-	private WebView webView;
+	@FXML private WebView webView;
 	private WebEngine webEngine = null;
 	
 	@FXML
 	protected void initialize() {
 		webEngine = webView.getEngine();
 		webEngine.setUserAgent("AppleWebKit/537.44");
-		webEngine.load(
-				"https://appetize.io/docs");
+		webEngine.load("https://appetize.io/docs");
 		webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
 			JSObject window = (JSObject) webEngine.executeScript("window");
 			JavaBridge bridge = new JavaBridge();
 			window.setMember("java", bridge);
-			webEngine.executeScript("console.log = function(message)\n" 
-					+ "{\n" 
-					+ "    java.log(message);\n" 
-					+ "};");
+			webEngine.executeScript("console.log = function(message)\n" + "{\n" + "    java.log(message);\n" + "};");
 		});
 	}
 	

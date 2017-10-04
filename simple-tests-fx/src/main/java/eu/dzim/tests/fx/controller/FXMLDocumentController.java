@@ -11,13 +11,10 @@ import javafx.scene.shape.Line;
 
 public class FXMLDocumentController {
 	
-	@FXML
-	private Pane drawPane;
+	@FXML private Pane drawPane;
 	
-	@FXML
-	private ResourceBundle resources;
-	@FXML
-	private URL location;
+	@FXML private ResourceBundle resources;
+	@FXML private URL location;
 	
 	@FXML
 	protected void initialize() {

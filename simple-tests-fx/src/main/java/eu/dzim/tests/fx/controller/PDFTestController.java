@@ -1,8 +1,6 @@
 package eu.dzim.tests.fx.controller;
 
-import org.jpedal.PdfDecoderFX;
 import org.jpedal.examples.viewer.OpenViewerFX;
-import org.jpedal.exception.PdfException;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;

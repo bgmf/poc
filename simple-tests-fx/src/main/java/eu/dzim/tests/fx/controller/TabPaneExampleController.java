@@ -3,12 +3,10 @@ package eu.dzim.tests.fx.controller;
 import java.lang.reflect.Field;
 import java.util.Optional;
 
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 
 public class TabPaneExampleController {
 	
@@ -19,35 +17,35 @@ public class TabPaneExampleController {
 	
 	@FXML
 	public void initialize() {
-//		tabPane.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
-//			Task<Void> task = new Task<Void>() {
-//				@Override
-//				protected Void call() throws Exception {
-//					try {
-//						Thread.sleep(100);
-//					} catch (InterruptedException e) {
-//						Thread.currentThread().interrupt();
-//						e.printStackTrace();
-//					}
-//					return null;
-//				}
-//			};
-//			task.setOnSucceeded(event -> getObject(tabPane.getSkin(), "tabHeaderArea")
-//					.ifPresent(tabHeaderArea -> getObject(tabHeaderArea, "headersRegion").ifPresent(headersRegion -> {
-//						StackPane stack = (StackPane) headersRegion;
-//						stack.getChildrenUnmodifiable().forEach(tabHeaderSkin -> {
-//							Optional<Object> tab = getObject(tabHeaderSkin, "tab");
-//							if (n == tab.get()) {
-//								tabHeaderSkin.toFront();
-//								tabHeaderSkin.setTranslateY(10.0);
-//							} else {
-//								tabHeaderSkin.toBack();
-//								tabHeaderSkin.setTranslateY(0.0);
-//							}
-//						});
-//					})));
-//			new Thread(task).start();
-//		});
+		// tabPane.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
+		// Task<Void> task = new Task<Void>() {
+		// @Override
+		// protected Void call() throws Exception {
+		// try {
+		// Thread.sleep(100);
+		// } catch (InterruptedException e) {
+		// Thread.currentThread().interrupt();
+		// e.printStackTrace();
+		// }
+		// return null;
+		// }
+		// };
+		// task.setOnSucceeded(event -> getObject(tabPane.getSkin(), "tabHeaderArea")
+		// .ifPresent(tabHeaderArea -> getObject(tabHeaderArea, "headersRegion").ifPresent(headersRegion -> {
+		// StackPane stack = (StackPane) headersRegion;
+		// stack.getChildrenUnmodifiable().forEach(tabHeaderSkin -> {
+		// Optional<Object> tab = getObject(tabHeaderSkin, "tab");
+		// if (n == tab.get()) {
+		// tabHeaderSkin.toFront();
+		// tabHeaderSkin.setTranslateY(10.0);
+		// } else {
+		// tabHeaderSkin.toBack();
+		// tabHeaderSkin.setTranslateY(0.0);
+		// }
+		// });
+		// })));
+		// new Thread(task).start();
+		// });
 	}
 	
 	private Optional<Object> getObject(Object source, String fieldName) {

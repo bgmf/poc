@@ -24,18 +24,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TableTestController {
 	
-	@FXML
-	private TableView<TableTestObject> tableView;
-	@FXML
-	private TableColumn<TableTestObject, String> tableColumnText;
-	@FXML
-	private TableColumn<TableTestObject, TableTestObject> tableColumnFlag;
-	@FXML
-	private TableColumn<TableTestObject, TableTestObject> tableColumnAncestor;
-	@FXML
-	private TableColumn<TableTestObject, TableTestObject> tableColumnDescendant;
-	@FXML
-	private TableColumn<TableTestObject, TableTestObject> tableColumnPoints;
+	@FXML private TableView<TableTestObject> tableView;
+	@FXML private TableColumn<TableTestObject, String> tableColumnText;
+	@FXML private TableColumn<TableTestObject, TableTestObject> tableColumnFlag;
+	@FXML private TableColumn<TableTestObject, TableTestObject> tableColumnAncestor;
+	@FXML private TableColumn<TableTestObject, TableTestObject> tableColumnDescendant;
+	@FXML private TableColumn<TableTestObject, TableTestObject> tableColumnPoints;
 	
 	private Map<String, List<String>> descendantMap;
 	private ObservableList<String> ancestorList;

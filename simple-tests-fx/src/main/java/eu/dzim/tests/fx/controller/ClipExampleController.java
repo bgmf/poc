@@ -7,10 +7,8 @@ import javafx.scene.shape.Circle;
 
 public class ClipExampleController {
 	
-	@FXML
-	private BorderPane root;
-	@FXML
-	private VBox vbox;
+	@FXML private BorderPane root;
+	@FXML private VBox vbox;
 	
 	@FXML
 	protected void initialize() {

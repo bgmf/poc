@@ -11,8 +11,7 @@ import javafx.scene.control.ListView;
 
 public class ListTestController {
 	
-	@FXML
-	private ListView<TableTestObject> list;
+	@FXML private ListView<TableTestObject> list;
 	
 	@FXML
 	protected void initialize() {

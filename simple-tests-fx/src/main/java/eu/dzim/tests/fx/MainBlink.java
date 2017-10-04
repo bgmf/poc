@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -26,7 +25,7 @@ public class MainBlink extends Application {
 		
 		primaryStage.setScene(new Scene(box));
 		primaryStage.show();
-
+		
 		AtomicInteger counter = new AtomicInteger(0);
 		final Timeline tl = new Timeline(new KeyFrame(Duration.millis(500), new EventHandler<ActionEvent>() {
 			@Override

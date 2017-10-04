@@ -15,7 +15,7 @@ public class MainPdf extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PDFTest.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root, 1200, 800);
-
+		
 		stage.setScene(scene);
 		stage.show();
 	}

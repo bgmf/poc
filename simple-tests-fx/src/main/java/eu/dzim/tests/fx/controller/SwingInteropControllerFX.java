@@ -8,10 +8,8 @@ import javafx.scene.layout.BorderPane;
 
 public class SwingInteropControllerFX implements SwingInteropControllerInterface {
 	
-	@FXML
-	private BorderPane root;
-	@FXML
-	private Button button;
+	@FXML private BorderPane root;
+	@FXML private Button button;
 	
 	private SwingInteropModel model;
 	

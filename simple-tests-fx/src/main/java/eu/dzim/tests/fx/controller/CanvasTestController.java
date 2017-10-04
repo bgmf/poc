@@ -12,20 +12,13 @@ import javafx.scene.paint.Color;
 
 public class CanvasTestController {
 	
-	@FXML
-	private TextField text1;
-	@FXML
-	private TextField text2;
-	@FXML
-	private TextField text3;
-	@FXML
-	private Button button1;
-	@FXML
-	private Button button2;
-	@FXML
-	private StackPane canvasPane;
-	@FXML
-	private ResizableCanvas canvas;
+	@FXML private TextField text1;
+	@FXML private TextField text2;
+	@FXML private TextField text3;
+	@FXML private Button button1;
+	@FXML private Button button2;
+	@FXML private StackPane canvasPane;
+	@FXML private ResizableCanvas canvas;
 	
 	private GraphicsContext gc;
 	

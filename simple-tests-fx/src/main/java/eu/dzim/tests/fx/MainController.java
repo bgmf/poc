@@ -10,8 +10,7 @@ import javafx.scene.control.Label;
 
 public class MainController implements Initializable {
 	
-	@FXML
-	private Label label;
+	@FXML private Label label;
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event) {

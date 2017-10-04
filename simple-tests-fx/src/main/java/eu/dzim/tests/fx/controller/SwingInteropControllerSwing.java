@@ -11,10 +11,8 @@ import javafx.scene.layout.BorderPane;
 
 public class SwingInteropControllerSwing implements SwingInteropControllerInterface {
 	
-	@FXML
-	private BorderPane root;
-	@FXML
-	private SwingNode swingNode;
+	@FXML private BorderPane root;
+	@FXML private SwingNode swingNode;
 	
 	private SwingInteropModel model;
 	

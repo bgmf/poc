@@ -1,7 +1,6 @@
 package eu.dzim.tests.fx.math;
 
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -39,10 +38,10 @@ public class MathTextFlowController {
 			flow.getChildren().add(flow.getChildren().indexOf(input), new Text(formula));
 		} else {
 			iv.setUserData(formula);
-//			Group container = new Group(iv);
-//			System.err.println(iv.getFitHeight() + " " + iv.getImage().getHeight());
-//			if (iv.getFitHeight() > input.getHeight())
-//				container.setTranslateY(input.getHeight() / 2.0);
+			// Group container = new Group(iv);
+			// System.err.println(iv.getFitHeight() + " " + iv.getImage().getHeight());
+			// if (iv.getFitHeight() > input.getHeight())
+			// container.setTranslateY(input.getHeight() / 2.0);
 			flow.getChildren().add(flow.getChildren().indexOf(input), iv);
 		}
 	}
