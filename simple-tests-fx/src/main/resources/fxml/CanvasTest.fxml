@@ -4,7 +4,7 @@
 -->
 
 <?import java.lang.*?>
-<?import eu.dzim.tests.fx.ResizableCanvas?>
+<?import eu.dzim.tests.fx.controls.ResizableCanvas?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>

@@ -10,7 +10,7 @@ import javafx.geometry.Insets
 import javafx.scene.control.TextField
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.StackPane
-import eu.dzim.tests.fx.ResizableCanvas
+import eu.dzim.tests.fx.controls.ResizableCanvas
 import eu.dzim.tests.fx.controller.CanvasTestController
 
 component CanvasTest controlledby CanvasTestController {
