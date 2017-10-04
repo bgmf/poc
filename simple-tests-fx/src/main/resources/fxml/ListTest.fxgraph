@@ -2,7 +2,7 @@ package fxml
 
 import javafx.scene.layout.BorderPane
 import javafx.scene.control.ListView
-import eu.dzim.tests.fx.TableTestObject
+import eu.dzim.tests.fx.model.TableTestObject
 import eu.dzim.tests.fx.controller.ListTestController
 
 component TableTest controlledby ListTestController {

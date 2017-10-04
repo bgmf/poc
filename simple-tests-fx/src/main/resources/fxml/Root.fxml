@@ -9,7 +9,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.RootController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.controller.RootController">
 
 	<top>
 		<MenuBar> 

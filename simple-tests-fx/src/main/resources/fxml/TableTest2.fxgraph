@@ -12,7 +12,7 @@ import javafx.scene.control.TextField
 import javafx.scene.control.CheckBox
 import javafx.scene.control.Button
 import javafx.scene.control.Separator
-import eu.dzim.tests.fx.TableTest2Model
+import eu.dzim.tests.fx.model.TableTest2Model
 
 component TableTest2 {
 	BorderPane {

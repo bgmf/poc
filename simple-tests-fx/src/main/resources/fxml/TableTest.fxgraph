@@ -2,9 +2,9 @@ package fxml
 
 import javafx.scene.layout.BorderPane
 import javafx.scene.control.TableView
-import eu.dzim.tests.fx.TableTestObject
 import javafx.scene.control.TableColumn
 import javafx.geometry.Insets
+import eu.dzim.tests.fx.model.TableTestObject
 import eu.dzim.tests.fx.controller.TableTestController
 
 component TableTest controlledby TableTestController {
