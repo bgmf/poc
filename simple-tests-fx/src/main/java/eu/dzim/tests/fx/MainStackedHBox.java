@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class MainStack extends Application {
+public class MainStackedHBox extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		
