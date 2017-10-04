@@ -24,7 +24,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class AudioPlayer extends Application {
+public class MainAudioPlayer extends Application {
 	
 	Button playButton;
 	Button pauseButton;

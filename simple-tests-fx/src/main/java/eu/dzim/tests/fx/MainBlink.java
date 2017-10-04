@@ -14,7 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class BlinkMain extends Application {
+public class MainBlink extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws InterruptedException {

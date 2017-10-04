@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Tip1ResizableCanvas extends Application {
+public class MainResizableCanvas extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {

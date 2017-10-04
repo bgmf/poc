@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class ResizeMain extends Application {
+public class MainResize extends Application {
 	
 	private double xOffset = 0;
 	private double yOffset = 0;

@@ -9,14 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class Koord extends Application {
+public class MainKoord extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Koordinatensystem");
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Koord.class.getResource("/fxml/FXMLDocument.fxml"));
+			loader.setLocation(MainKoord.class.getResource("/fxml/FXMLDocument.fxml"));
 			Pane rootLayout = (Pane) loader.load();
 			FXMLDocumentController controller = loader.getController();
 			Scene scene = new Scene(rootLayout);
