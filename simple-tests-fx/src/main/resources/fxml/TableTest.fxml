@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.TableTestController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.controller.TableTestController">
 
 	<center>
 		<TableView fx:id="tableView"> 

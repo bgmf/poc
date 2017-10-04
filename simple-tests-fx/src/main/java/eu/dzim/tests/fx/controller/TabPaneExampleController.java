@@ -1,4 +1,4 @@
-package eu.dzim.tests.fx;
+package eu.dzim.tests.fx.controller;
 
 import java.lang.reflect.Field;
 import java.util.Optional;

@@ -2,7 +2,7 @@ package fxml
 
 import javafx.scene.layout.BorderPane
 import javafx.scene.control.Button
-import eu.dzim.tests.fx.SwingInteropControllerFX
+import eu.dzim.tests.fx.controller.SwingInteropControllerFX
 
 component SwingInteropFXButton controlledby SwingInteropControllerFX {
 	BorderPane id root {

@@ -1,8 +1,10 @@
-package eu.dzim.tests.fx;
+package eu.dzim.tests.fx.controller;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
+import eu.dzim.tests.fx.SwingInteropControllerInterface;
+import eu.dzim.tests.fx.SwingInteropModel;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;

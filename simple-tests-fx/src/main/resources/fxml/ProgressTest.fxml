@@ -12,7 +12,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.ProgressTestController" alignment="CENTER" vgap="5" hgap="5">
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.controller.ProgressTestController" alignment="CENTER" vgap="5" hgap="5">
 
 	<Label text="HD Drive" GridPane.columnIndex="0" GridPane.rowIndex="0"/> 
 	<TextField promptText="pick drive" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="2"/> 

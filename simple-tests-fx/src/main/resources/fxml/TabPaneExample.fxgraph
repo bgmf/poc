@@ -4,7 +4,7 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.control.TabPane
 import javafx.scene.control.Tab
 import javafx.geometry.Insets
-import eu.dzim.tests.fx.TabPaneExampleController
+import eu.dzim.tests.fx.controller.TabPaneExampleController
 
 component TabPaneExample controlledby TabPaneExampleController styledwith ["./application.css"] {
 	BorderPane id root {

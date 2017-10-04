@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.ClipExampleController" style="-fx-background-color: steelblue;">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.controller.ClipExampleController" style="-fx-background-color: steelblue;">
 
 	<center>
 		<VBox fx:id="vbox" alignment="CENTER" spacing="5" maxWidth="150"> 

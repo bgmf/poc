@@ -3,9 +3,9 @@ package fxml
 
 import javafx.scene.layout.AnchorPane
 import javafx.scene.control.Button
-import eu.dzim.tests.fx.MultiInstanceTestPaneController
 import javafx.scene.control.Label
 import javafx.scene.layout.VBox
+import eu.dzim.tests.fx.controller.MultiInstanceTestPaneController
 
 component MultiInstanceTestPane controlledby MultiInstanceTestPaneController {
 	VBox id test {

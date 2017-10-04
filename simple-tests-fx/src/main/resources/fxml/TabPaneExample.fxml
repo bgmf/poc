@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?scenebuilder-stylesheet ./application.css?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.TabPaneExampleController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.controller.TabPaneExampleController">
 
 	<center>
 		<TabPane fx:id="tabPane"> 

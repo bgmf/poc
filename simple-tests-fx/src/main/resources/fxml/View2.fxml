@@ -9,7 +9,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.View2Controller" spacing="10">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.controller.View2Controller" spacing="10">
 
 	<ListView> 
 		<items>

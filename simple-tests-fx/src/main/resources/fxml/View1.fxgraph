@@ -4,9 +4,9 @@ import javafx.scene.layout.VBox
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.geometry.Insets
-import eu.dzim.tests.fx.View1Controller
 import javafx.scene.control.Separator
 import javafx.scene.control.SplitMenuButton
+import eu.dzim.tests.fx.controller.View1Controller
 
 component View1 controlledby View1Controller {
 	VBox {

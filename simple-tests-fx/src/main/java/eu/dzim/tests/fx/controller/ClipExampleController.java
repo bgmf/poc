@@ -1,4 +1,4 @@
-package eu.dzim.tests.fx;
+package eu.dzim.tests.fx.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;

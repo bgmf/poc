@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.FillChangerController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.controller.FillChangerController">
 
 	<center>
 		<VBox fx:id="center"> 

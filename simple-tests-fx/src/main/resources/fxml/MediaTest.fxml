@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.media.MediaView?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.MediaTestController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.controller.MediaTestController">
 
 	<maxWidth><Double fx:constant="MAX_VALUE" /></maxWidth>
 	<center>

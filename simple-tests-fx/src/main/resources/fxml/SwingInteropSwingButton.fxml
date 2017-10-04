@@ -7,7 +7,7 @@
 <?import javafx.embed.swing.SwingNode?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.SwingInteropControllerSwing">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:id="root" fx:controller="eu.dzim.tests.fx.controller.SwingInteropControllerSwing">
 
 	<center>
 		<SwingNode fx:id="swingNode"/> 

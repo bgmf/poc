@@ -8,7 +8,7 @@ import javafx.scene.control.ProgressBar
 import java.lang.Double
 import javafx.geometry.Insets
 import javafx.scene.control.ProgressIndicator
-import eu.dzim.tests.fx.ProgressTestController
+import eu.dzim.tests.fx.controller.ProgressTestController
 
 component ProgressTest controlledby ProgressTestController {
 	GridPane {

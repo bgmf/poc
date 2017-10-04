@@ -8,7 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:id="test" fx:controller="eu.dzim.tests.fx.MultiInstanceTestPaneController" minHeight="250" minWidth="100" spacing="5">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:id="test" fx:controller="eu.dzim.tests.fx.controller.MultiInstanceTestPaneController" minHeight="250" minWidth="100" spacing="5">
 
 	<Label fx:id="header" text="[placeholder]"/> 
 	<Button fx:id="button1" text="Hit me!" onAction="#handleButton1"/> 

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.CanvasTestController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.controller.CanvasTestController">
 
 	<top>
 		<VBox> 

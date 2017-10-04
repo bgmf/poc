@@ -9,7 +9,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.ButtonBar
 import javafx.scene.control.Slider
 import javafx.scene.control.Label
-import eu.dzim.tests.fx.MediaTestController
+import eu.dzim.tests.fx.controller.MediaTestController
 
 component MediaTest controlledby MediaTestController {
 	BorderPane id root {

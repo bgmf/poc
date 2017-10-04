@@ -2,8 +2,7 @@ package fxml
 
 import javafx.scene.layout.BorderPane
 import javafx.scene.control.SplitPane
-
-import eu.dzim.tests.fx.MultiInstanceTestRootController
+import eu.dzim.tests.fx.controller.MultiInstanceTestRootController
 
 component MultiInstanceTestRoot controlledby MultiInstanceTestRootController {
 	BorderPane id rootPane {

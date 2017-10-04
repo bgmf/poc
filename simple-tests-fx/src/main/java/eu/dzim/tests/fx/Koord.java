@@ -2,6 +2,7 @@ package eu.dzim.tests.fx;
 
 import java.io.IOException;
 
+import eu.dzim.tests.fx.controller.FXMLDocumentController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

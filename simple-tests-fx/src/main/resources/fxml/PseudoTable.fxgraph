@@ -10,7 +10,7 @@ import ch.cnlab.aschwanden.dura.ui.SelectionTableController
 import javafx.scene.control.ScrollBar
 import javafx.scene.layout.StackPane
 import java.lang.Double
-import eu.dzim.tests.fx.PseudoTableController
+import eu.dzim.tests.fx.controller.PseudoTableController
 
 component PseudoTable styledwith [ "./application.css" ] controlledby PseudoTableController {
 

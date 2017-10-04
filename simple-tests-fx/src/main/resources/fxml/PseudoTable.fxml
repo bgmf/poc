@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?scenebuilder-stylesheet ./application.css?>
 
-<HBox xmlns:fx="http://javafx.com/fxml" fx:id="container" fx:controller="eu.dzim.tests.fx.PseudoTableController" spacing="0">
+<HBox xmlns:fx="http://javafx.com/fxml" fx:id="container" fx:controller="eu.dzim.tests.fx.controller.PseudoTableController" spacing="0">
 
 	<VBox fx:id="labelContainer" spacing="0"> 
 		<Label fx:id="fixLine1Label" text="FIX LINE" alignment="CENTER" VBox.vgrow="ALWAYS"> 

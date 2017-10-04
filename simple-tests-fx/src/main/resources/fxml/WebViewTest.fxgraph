@@ -2,7 +2,7 @@ package fxml
 
 import javafx.scene.layout.BorderPane
 import javafx.scene.web.WebView
-import eu.dzim.tests.fx.WebViewTestController
+import eu.dzim.tests.fx.controller.WebViewTestController
 
 component WebViewTest controlledby WebViewTestController {
 	BorderPane {

@@ -1,4 +1,4 @@
-package eu.dzim.tests.fx;
+package eu.dzim.tests.fx.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.WebViewTestController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.controller.WebViewTestController">
 
 	<center>
 		<WebView fx:id="webView"/> 

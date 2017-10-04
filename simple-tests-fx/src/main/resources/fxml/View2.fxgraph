@@ -6,7 +6,7 @@ import javafx.scene.control.TextField
 import javafx.geometry.Insets
 import javafx.scene.control.ListView
 import javafx.collections.FXCollections
-import eu.dzim.tests.fx.View2Controller
+import eu.dzim.tests.fx.controller.View2Controller
 
 component View1 controlledby View2Controller {
 	VBox {
