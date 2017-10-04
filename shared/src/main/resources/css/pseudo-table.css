@@ -1,0 +1,237 @@
+/* 
+@import url("core.css");
+*/
+
+.root {
+	-brand-primary: #004893;
+	-brand-secondary: #009EE3;
+	-brand-tertiary: #99D8F4;
+	-brand-tertiary-half: #99D8F47F;
+	-brand-gradient-horizontal: linear-gradient(to right, #004893 0%, #009EE3 100%);
+	-brand-gradient-vertical: linear-gradient(to bottom, #004893 0%, #009EE3 100%);
+	
+	-neutral-dark-gray-1: #505050;
+	-neutral-dark-gray-2: #999999;
+	-neutral-light-gray-1: #E0E0E0;
+	-neutral-light-gray-2: #F3F3F3;
+	
+	-util-error: #EF3C2F;
+	-util-positive: #00BD76;
+	-util-warning: #EEBA2B;
+	-util-neutral: #009EE3;
+	
+	-fx-base: -brand-secondary;
+	-fx-background-color: -neutral-white;
+	
+	/*-fx-font-size: 1.2em;*/
+}
+
+/*
+MaterialDesignIconView {
+	-fx-font-family: 'Material Design Icons';
+	-fx-font-size: 16;
+}
+*/
+
+/*
+ * Column Selection Container
+ */
+
+.pseudo-table {
+	-fx-background-color: white;
+}
+
+/*
+ * Some defaults
+ */
+ 
+.pseudo-table .row-text {
+	-fx-font-size: 0.8em;
+}
+
+.pseudo-table .cell-text {
+	-fx-font-size: 0.8em;
+}
+
+.pseudo-table .column-container {
+	-fx-background-color: transparent;
+}
+
+.pseudo-table .custom-scroll-pane {
+	-fx-background-color: transparent;
+}
+
+.pseudo-table .custom-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/*
+ * Table Entry, Static left content
+ */
+
+.pseudo-table .first-column {
+	/*-fx-border-color: black;*/
+	-fx-border-color: black transparent black black;  
+	-fx-border-width: 1.0 0.0 1.0 1.0;
+	-fx-border-style: solid;
+}
+
+/* .first-column * */
+.pseudo-table .first-column .label,
+.pseudo-table .first-column TextFlow {
+	-fx-border-color: black transparent transparent transparent;
+	-fx-border-style: solid;
+	-fx-min-height: 32;
+	-fx-padding: 0 0 0 16;
+}
+
+.pseudo-table .first-column > .first {
+	-fx-border-color: transparent transparent black transparent;
+	-fx-background-color: -neutral-light-gray-1;
+}
+
+.pseudo-table .first-column > .last {
+	-fx-border-color: black transparent transparent transparent;
+	-fx-border-style: solid;
+	/*-fx-min-height: 34;*/
+}
+
+.pseudo-table .first-column VBox > .first {
+	-fx-border-color: transparent;
+}
+
+.pseudo-table .first-column VBox > .last {
+	-fx-border-color: black transparent transparent transparent;
+	-fx-border-style: solid; 
+}
+
+/* fix: remove border around viewport -> otherwise the rows don't match */
+.pseudo-table .first-column .custom-scroll-pane .viewport {
+	-fx-border-width: 0.0 0.0 0.0 0.0;
+}
+
+/*
+ * Table Entry Container
+ */
+
+.pseudo-table .column-scroll-container {
+	-fx-border-insets: 0 0 0 0;
+	-fx-padding: 0 0 0 0;
+}
+.pseudo-table .column-box {
+	-fx-border-color: transparent transparent transparent black; 
+	-fx-border-style: solid;
+	/*-fx-border-width: 0.0 0.0 0.0 1.0;*/
+	-fx-border-insets: -1 0 -1 0;
+	-fx-padding: 0 -1 0 0;
+}
+
+/*
+ * Table Entry
+ */
+
+.pseudo-table .column {
+	-fx-border-color: black black black transparent;
+	-fx-border-style: solid;
+	-fx-border-insets: 0 0 0 0;
+}
+
+/* .column * */
+.pseudo-table .column .label,
+.pseudo-table .column TextFlow {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: solid;
+	-fx-min-height: 32;
+	-fx-background-color: transparent;
+}
+
+.pseudo-table .column > .first {
+	-fx-border-color: transparent transparent black transparent; 
+	-fx-background-color: -neutral-light-gray-1;
+	-fx-background-insets: 0 0 0 -1;
+	-fx-min-height: 32;
+}
+
+.pseudo-table .column > .last {
+	-fx-border-color: black transparent transparent transparent; 
+	-fx-border-style: solid;
+	-fx-min-height: 32;
+}
+
+.pseudo-table .column VBox {
+	-fx-background-color: transparent; 
+}
+
+.pseudo-table .column VBox > .first {
+	-fx-border-color: transparent; 
+}
+
+.pseudo-table .column VBox > .last {
+	-fx-border-color: black transparent transparent transparent; 
+}
+
+/* 
+ * Selection styles 
+ */
+
+/* 
+ * START: columns selection 
+ */
+.pseudo-table .column:selected {
+	-fx-border-color: -brand-primary;
+	-fx-border-style: solid;
+}
+.pseudo-table .column:selected  > .first {
+	-fx-background-color: -brand-tertiary;
+	-fx-background-insets: 0 0 0 0;
+}
+.pseudo-table .column:selected {
+	/*-fx-background-color: derive(-brand-tertiary, 80%);*/
+	-fx-background-color: -brand-tertiary-half;
+}
+.pseudo-table .column:selected .label,
+.pseudo-table .column:selected TextFlow {
+	
+}
+/* 
+ * END: columns selection
+ */
+
+/* 
+ * START: row selection 
+ */
+.pseudo-table .first-column .label:selected,
+.pseudo-table .first-column TextFlow:selected {
+	-fx-background-color: -brand-tertiary-half;
+}
+
+.pseudo-table .first-column > .first:selected {
+	-fx-background-color: -brand-tertiary;
+}
+.pseudo-table .column .label:selected,
+.pseudo-table .column TextFlow:selected {
+	-fx-background-color: -brand-tertiary-half;
+	/*-fx-border-color: -brand-primary;
+	-fx-border-style: solid;*/
+}
+.pseudo-table .column > .first:selected {
+	-fx-background-color: -brand-tertiary;
+}
+/* 
+ * END: row selection 
+ */
+
+/* 
+ * START: cell selection 
+ */
+.pseudo-table .column .label:selected-cell {
+	-fx-border-color: -brand-primary;
+	-fx-border-style: solid;
+	-fx-background-color: -brand-tertiary-half;
+}
+.pseudo-table .column > .first:selected-cell {
+	-fx-background-color: -brand-tertiary;
+}
+/* 
+ * END: cell selection 
+ */
