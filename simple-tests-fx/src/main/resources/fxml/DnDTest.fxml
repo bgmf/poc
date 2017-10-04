@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.DnDController" minWidth="640" minHeight="480">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.controller.DnDController" minWidth="640" minHeight="480">
 
 	<top>
 		<HBox fx:id="top" style="-fx-background-color: grey;"> 

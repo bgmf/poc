@@ -7,7 +7,7 @@ import javafx.scene.control.Label
 import javafx.scene.layout.Region
 import javafx.scene.layout.Background
 import javafx.geometry.Insets
-import eu.dzim.tests.fx.DnDController
+import eu.dzim.tests.fx.controller.DnDController
 
 component DnDTest controlledby DnDController {
 	BorderPane {

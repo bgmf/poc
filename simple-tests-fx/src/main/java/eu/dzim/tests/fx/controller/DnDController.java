@@ -1,4 +1,4 @@
-package eu.dzim.tests.fx;
+package eu.dzim.tests.fx.controller;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,31 +16,19 @@ import javafx.scene.layout.Region;
 
 public class DnDController {
 	
-	@FXML
-	private HBox top;
-	@FXML
-	private BorderPane c1;
-	@FXML
-	private BorderPane c2;
-	@FXML
-	private BorderPane c3;
-	@FXML
-	private BorderPane c4;
-	@FXML
-	private BorderPane c5;
+	@FXML private HBox top;
+	@FXML private BorderPane c1;
+	@FXML private BorderPane c2;
+	@FXML private BorderPane c3;
+	@FXML private BorderPane c4;
+	@FXML private BorderPane c5;
 	
-	@FXML
-	private Region r1;
-	@FXML
-	private Region r2;
-	@FXML
-	private Region r3;
-	@FXML
-	private Region r4;
-	@FXML
-	private Region r5;
-	@FXML
-	private Region r6;
+	@FXML private Region r1;
+	@FXML private Region r2;
+	@FXML private Region r3;
+	@FXML private Region r4;
+	@FXML private Region r5;
+	@FXML private Region r6;
 	
 	@FXML
 	private void initialize() {
