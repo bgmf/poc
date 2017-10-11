@@ -38,6 +38,7 @@ import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -79,7 +80,7 @@ public class SimpleDialog extends StackPane {
 	
 	private static final Duration DEFAULT_ANIMATION_DURATION = Duration.millis(250);
 	
-	protected static final URL DIALOGS_CSS_URL = SimpleDialog.class.getResource("/css/simple-dialogs.css");
+	protected static final URL DIALOGS_CSS_URL = SimpleDialog.class.getResource("/ch/cnlab/aschwanden/ui/simple-dialogs.css");
 	
 	public static final DropShadow DEFAULT_EFFECT = new DropShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.26), 25, 0.25, 0, 8);
 	
@@ -158,7 +159,7 @@ public class SimpleDialog extends StackPane {
 		initialize();
 		setOverlayClose(overlayClose);
 		setContent(content);
-		setDialogContainer(dialogContainer);
+		setDialogContainer(dialogContainer, true);
 		setAnimationStrategy(animationStrategy);
 		initChangeListeners();
 	}
@@ -188,6 +189,7 @@ public class SimpleDialog extends StackPane {
 		dialogBackground.addListener(
 				(obs, o, n) -> contentHolder.setBackground(new Background(new BackgroundFill(dialogBackground.get(), new CornerRadii(2), null))));
 		contentHolder.setPickOnBounds(false);
+		contentHolder.setCacheHint(CacheHint.QUALITY);
 		
 		updateSizingStrategy();
 		sizingStrategy.addListener((obs, o, n) -> updateSizingStrategy());
@@ -217,7 +219,29 @@ public class SimpleDialog extends StackPane {
 		default:
 			// intended fall-through
 		case USE_PREF_SIZE:
+			// we need to unbind it, otherwise, we can't update the max size or re-bind
+			contentHolder.maxWidthProperty().unbind();
+			contentHolder.maxHeightProperty().unbind();
+			// use max size by default
 			contentHolder.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+			// if the content node is set up...
+			if (content != null) {
+				// ... check whether the pref with is set (otherwise: -1 = use computed size)
+				
+				if (content.getPrefWidth() > 0)
+					contentHolder.maxWidthProperty().bind(content.prefWidthProperty());
+				// ... check whether the pref height is set (otherwise: -1 = use computed size)
+				if (content.getPrefHeight() > 0) {
+					if (isUseDecoration() && decoratedContentHolder != null) {
+						contentHolder.maxHeightProperty()
+								.bind(content.prefHeightProperty().add(((HBox) decoratedContentHolder.getTop()).heightProperty()));
+					} else {
+						contentHolder.maxHeightProperty().bind(content.prefHeightProperty());
+					}
+				}
+				// we need to do the pref width/height checks, or we end up with full-screen dialogs
+				// with tiny content
+			}
 			break;
 		case USE_MAX_WIDTH:
 			contentHolder.setMaxSize(Double.MAX_VALUE, Region.USE_PREF_SIZE);
@@ -491,7 +515,7 @@ public class SimpleDialog extends StackPane {
 	 * 
 	 * @param dialogContainer
 	 */
-	public void setDialogContainer(StackPane dialogContainer) {
+	public void setDialogContainer(StackPane dialogContainer, boolean newAnimation) {
 		if (dialogContainer != null) {
 			this.dialogContainer = dialogContainer;
 			Scene _scene = this.dialogContainer.getScene();
@@ -511,7 +535,8 @@ public class SimpleDialog extends StackPane {
 			// FIXME: need to be improved to consider only the parent boundary
 			offsetX = (this.getParent().getBoundsInLocal().getWidth());
 			offsetY = (this.getParent().getBoundsInLocal().getHeight());
-			animation = getShowAnimation(animationStrategy.get());
+			if (newAnimation)
+				animation = getShowAnimation(animationStrategy.get());
 		}
 	}
 	
@@ -520,6 +545,10 @@ public class SimpleDialog extends StackPane {
 	 */
 	public Region getContent() {
 		return content;
+	}
+	
+	public StackPane getContentHolder() {
+		return contentHolder;
 	}
 	
 	/**
@@ -532,7 +561,15 @@ public class SimpleDialog extends StackPane {
 			content.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE); // XXX
 			this.content = content;
 			this.content.setPickOnBounds(false);
-			contentHolder.getChildren().add(content);
+			updateSizingStrategy();
+			if (dialogContainer == null) {
+				contentHolder.getChildren().add(content);
+			} else {
+				setupDecoration();
+				// setDialogContainer(dialogContainer, false);
+				bindDecoratedDialogPosition();
+			}
+			
 		}
 	}
 	
@@ -544,8 +581,9 @@ public class SimpleDialog extends StackPane {
 	public <T> Optional<T> show(StackPane dialogContainer) {
 		
 		setupDecoration();
-		setDialogContainer(dialogContainer);
+		setDialogContainer(dialogContainer, true);
 		bindDecoratedDialogPosition();
+		updateSizingStrategy();
 		
 		preventFocusTraversal();
 		
@@ -734,7 +772,8 @@ public class SimpleDialog extends StackPane {
 			contentHolder.getChildren().add(decoratedContentHolder);
 		} else {
 			contentHolder.getChildren().clear();
-			contentHolder.getChildren().add(content);
+			if (content != null)
+				contentHolder.getChildren().add(content);
 		}
 	}
 	
@@ -890,7 +929,10 @@ public class SimpleDialog extends StackPane {
 			}
 		};
 		center.getStyleClass().add(DECORATION_CENTER_STYLE_CLASS);
-		center.getChildren().addAll(content, resizeCorner);
+		if (content != null)
+			center.getChildren().add(content);
+		center.getChildren().add(resizeCorner);
+		// center.getChildren().addAll(content, resizeCorner);
 		pane.setCenter(center);
 		// } else {
 		// StackPane center = new StackPane();
