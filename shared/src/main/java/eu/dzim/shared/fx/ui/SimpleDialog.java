@@ -125,6 +125,7 @@ public class SimpleDialog extends StackPane {
 	private ObjectProperty<SizingStrategy> sizingStrategy = new SimpleObjectProperty<>(SizingStrategy.USE_PREF_SIZE);
 	private ObjectProperty<AnimationStrategy> animationStrategy = new SimpleObjectProperty<>(AnimationStrategy.NONE);
 	private ObjectProperty<Duration> animationDuration = new SimpleObjectProperty<>(DEFAULT_ANIMATION_DURATION);
+	private BooleanProperty useAnimationCaching = new SimpleBooleanProperty(true);
 	
 	private ObjectProperty<Pos> dialogPosition = new SimpleObjectProperty<>(Pos.CENTER);
 	private ObjectProperty<Pos> decoratedDialogPosition = new SimpleObjectProperty<>(Pos.CENTER);
@@ -397,6 +398,18 @@ public class SimpleDialog extends StackPane {
 		this.animationDurationProperty().set(animationDuration);
 	}
 	
+	public final BooleanProperty useAnimationCachingProperty() {
+		return this.useAnimationCaching;
+	}
+	
+	public final boolean isUseAnimationCaching() {
+		return this.useAnimationCachingProperty().get();
+	}
+	
+	public final void setUseAnimationCaching(final boolean useAnimationCaching) {
+		this.useAnimationCachingProperty().set(useAnimationCaching);
+	}
+	
 	public final ObjectProperty<Pos> dialogPositionProperty() {
 		return this.dialogPosition;
 	}
@@ -664,7 +677,10 @@ public class SimpleDialog extends StackPane {
 				break;
 			}
 			
-			animation = new CenterTransition(duration);
+			if (isUseAnimationCaching())
+				animation = new CenterTransition(duration);
+			else
+				animation = new UncachedCenterTransition(duration);
 		}
 		if (animation != null)
 			animation.setOnFinished((finish) -> onDialogOpenedProperty.get().handle(new SimpleDialogEvent(SimpleDialogEvent.OPENED)));
@@ -1052,6 +1068,27 @@ public class SimpleDialog extends StackPane {
 			// reduce the number to increase the shifting , increase number to reduce shifting
 			setCycleDuration(Duration.seconds(0.4));
 			setDelay(Duration.seconds(0));
+		}
+	}
+	
+	private class UncachedCenterTransition extends Transition {
+		
+		final Timeline timeline;
+		
+		public UncachedCenterTransition(Duration duration) {
+			timeline = new Timeline(buildKeyFrame1(animationStrategy.get()), buildKeyFrame2(animationStrategy.get()),
+					buildKeyFrame3(animationStrategy.get(), duration));
+			setCycleDuration(Duration.seconds(0.4));
+			setDelay(Duration.seconds(0));
+		}
+		
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		protected void interpolate(double d) {
+			timeline.playFrom(Duration.seconds(d));
+			timeline.stop();
 		}
 	}
 }
