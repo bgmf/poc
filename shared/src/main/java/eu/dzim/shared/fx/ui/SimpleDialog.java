@@ -226,12 +226,27 @@ public class SimpleDialog extends StackPane {
 			contentHolder.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 			// if the content node is set up...
 			if (content != null) {
+				Pair<Double, Double> fixed = fixPrefSize(content.getPrefWidth(), content.getPrefHeight());
 				// ... check whether the pref with is set (otherwise: -1 = use computed size)
-				
-				if (content.getPrefWidth() > 0)
+				if (content.getPrefWidth() > 0) {
+					double calcWidth = content.getPrefWidth();
+					calcWidth = Math.abs(calcWidth);
+					double maxWidth = SimpleDialog.this.getWidth();
+					maxWidth = Math.abs(maxWidth);
+					calcWidth = fixed.getKey();
+					if (calcWidth > 0)
+						content.setPrefWidth(calcWidth > maxWidth ? maxWidth : calcWidth);
 					contentHolder.maxWidthProperty().bind(content.prefWidthProperty());
+				}
 				// ... check whether the pref height is set (otherwise: -1 = use computed size)
 				if (content.getPrefHeight() > 0) {
+					double calcHeight = content.getPrefHeight();
+					calcHeight = Math.abs(calcHeight);
+					double maxHeight = SimpleDialog.this.getHeight();
+					maxHeight = Math.abs(maxHeight);
+					calcHeight = fixed.getValue();
+					if (calcHeight > 0)
+						content.setPrefHeight(calcHeight > maxHeight ? maxHeight : calcHeight);
 					if (isUseDecoration() && decoratedContentHolder != null) {
 						contentHolder.maxHeightProperty()
 								.bind(content.prefHeightProperty().add(((HBox) decoratedContentHolder.getTop()).heightProperty()));
@@ -1028,9 +1043,16 @@ public class SimpleDialog extends StackPane {
 					dragAnchor = new Point2D(event.getSceneX(), event.getSceneY());
 				} else if (type == MouseEvent.MOUSE_DRAGGED) {
 					double calcWidth = Math.max(content.minWidth(-1), width + (event.getSceneX() - dragAnchor.getX()));
+					calcWidth = Math.abs(calcWidth);
 					double maxWidth = SimpleDialog.this.getWidth();
+					maxWidth = Math.abs(maxWidth);
 					double calcHeight = Math.max(content.minHeight(-1), height + (event.getSceneY() - dragAnchor.getY()));
+					calcHeight = Math.abs(calcHeight);
 					double maxHeight = SimpleDialog.this.getHeight();
+					maxHeight = Math.abs(maxHeight);
+					Pair<Double, Double> fixed = fixPrefSize(calcWidth, calcHeight);
+					calcWidth = fixed.getKey();
+					calcHeight = fixed.getValue();
 					content.setPrefWidth(calcWidth > maxWidth ? maxWidth : calcWidth);
 					content.setPrefHeight(calcHeight > maxHeight ? maxHeight : calcHeight);
 				} else if (type == MouseEvent.MOUSE_ENTERED) {
@@ -1045,6 +1067,14 @@ public class SimpleDialog extends StackPane {
 		resizeCorner.setOnMouseDragged(resizeHandler);
 		resizeCorner.setOnMouseEntered(resizeHandler);
 		resizeCorner.setOnMouseExited(resizeHandler);
+	}
+	
+	public Pair<Double, Double> fixPrefSize(Double calcWidth, Double calcHeight) {
+		if (content.getPrefWidth() > 0 && calcWidth % 2.0 == 0)
+			calcWidth = Math.abs(calcWidth + 1.0);
+		if (content.getPrefHeight() > 0 && calcHeight % 2.0 == 0)
+			calcHeight = Math.abs(calcHeight + 1.0);
+		return new Pair<>(calcWidth, calcHeight);
 	}
 	
 	private KeyFrame buildKeyFrame1(AnimationStrategy strategy) {
