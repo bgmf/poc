@@ -44,7 +44,7 @@ public class MainTableTest3 extends Application {
 		List<TableColumn<TableRecord, ?>> columns = new ArrayList<>();
 		columns.add(createColumn(String.class, "Name", "userName"));
 		columns.add(createColumn(String.class, "Bezeichnung", "azlWert"));
-		columns.add(createColumn(String.class, "Januar", "azlJan"));
+		columns.add(createColumn(Double.class, "Januar", "azlJan"));
 		columns.add(createColumn(Double.class, "Februar", "azlFeb"));
 		columns.add(createColumn(Double.class, "März", "azlMai"));
 		columns.add(createColumn(Double.class, "April", "azlApr"));
