@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -23,10 +25,23 @@ public class MainTableTest3 extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		StringProperty appStatus = new SimpleStringProperty();
+		
 		primaryStage.setTitle("TableTest3");
+		primaryStage.titleProperty().bind(Bindings.createStringBinding(
+				() -> "TableTest3" + (appStatus.get() != null && !appStatus.get().isEmpty() ? " - " + appStatus.get() : ""), appStatus));
+		
 		BorderPane rootLayout = new BorderPane();
 		TableView<TableRecord> table = new TableView<>();
+		
 		createTableData(table, createRecords());
+		
+		appStatus.bind(Bindings.createStringBinding(() -> {
+			int size = table.getItems().size();
+			String str = size > 1 ? " Einträge" : " Eintrag";
+			return size + str;
+		}, table.getItems()));
+		
 		rootLayout.setCenter(table);
 		Scene scene = new Scene(rootLayout, 800, 600);
 		primaryStage.setScene(scene);
