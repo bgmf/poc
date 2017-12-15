@@ -66,6 +66,9 @@ public class MainTableTest4 extends Application {
 	
 	private void createTableData(TableView<Map<String, Object>> table, ObservableList<Map<String, Object>> records) {
 		
+		table.getItems().clear();
+		table.getColumns().clear();
+		
 		Map<String, Class<?>> header = new TreeMap<>();
 		records.forEach(map -> map.keySet().forEach(key -> header.put(key, map.get(key) == null ? Object.class : map.get(key).getClass())));
 		
