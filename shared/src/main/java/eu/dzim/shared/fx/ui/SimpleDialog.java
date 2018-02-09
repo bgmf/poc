@@ -771,11 +771,12 @@ public class SimpleDialog extends StackPane {
 		if (myStage == null)
 			return;
 		ObservableList<SimpleDialog> list = OPEN_DIALOGS.get(myStage);
-		if (list == null) {
-			list = FXCollections.observableArrayList();
-			OPEN_DIALOGS.put(myStage, list);
+		if (list != null) {
+			list.remove(this);
+			if (list.isEmpty()) {
+				OPEN_DIALOGS.remove(myStage);
+			}
 		}
-		list.remove(this);
 	}
 	
 	private void setupDecoration() {
