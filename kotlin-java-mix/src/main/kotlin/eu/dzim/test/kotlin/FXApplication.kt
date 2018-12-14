@@ -1,30 +1,34 @@
 package eu.dzim.test.kotlin
 
-import javafx.application.Application
-import javafx.stage.Stage
-import javafx.scene.layout.Pane
-import javafx.scene.Scene
 import eu.dzim.test.model.TestModel
+import javafx.application.Application
+import javafx.scene.Scene
+import javafx.scene.layout.Pane
+import javafx.stage.Stage
 
 class FXApplication : Application() {
-	
-	override fun start(primaryStage: Stage?) {
-		
-		var tm = TestModel()
-		tm.testString = "test"
-		println(tm.testString)
-		println(tm.testStringProperty().get())
-		
-		primaryStage!!.minWidth = 640.0
-		primaryStage.minHeight = 480.0
-		primaryStage.title = "FX"
-		
-		var pane = Pane()
-		
-		var scene = Scene(pane)
-		
-		primaryStage.scene = scene
-		
-		primaryStage.show()
-	}
+
+    override fun start(primaryStage: Stage?) {
+
+        val model = TestModel().apply {
+            testString = "test"
+        }.also {
+            println(it.testString)
+            println(it.testStringProperty().get())
+        }
+
+
+
+        primaryStage?.apply {
+            minWidth = 640.0
+            minHeight = 480.0
+            title = "FX"
+
+            scene = Pane().let {
+                // init pane
+                // transform it into a scene
+                Scene(it) // .apply { more stuff }
+            }
+        }?.show()
+    }
 }

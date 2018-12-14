@@ -1,9 +1,18 @@
+# Other
 *~
 *.bak
+*.log
+**/sjjb_icons/
+
+# Eclispe
 .settings
-target/
 .project
 .classpath
-*.log
+
+# Maven
+target/
 dependency-reduced-pom.xml
-**/sjjb_icons/
+
+# IntelliJ
+.idea
+*.iml

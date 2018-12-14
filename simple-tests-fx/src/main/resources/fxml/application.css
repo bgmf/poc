@@ -1,21 +1,21 @@
 .root {
-	
-	-brand-primary: #004893;
-	-brand-secondary: #009EE3;
-	-brand-tertiary: #99D8F4;
-	
-	-neutral-dark-gray-1: #505050;
-	-neutral-dark-gray-2: #999999;
-	-neutral-light-gray-1: #E0E0E0;
-	-neutral-light-gray-2: #F3F3F3;
-	
-	-util-error: #EF3C2F;
-	-util-positive: #00BD76;
-	-util-warning: #EEBA2B;
-	-util-neutral: #009EE3;
-	
-	-neutral-white: white;
-	-neutral-black: black;
+
+    -brand-primary: #004893;
+    -brand-secondary: #009EE3;
+    -brand-tertiary: #99D8F4;
+
+    -neutral-dark-gray-1: #505050;
+    -neutral-dark-gray-2: #999999;
+    -neutral-light-gray-1: #E0E0E0;
+    -neutral-light-gray-2: #F3F3F3;
+
+    -util-error: #EF3C2F;
+    -util-positive: #00BD76;
+    -util-warning: #EEBA2B;
+    -util-neutral: #009EE3;
+
+    -neutral-white: white;
+    -neutral-black: black;
 }
 
 /*
@@ -23,7 +23,7 @@
  */
 
 .column-selection {
-	-fx-background-color: white;
+    -fx-background-color: white;
 }
 
 /*
@@ -31,37 +31,37 @@
  */
 
 .pseudo-table-entry-first {
-	/*-fx-border-color: black;*/
-	-fx-border-color: black transparent black black;  
-	-fx-border-style: dotted;
+    /*-fx-border-color: black;*/
+    -fx-border-color: black transparent black black;
+    -fx-border-style: dotted;
 }
 
 /* .pseudo-table-entry-first * */
 .pseudo-table-entry-first .label,
 .pseudo-table-entry-first TextFlow {
-	-fx-border-color: black transparent transparent transparent; 
-	-fx-border-style: dotted;
-	-fx-min-height: 32;
-	-fx-padding: 0 0 0 16;
+    -fx-border-color: black transparent transparent transparent;
+    -fx-border-style: dotted;
+    -fx-min-height: 32;
+    -fx-padding: 0 0 0 16;
 }
 
 .pseudo-table-entry-first > .first {
-	-fx-border-color: transparent transparent black transparent;
-	-fx-background-color: -neutral-light-gray-1;
+    -fx-border-color: transparent transparent black transparent;
+    -fx-background-color: -neutral-light-gray-1;
 }
 
 .pseudo-table-entry-first > .last {
-	-fx-border-color: black transparent transparent transparent; 
-	-fx-border-style: dotted;
-	/*-fx-min-height: 34;*/
+    -fx-border-color: black transparent transparent transparent;
+    -fx-border-style: dotted;
+    /*-fx-min-height: 34;*/
 }
 
 .pseudo-table-entry-first VBox > .first {
-	-fx-border-color: transparent; 
+    -fx-border-color: transparent;
 }
 
 .pseudo-table-entry-first VBox > .last {
-	-fx-border-color: black transparent transparent transparent; 
+    -fx-border-color: black transparent transparent transparent;
 }
 
 /*
@@ -69,9 +69,9 @@
  */
 
 .pseudo-table-container {
-	-fx-border-color: transparent transparent transparent black; 
-	-fx-border-style: dotted;
-	-fx-padding: 0 -1 0 0;
+    -fx-border-color: transparent transparent transparent black;
+    -fx-border-style: dotted;
+    -fx-padding: 0 -1 0 0;
 }
 
 /*
@@ -79,49 +79,47 @@
  */
 
 .pseudo-table-entry {
-	-fx-border-color: black black black transparent; 
-	-fx-border-style: dotted;
+    -fx-border-color: black black black transparent;
+    -fx-border-style: dotted;
 }
 
 .pseudo-table-entry:selected {
-	-fx-border-color: -brand-primary;
-	-fx-border-style: solid;
+    -fx-border-color: -brand-primary;
+    -fx-border-style: solid;
 }
 
 /* .pseudo-table-entry * */
 .pseudo-table-entry .label,
 .pseudo-table-entry TextFlow {
-	-fx-border-color: black transparent transparent transparent; 
-	-fx-border-style: dotted;
-	-fx-min-height: 32;
+    -fx-border-color: black transparent transparent transparent;
+    -fx-border-style: dotted;
+    -fx-min-height: 32;
 }
 
 .pseudo-table-entry > .first {
-	-fx-border-color: transparent transparent black transparent; 
-	-fx-background-color: -neutral-light-gray-1;
-	-fx-background-insets: 0 0 0 -1;
+    -fx-border-color: transparent transparent black transparent;
+    -fx-background-color: -neutral-light-gray-1;
+    -fx-background-insets: 0 0 0 -1;
 }
 
-.pseudo-table-entry:selected  > .first {
-	-fx-background-color: -brand-tertiary;
-	-fx-background-insets: 0 0 0 0;
+.pseudo-table-entry:selected > .first {
+    -fx-background-color: -brand-tertiary;
+    -fx-background-insets: 0 0 0 0;
 }
 
 .pseudo-table-entry > .last {
-	-fx-border-color: black transparent transparent transparent; 
-	-fx-border-style: dotted;
-	-fx-min-height: 32;
+    -fx-border-color: black transparent transparent transparent;
+    -fx-border-style: dotted;
+    -fx-min-height: 32;
 }
 
 .pseudo-table-entry VBox > .first {
-	-fx-border-color: transparent; 
+    -fx-border-color: transparent;
 }
 
 .pseudo-table-entry VBox > .last {
-	-fx-border-color: black transparent transparent transparent; 
+    -fx-border-color: black transparent transparent transparent;
 }
-
-
 
 
 /* TabPane Variant 1 */
@@ -202,7 +200,7 @@
 .tab {
     -fx-border-radius: 15 15 0 0;
     -fx-background-radius: 15 15 0 0;
-    -fx-background-insets: 0 1 0 1,0,0;
+    -fx-background-insets: 0 1 0 1, 0, 0;
 }
 
 .tab-content-area {
@@ -219,7 +217,7 @@
 
 .tab-pane:top *.tab-header-area {
     -fx-background-insets: 0, 0 0 1 0;
-/* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+    /* -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
     -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */
 }
 
@@ -257,35 +255,42 @@
 .split-menu-button > .arrow-button:hover {
     -fx-color: derive(lightblue, -50%); /*-fx-hover-base;*/
 }
+
 .split-menu-button:armed > .label,
 .split-menu-button > .arrow-button:pressed,
 .split-menu-button:showing > .arrow-button {
     -fx-color: darkblue; /*-fx-pressed-base;*/
 }
+
 .split-menu-button:disabled {
     -fx-opacity: 0.4;
 }
+
 .split-menu-button:show-mnemonics > .mnemonic-underline {
     -fx-stroke: -fx-text-base-color;
 }
+
 .split-menu-button > .arrow-button > .arrow {
     -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
     -fx-background-insets: 0 0 -1 0, 0;
     -fx-padding: 0.25em;
     -fx-shape: "M 0 -3.5 v 7 l 4 -3.5 z";
 }
-.split-menu-button:openvertically > .arrow-button > .arrow  {
+
+.split-menu-button:openvertically > .arrow-button > .arrow {
     -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
     -fx-background-insets: 0 0 -1 0, 0;
     -fx-padding: 0.166667em 0.333333em 0.166667em 0.333333em; /* 2 4 2 4 */
     -fx-shape: "M 0 0 h 7 l -3.5 4 z";
 }
+
 .split-menu-button {
     -fx-background-color: lightblue, lightblue; /*-fx-shadow-highlight-color, -fx-outer-border;*/
     -fx-background-insets: 0, 0; /*0 0 -1 0, 0;*/
     -fx-background-radius: 3, 3;
     -fx-padding: 0;
 }
+
 .split-menu-button > .label {
     -fx-text-fill: -fx-text-base-color;
     -fx-background-color: lightblue; /*-fx-inner-border, -fx-body-color;*/
@@ -293,17 +298,20 @@
     -fx-background-radius: 2 0 0 2, 1 0 0 1;
     -fx-padding: 0.333333em 0.667em 0.333333em 0.667em; /* 4 8 4 8 */
 }
+
 .split-menu-button > .arrow-button {
     -fx-background-color: lightblue; /*-fx-inner-border, -fx-body-color;*/
     -fx-background-insets: 1, 2;
     -fx-background-radius: 0 2 2 0, 0 1 1 0;
     -fx-padding: 0.5em 0.667em 0.5em 0.667em; /* 6 8 6 8 */
 }
+
 .split-menu-button:focused {
     -fx-background-color: lightblue; /*-fx-focus-color;*/
     -fx-background-insets: -0.2;
     -fx-background-radius: 3;
 }
+
 .split-menu-button:focused > .label {
     -fx-background-color: blue; /*-fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color;*/
     -fx-background-insets: 1 0 1 1, 2 1 2 2, -1.4 0 -1.4 -1.4, 2.6 1.6 2.6 2.6;
@@ -311,6 +319,7 @@
     /* --- */
     -fx-text-fill: derive(lightblue, 50%);
 }
+
 .split-menu-button:focused > .arrow-button {
     -fx-background-color: blue; /*-fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color;*/
     -fx-background-insets: 1, 2, -1.4, 2.6;

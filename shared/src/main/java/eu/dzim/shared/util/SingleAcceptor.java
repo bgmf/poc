@@ -2,5 +2,5 @@ package eu.dzim.shared.util;
 
 @FunctionalInterface
 public interface SingleAcceptor<T> {
-	void accept(T t);
+    void accept(T t);
 }

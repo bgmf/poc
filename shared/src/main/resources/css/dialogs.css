@@ -14,15 +14,15 @@
  * Lightweight dialog                                                          *
  *                                                                             *
  ******************************************************************************/
- 
+
 /* used to 'fade out' the background content so the dialog becomes more prominent */
 .lightweight-dialog-background {
-     -fx-background-color: #000000B2; /* 44 (~.25) -> B2 (~.7) */
+    -fx-background-color: #000000B2; /* 44 (~.25) -> B2 (~.7) */
 }
 
 /* used to create a Window 8 like dialog stile */
 .lightweight-dialog-background.horizontal {
-     -fx-background-color: #009ee3;
+    -fx-background-color: #009ee3;
 }
 
 /*******************************************************************************
@@ -42,12 +42,13 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 0.2), 11.0, 0.0, 3.0, 3.0);
     -fx-border-color: #a3a3a3;
 }
+
 .dialog.custom-chrome.borderless {
-	-fx-padding: 10;
-	-fx-border-width: 0;
-	-fx-border-radius: 0.0 0.0 0.0 0.0;
-	-fx-effect: null;
-	-fx-border-color: null;
+    -fx-padding: 10;
+    -fx-border-width: 0;
+    -fx-border-radius: 0.0 0.0 0.0 0.0;
+    -fx-effect: null;
+    -fx-border-color: null;
 }
 
 .dialog.heavyweight.custom-chrome {
@@ -98,8 +99,8 @@
 }
 
 .dialog:active .window-button:hover {
-    -fx-background-color: linear-gradient(#505050,#2d2d2d),
-                          linear-gradient(#a3a3a3, #8b8b8b 34.0%, #777777 36.0%, #777777 63.0%, #8b8b8b 65.0%, #adadad);
+    -fx-background-color: linear-gradient(#505050, #2d2d2d),
+    linear-gradient(#a3a3a3, #8b8b8b 34.0%, #777777 36.0%, #777777 63.0%, #8b8b8b 65.0%, #adadad);
 }
 
 .dialog .window-buttons {
@@ -107,8 +108,8 @@
 }
 
 .dialog .window-button:pressed {
-    -fx-background-color: linear-gradient(#515151,#202020),
-                          linear-gradient(#a3a3a3, #8b8b8b 34.0%, #777777 36.0%, #777777 63.0%, #8b8b8b 65.0%, #adadad);
+    -fx-background-color: linear-gradient(#515151, #202020),
+    linear-gradient(#a3a3a3, #8b8b8b 34.0%, #777777 36.0%, #777777 63.0%, #8b8b8b 65.0%, #adadad);
 }
 
 .dialog .window-button > .graphic {
@@ -143,15 +144,15 @@
  * Masthead                                                                    *
  *                                                                             *
  ******************************************************************************/
- 
+
 .dialog:masthead .masthead-panel {
     -fx-padding: 10.0 14.0 10.0 14.0;
     -fx-background-insets: 0.0 -1.0 0.0 -1.0, 0.0 -1.0 1.0 -1.0;
-    -fx-background-color: #b4b4b4, linear-gradient(#e2e2e2,#e2e2e2,#eeeeee);
+    -fx-background-color: #b4b4b4, linear-gradient(#e2e2e2, #e2e2e2, #eeeeee);
 }
 
 .dialog:masthead .masthead-panel .label {
-    -fx-font-size: 1.249999em; 
+    -fx-font-size: 1.249999em;
     -fx-wrap-text: true;
 }
 
@@ -165,9 +166,9 @@
  * Content area of the Dialog                                                  *
  *                                                                             *
  ******************************************************************************/
- 
+
 .dialog > * > .content-pane {
-    -fx-background-color: linear-gradient(#ffffff,#f3f3f4);
+    -fx-background-color: linear-gradient(#ffffff, #f3f3f4);
     -fx-border-width: 1.0 1.0 1.0 1.0;
     -fx-border-color: #b4b4b4 transparent #b4b4b4 transparent;
     -fx-font-size: 1.083333em; /*13px;*/
@@ -207,7 +208,6 @@
 }
 
 
-
 /*******************************************************************************
  *                                                                             *
  * Expandable Dialog                                                           *
@@ -228,11 +228,11 @@
     -fx-alignment: CENTER_RIGHT;
 }
 
-.dialog .details-button  {
-  -fx-alignment: baseline-left;
-  -fx-focus-traversable: false;
-  -fx-padding: 5.0 5.0 5.0 5.0;
-  -fx-font-size: 1.0em;
+.dialog .details-button {
+    -fx-alignment: baseline-left;
+    -fx-focus-traversable: false;
+    -fx-padding: 5.0 5.0 5.0 5.0;
+    -fx-font-size: 1.0em;
 }
 
 .dialog .details-button.more {
@@ -248,15 +248,14 @@
 }
 
 
-
 /*******************************************************************************
  *                                                                             *
  * Command Link                                                                *
  *                                                                             *
  ******************************************************************************/
- /* For the text displayed above command-link buttons (but below the masthead) */
+/* For the text displayed above command-link buttons (but below the masthead) */
 .dialog > * > .content-pane .command-link-message {
-    -fx-font-size: 1.25em; 
+    -fx-font-size: 1.25em;
 }
 
 .dialog .command-link-button {
@@ -270,40 +269,40 @@
 
 .dialog .command-link-button:hover {
     -fx-border-color: -fx-box-border;
-    -fx-background-color: linear-gradient(to bottom, 
-        white, 
-        derive(-fx-box-border, 60.0%)
+    -fx-background-color: linear-gradient(to bottom,
+    white,
+    derive(-fx-box-border, 60.0%)
     );
 }
 
-.dialog .command-link-button:armed  {
-    -fx-background-color: linear-gradient(to bottom, 
-        white, 
-        derive(-fx-box-border, 40.0%)
+.dialog .command-link-button:armed {
+    -fx-background-color: linear-gradient(to bottom,
+    white,
+    derive(-fx-box-border, 40.0%)
     );
 }
 
 .dialog .command-link-button:default {
     -fx-border-color: -fx-default-button;
-    -fx-background-color: linear-gradient(to bottom, 
-        white, 
-        derive(-fx-default-button, 80.0%)
+    -fx-background-color: linear-gradient(to bottom,
+    white,
+    derive(-fx-default-button, 80.0%)
     );
 }
 
 .dialog .command-link-button:default:hover {
     -fx-border-color: -fx-default-button;
-    -fx-background-color: linear-gradient(to bottom, 
-        white, 
-        derive(-fx-default-button, 60.0%)
+    -fx-background-color: linear-gradient(to bottom,
+    white,
+    derive(-fx-default-button, 60.0%)
     );
 }
 
 .dialog .command-link-button:default:armed {
     -fx-border-color: -fx-default-button;
-    -fx-background-color: linear-gradient(to bottom, 
-        white, 
-        derive(-fx-default-button, 40.0%)
+    -fx-background-color: linear-gradient(to bottom,
+    white,
+    derive(-fx-default-button, 40.0%)
     );
 }
 
@@ -313,7 +312,7 @@
 }
 
 .dialog .command-link-button > .container > .line-2 {
-    -fx-font-size: 1.0em; 
+    -fx-font-size: 1.0em;
     -fx-padding: 0.0 0.0 0.0 5.0;
 }
 

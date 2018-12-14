@@ -22,7 +22,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-public class Main extends Application {
+public class MainScalingIssues extends Application {
 
     // Platzhalter
     Label labelb = new Label("Ich putz hier nur.");

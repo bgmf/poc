@@ -1,17 +1,17 @@
 .root {
-	
+
 }
 
 .math-flow {
-	-fx-orientation: horizontal; /* horizontal, vertical */
-	-fx-hgap: 5.0;
-	-fx-vgap: 5.0;
-	-fx-alignment: top-left; /* top-center */
-	-fx-column-halignment: left; /* left, center, right */
-	-fx-row-valignment: center; /* top, center, baseline, bottom */
+    -fx-orientation: horizontal; /* horizontal, vertical */
+    -fx-hgap: 5.0;
+    -fx-vgap: 5.0;
+    -fx-alignment: top-left; /* top-center */
+    -fx-column-halignment: left; /* left, center, right */
+    -fx-row-valignment: center; /* top, center, baseline, bottom */
 }
 
 .math-text-flow {
-	-fx-text-alignment: left; /*left, center, right, justify*/
-	-fx-wrap-text: true;
+    -fx-text-alignment: left; /*left, center, right, justify*/
+    -fx-wrap-text: true;
 }
