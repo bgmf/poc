@@ -71,7 +71,16 @@ public interface Resource {
      * @param key the key for the resource
      * @return the string resource, or the key within exclamation marks, if the key is non-existent in the resources
      */
-    String getGuranteedString(String key);
+    String getGuaranteedString(String key);
+
+    /**
+     * See {@link #getGuaranteedString(String)}, but for a specific language.
+     *
+     * @param locale the locale to check
+     * @param key    the key for the resource
+     * @return the string resource, or the key within exclamation marks, if the key is non-existent in the resources
+     */
+    String getGuaranteedString(Locale locale, String key);
 
     /**
      * Use this method, if the key you want to fetch contains formatting options (see {@link Formatter}).
@@ -81,6 +90,16 @@ public interface Resource {
      * @return the formatted string resource, or something within exclamation marks, if the key is non-existent in the resources
      */
     String getGuaranteedString(String key, Object... args);
+
+    /**
+     * See {@link #getGuaranteedString(String, Object...)}, but for a specific language.
+     *
+     * @param locale the locale to check
+     * @param key    the key for the resource
+     * @param args   the formatting arguments for the string resource
+     * @return the string resource, or the key within exclamation marks, if the key is non-existent in the resources
+     */
+    String getGuaranteedString(Locale locale, String key, Object... args);
 
     /**
      * Use this method, if you need only the plain string for a specific key.
@@ -237,4 +256,11 @@ public interface Resource {
      */
     Binding<String> getBinding(final ObjectProperty<? extends BaseEnumType> type, final String defaultValue, final List<Observable> dependencies,
             final Object... parameter);
+
+    /**
+     * Parent resource that is checked for all "gets" if the local Resource class doesn't provide a localization.
+     *
+     * @param parentResource
+     */
+    void setParentResource(final Resource parentResource);
 }

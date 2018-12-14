@@ -23,6 +23,11 @@ public abstract class BaseResource implements Resource, Disposable {
     private static final String DEFAULT_PROPERTIES_NAME = "strings";
 
     /**
+     * Parent resource which is also checked for localizations
+     */
+    private Resource parentResource;
+
+    /**
      * The path, where the property file - containing translated strings - can be found. Be aware, that in the moment that means: inside the
      * {@link ClassLoader}s hierarchy. Be also aware, that the {@link ResourceBundle} mechanism doesn't need neither the underscore-language part nor
      * the dot-properties file ending to be attached.
@@ -38,6 +43,8 @@ public abstract class BaseResource implements Resource, Disposable {
      * A reference to the current active language bundle. Per default the bundle for the English locale will be loaded.
      */
     private final ReadOnlyObjectWrapper<ResourceBundle> resourceBundle = new ReadOnlyObjectWrapper<>(this, "resourceBundle");
+
+    private final Map<Locale, ResourceBundle> localizedResourceBundles = new HashMap<>();
 
     /**
      * a container for fast access to <b>unparameterized</b> {@link Binding}s - {@link StringBinding}s with parameters are created on the fly
@@ -61,7 +68,13 @@ public abstract class BaseResource implements Resource, Disposable {
                 new Locale(defaultLocale.getLanguage().toLowerCase()) :
                 new Locale(Locale.getDefault().getLanguage().toLowerCase());
         this.locale.set(locale);
-        this.resourceBundle.set(ResourceBundle.getBundle(bundleName, locale, getClass().getClassLoader()));
+        if (this.localizedResourceBundles.get(locale) != null) {
+            this.resourceBundle.set(this.localizedResourceBundles.get(locale));
+        } else {
+            this.resourceBundle.set(ResourceBundle.getBundle(bundleName, locale, getClass().getClassLoader()));
+            this.localizedResourceBundles.put(locale, this.resourceBundle.get());
+        }
+        this.parentResource = null;
     }
 
     protected BaseResource(String stringsContainerPackage, Locale defaultLocale) {
@@ -91,10 +104,20 @@ public abstract class BaseResource implements Resource, Disposable {
     }
 
     @Override
+    public void setParentResource(final Resource resource) {
+        this.parentResource = resource;
+    }
+
+    @Override
     public synchronized boolean setLocale(Locale next) {
         Locale current = Locale.getDefault();
         if (current == null || !current.equals(next)) {
-            resourceBundle.set(ResourceBundle.getBundle(bundleName, next, getClass().getClassLoader()));
+            if (localizedResourceBundles.get(next) != null) {
+                resourceBundle.set(localizedResourceBundles.get(next));
+            } else {
+                resourceBundle.set(ResourceBundle.getBundle(bundleName, next, getClass().getClassLoader()));
+                localizedResourceBundles.put(next, this.resourceBundle.get());
+            }
             locale.set(next);
         }
         return false;
@@ -110,7 +133,7 @@ public abstract class BaseResource implements Resource, Disposable {
     }
 
     @Override
-    public ReadOnlyObjectProperty<ResourceBundle> resourceBundleProperty() {
+    public synchronized ReadOnlyObjectProperty<ResourceBundle> resourceBundleProperty() {
         return resourceBundle.getReadOnlyProperty();
     }
 
@@ -120,21 +143,51 @@ public abstract class BaseResource implements Resource, Disposable {
     }
 
     @Override
-    public synchronized String getGuranteedString(String key) {
+    public synchronized String getGuaranteedString(String key) {
         try {
-            return resourceBundle.get().getString(key);
+            return resourceBundle.get().getString(key).trim();
         } catch (MissingResourceException e) {
-            return '!' + key + '!';
+            if (parentResource != null) {
+                return parentResource.getGuaranteedString(key).trim();
+            } else {
+                return '!' + key + '!';
+            }
+        }
+    }
+
+    @Override
+    public String getGuaranteedString(Locale locale, String key) {
+        ResourceBundle rb = localizedResourceBundles.get(locale);
+        if (rb == null) {
+            rb = ResourceBundle.getBundle(bundleName, locale, getClass().getClassLoader());
+            localizedResourceBundles.put(locale, rb);
+        }
+        if (localizedResourceBundles.get(locale) != null) {
+            try {
+                return rb.getString(key).trim();
+            } catch (MissingResourceException e) {
+                if (parentResource != null) {
+                    return parentResource.getGuaranteedString(locale, key).trim();
+                } else {
+                    return '!' + key + '!';
+                }
+            }
+        } else {
+            return getGuaranteedString(key);
         }
     }
 
     @Override
     public synchronized String getGuaranteedString(String key, Object... args) {
-        String value = "!empty!";
+        String value;
         try {
-            value = resourceBundle.get().getString(key);
+            value = resourceBundle.get().getString(key).trim();
         } catch (MissingResourceException e) {
-            value = '!' + key + '!';
+            if (parentResource != null) {
+                value = parentResource.getGuaranteedString(key, args).trim();
+            } else {
+                value = '!' + key + '!';
+            }
         }
         if (value.startsWith("!") && value.endsWith("!"))
             return value;
@@ -142,21 +195,55 @@ public abstract class BaseResource implements Resource, Disposable {
     }
 
     @Override
+    public String getGuaranteedString(Locale locale, String key, Object... args) {
+        ResourceBundle rb = localizedResourceBundles.get(locale);
+        if (rb == null) {
+            rb = ResourceBundle.getBundle(bundleName, locale, getClass().getClassLoader());
+            localizedResourceBundles.put(locale, rb);
+        }
+        if (localizedResourceBundles.get(locale) != null) {
+            String value;
+            try {
+                value = rb.getString(key).trim();
+            } catch (MissingResourceException e) {
+                if (parentResource != null) {
+                    value = parentResource.getGuaranteedString(locale, key, args).trim();
+                } else {
+                    value = '!' + key + '!';
+                }
+            }
+            if (value.startsWith("!") && value.endsWith("!"))
+                return value;
+            return String.format(value, args);
+        } else {
+            return getGuaranteedString(key, args);
+        }
+    }
+
+    @Override
     public synchronized Optional<String> getString(String key) {
         try {
-            return Optional.of(resourceBundle.get().getString(key));
+            return Optional.of(resourceBundle.get().getString(key).trim());
         } catch (MissingResourceException e) {
-            return Optional.empty();
+            if (parentResource != null) {
+                return parentResource.getString(key);
+            } else {
+                return Optional.empty();
+            }
         }
     }
 
     @Override
     public synchronized Optional<String> getString(String key, Object... args) {
-        String value = "!empty!";
+        String value;
         try {
-            value = resourceBundle.get().getString(key);
+            value = resourceBundle.get().getString(key).trim();
         } catch (MissingResourceException e) {
-            value = '!' + key + '!';
+            if (parentResource != null) {
+                value = parentResource.getString(key, args).orElse('!' + key + '!');
+            } else {
+                value = '!' + key + '!';
+            }
         }
         if (value.startsWith("!") && value.endsWith("!"))
             return Optional.empty();
@@ -166,9 +253,13 @@ public abstract class BaseResource implements Resource, Disposable {
     @Override
     public synchronized Optional<Boolean> getBoolean(String key) {
         try {
-            return Optional.of(Boolean.parseBoolean(resourceBundle.get().getString(key)));
+            return Optional.of(Boolean.parseBoolean(resourceBundle.get().getString(key).trim()));
         } catch (MissingResourceException e) {
-            return Optional.empty();
+            if (parentResource != null) {
+                return parentResource.getBoolean(key);
+            } else {
+                return Optional.empty();
+            }
         }
     }
 
@@ -180,22 +271,34 @@ public abstract class BaseResource implements Resource, Disposable {
     @Override
     public synchronized Optional<Integer> getInteger(String key) {
         try {
-            return Optional.of(Integer.parseInt(resourceBundle.get().getString(key)));
-        } catch (MissingResourceException | NumberFormatException e) {
+            return Optional.of(Integer.parseInt(resourceBundle.get().getString(key).trim()));
+        } catch (MissingResourceException e) {
+            if (parentResource != null) {
+                return parentResource.getInteger(key);
+            } else {
+                return Optional.empty();
+            }
+        } catch (NumberFormatException e) {
             return Optional.empty();
         }
     }
 
     @Override
-    public Integer getInteger(String key, Integer defaultValue) {
+    public synchronized Integer getInteger(String key, Integer defaultValue) {
         return getInteger(key).orElse(defaultValue);
     }
 
     @Override
     public synchronized Optional<Long> getLong(String key) {
         try {
-            return Optional.of(Long.parseLong(resourceBundle.get().getString(key)));
-        } catch (MissingResourceException | NumberFormatException e) {
+            return Optional.of(Long.parseLong(resourceBundle.get().getString(key).trim()));
+        } catch (MissingResourceException e) {
+            if (parentResource != null) {
+                return parentResource.getLong(key);
+            } else {
+                return Optional.empty();
+            }
+        } catch (NumberFormatException e) {
             return Optional.empty();
         }
     }
@@ -208,8 +311,14 @@ public abstract class BaseResource implements Resource, Disposable {
     @Override
     public synchronized Optional<Double> getDouble(String key) {
         try {
-            return Optional.of(Double.parseDouble(resourceBundle.get().getString(key)));
-        } catch (MissingResourceException | NumberFormatException e) {
+            return Optional.of(Double.parseDouble(resourceBundle.get().getString(key).trim()));
+        } catch (MissingResourceException e) {
+            if (parentResource != null) {
+                return parentResource.getDouble(key);
+            } else {
+                return Optional.empty();
+            }
+        } catch (NumberFormatException e) {
             return Optional.empty();
         }
     }
@@ -264,13 +373,13 @@ public abstract class BaseResource implements Resource, Disposable {
             StringBinding binding = keyStringBindings.get(key);
             if (binding != null)
                 return binding;
-            binding = Bindings
-                    .createStringBinding(() -> defaultValue == null ? getGuaranteedString(key) : getString(key).orElse(defaultValue), resourceBundle);
+            binding = Bindings.createStringBinding(() -> defaultValue == null ? getGuaranteedString(key).trim() : getString(key).orElse(defaultValue),
+                    resourceBundle);
             keyStringBindings.put(key, binding);
             return binding;
         } else {
             return Bindings.createStringBinding(() -> defaultValue == null ?
-                    getGuaranteedString(key, parameter) :
+                    getGuaranteedString(key, parameter).trim() :
                     String.format(getLocale(), getString(key).orElse(defaultValue), parameter), resourceBundle);
         }
     }
@@ -313,21 +422,20 @@ public abstract class BaseResource implements Resource, Disposable {
 
     private StringBinding createStringBindingForBaseEnumType(final ObjectProperty<? extends BaseEnumType> type, final String defaultValue,
             final List<Observable> dependencies, final Object... parameter) {
-        final List<Observable> finalDependencies = new ArrayList<>();
-        finalDependencies.addAll(Arrays.asList(type, resourceBundle));
+        final List<Observable> finalDependencies = new ArrayList<>(Arrays.asList(type, resourceBundle));
         if (dependencies != null && !dependencies.isEmpty())
             finalDependencies.addAll(dependencies);
         // @formatter:off
 		return Bindings.createStringBinding(
-				() -> defaultValue == null 
-						? getGuaranteedString(type.get().getKey())
+				() -> defaultValue == null
+						? getGuaranteedString(type.get().getKey()).trim()
 						: String.format(getLocale(), getString(type.get().getKey()).orElse(defaultValue), parameter),
-				finalDependencies.stream().toArray(size -> new Observable[size]));
+				finalDependencies.toArray(new Observable[0]));
 		// @formatter:on
     }
 
     @Override
-    public synchronized void dispose() {
+    public void dispose() {
         keyStringBindings.clear();
         keyBooleanBindings.clear();
         keyIntegerBindings.clear();
