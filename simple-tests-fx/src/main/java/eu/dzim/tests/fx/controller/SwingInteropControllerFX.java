@@ -1,6 +1,5 @@
 package eu.dzim.tests.fx.controller;
 
-import eu.dzim.tests.fx.SwingInteropControllerInterface;
 import eu.dzim.tests.fx.model.SwingInteropModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

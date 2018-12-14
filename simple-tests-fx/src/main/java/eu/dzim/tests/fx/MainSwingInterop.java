@@ -1,5 +1,6 @@
 package eu.dzim.tests.fx;
 
+import eu.dzim.tests.fx.controller.SwingInteropControllerInterface;
 import eu.dzim.tests.fx.model.SwingInteropModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
