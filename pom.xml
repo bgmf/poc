@@ -88,7 +88,7 @@
         <version.guava>27.0.1-jre</version.guava>
         <version.log4j>2.11.1</version.log4j>
         <version.apache.commons.cli>1.4</version.apache.commons.cli>
-        <version.jackson>2.9.7</version.jackson>
+        <version.jackson>2.9.8</version.jackson>
 
         <version.jasperreports>6.4.1</version.jasperreports>
 
