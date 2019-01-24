@@ -63,7 +63,11 @@ public class MainMultiWindow extends Application {
         stage.show();
         */
 
-        DialogStage dialog = new DialogStage(StageStyle.DECORATED, Modality.APPLICATION_MODAL, primaryStage, -1, -1, 320, 240);
+        DialogStage dialog = new DialogStage(StageStyle.DECORATED,
+                Modality.APPLICATION_MODAL,
+                primaryStage,
+                -1, -1, 320, 240,
+                "Title", false);
         // dialog.show();
         dialog.showAndWait();
     }
@@ -74,7 +78,8 @@ class DialogStage extends Stage {
     private final double width;
     private final double height;
 
-    public DialogStage(StageStyle style, Modality modality, Window owner, double minWidth, double minHeight, double width, double height) {
+    public DialogStage(StageStyle style, Modality modality, Window owner, double minWidth, double minHeight, double width, double height,
+            String title, boolean alwaysOnTop) {
 
         super(style);
 
@@ -88,6 +93,9 @@ class DialogStage extends Stage {
 
         this.width = width;
         this.height = height;
+
+        setTitle(title);
+        setAlwaysOnTop(alwaysOnTop);
 
         createContent();
     }
