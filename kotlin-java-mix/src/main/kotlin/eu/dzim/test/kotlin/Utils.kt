@@ -1,12 +1,15 @@
 package eu.dzim.test.kotlin
 
 import com.google.inject.AbstractModule
+import com.google.inject.Stage
 import eu.dzim.shared.resource.BaseResource
 import eu.dzim.shared.resource.Resource
 import eu.dzim.test.model.TestModel
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.util.*
+
+val INJECTION_STAGE = Stage.DEVELOPMENT
 
 class ResourceImpl : BaseResource("i18n", "strings", Locale.ENGLISH)
 
