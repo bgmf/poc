@@ -12,12 +12,10 @@ class FXApplication : Application() {
 
         val model = TestModel().apply {
             testString = "test"
-        }.also {
-            println(it.testString)
-            println(it.testStringProperty().get())
+        }.run {
+            println(testString)
+            println(testStringProperty().get())
         }
-
-
 
         primaryStage?.apply {
             minWidth = 640.0
