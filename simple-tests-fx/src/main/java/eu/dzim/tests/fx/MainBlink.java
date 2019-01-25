@@ -20,7 +20,7 @@ public class MainBlink extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws InterruptedException {
+    public void start(Stage primaryStage) {
 
         Label signalfeld = new Label();
         signalfeld.setPrefSize(100, 100);
@@ -31,26 +31,23 @@ public class MainBlink extends Application {
         primaryStage.show();
 
         AtomicInteger counter = new AtomicInteger(0);
-        final Timeline tl = new Timeline(new KeyFrame(Duration.millis(500), new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                switch (counter.getAndIncrement()) {
-                case 0:
-                    signalfeld.setStyle("-fx-background-color: grey;");
-                    break;
-                case 1:
-                    signalfeld.setStyle("-fx-background-color: green;");
-                    break;
-                case 2:
-                    signalfeld.setStyle("-fx-background-color: blue;");
-                    break;
-                case 3:
-                    signalfeld.setStyle("-fx-background-color: red;");
-                    break;
-                default:
-                    signalfeld.setStyle("-fx-background-color: black;");
-                    break;
-                }
+        final Timeline tl = new Timeline(new KeyFrame(Duration.millis(500), event -> {
+            switch (counter.getAndIncrement()) {
+            case 0:
+                signalfeld.setStyle("-fx-background-color: grey;");
+                break;
+            case 1:
+                signalfeld.setStyle("-fx-background-color: green;");
+                break;
+            case 2:
+                signalfeld.setStyle("-fx-background-color: blue;");
+                break;
+            case 3:
+                signalfeld.setStyle("-fx-background-color: red;");
+                break;
+            default:
+                signalfeld.setStyle("-fx-background-color: black;");
+                break;
             }
         }));
         tl.cycleCountProperty().set(4);

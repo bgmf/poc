@@ -12,6 +12,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 public class MainMultiWindow extends Application {
+
     public static void main(String[] args) {
         launch(args);
     }
