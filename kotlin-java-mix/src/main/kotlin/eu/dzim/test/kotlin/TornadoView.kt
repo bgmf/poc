@@ -29,5 +29,8 @@ class TornadoView : View() {
         }
     }
 
+    // helper method: since we are not a full TornadoFX application (we display Tornado-Views in a non-Tornado basic Application class),
+    // we need a helper function to access the root - otherwise, we get strange exceptions, which I probably need to ask the TornadoFX dev, why they
+    // actually happen
     fun getView(): Pane = root
 }
