@@ -142,6 +142,10 @@
                 <version>3.8.0</version>
                 <configuration>
                     <release>11</release>
+                    <compilerArgs>
+                        <arg>--add-exports=javafx.graphics/com.sun.javafx.util=ALL-UNNAMED</arg>
+                        <arg>--add-modules=javafx.controls</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
