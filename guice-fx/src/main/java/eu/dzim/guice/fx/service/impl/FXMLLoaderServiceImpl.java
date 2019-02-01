@@ -6,8 +6,6 @@ import com.google.inject.ProvisionException;
 import eu.dzim.guice.fx.service.FXMLLoaderService;
 import javafx.fxml.FXMLLoader;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,11 +13,6 @@ import java.util.ResourceBundle;
 public class FXMLLoaderServiceImpl implements FXMLLoaderService {
 
     @Inject private Injector injector;
-
-    // post-construct not working out of the box in Guice
-    @PostConstruct
-    private void postConstruct() {
-    }
 
     @Override
     public FXMLLoader getLoader() {
@@ -52,10 +45,5 @@ public class FXMLLoaderServiceImpl implements FXMLLoaderService {
             e.printStackTrace();
             return null;
         }
-    }
-
-    // pre-destroy not working out of the box in Guice
-    @PreDestroy
-    private void preDestroy() {
     }
 }
