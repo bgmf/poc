@@ -22,7 +22,7 @@ public class PluginServiceLoader implements PluginIntegrator {
 
     private static final Logger LOG = LogManager.getLogger(PluginServiceLoader.class.getName());
 
-    private static final String JAR_FILE = "plugin.jar";
+    private static final String JAR_SUFFIX = "plugin.jar";
 
     private final ObservableMap<String, Plugin> plugins = FXCollections.observableMap(new TreeMap<>());
 
@@ -37,14 +37,14 @@ public class PluginServiceLoader implements PluginIntegrator {
 
     private <T> List<Pair<ServiceLoader<T>, ClassLoader>> loadIntegrations(Path path, Class<T> clazz) {
         if (path != null) {
-            if (path.toFile().isFile() && path.getFileName().toString().endsWith(JAR_FILE)) {
+            if (path.toFile().isFile() && path.getFileName().toString().endsWith(JAR_SUFFIX)) {
                 return Collections.singletonList(loadJarIntegrations(Collections.singletonList(path), clazz));
             }
             List<Path> jarFiles = findJarFiles(path);
             if (jarFiles.isEmpty()) {
-                return Collections.singletonList(loadDirecotryIntegrations(path, clazz));
+                return Collections.singletonList(loadDirectoryIntegrations(path, clazz));
             } else {
-                return jarFiles.stream().map(jarFile -> loadDirecotryIntegrations(jarFile, clazz)).collect(Collectors.toList());
+                return jarFiles.stream().map(jarFile -> loadDirectoryIntegrations(jarFile, clazz)).collect(Collectors.toList());
             }
         } else {
             return Collections.singletonList(new Pair<>(ServiceLoader.load(clazz), getClass().getClassLoader()));
@@ -60,7 +60,7 @@ public class PluginServiceLoader implements PluginIntegrator {
                 LOG.error(e);
                 return null;
             }
-        }).filter(url -> url != null).toArray(size -> new URL[size]);
+        }).filter(Objects::nonNull).toArray(URL[]::new);
         URLClassLoader cl = new URLClassLoader(array, getClass().getClassLoader());
         return new Pair<>(ServiceLoader.load(clazz, cl), cl);
     }
@@ -70,7 +70,7 @@ public class PluginServiceLoader implements PluginIntegrator {
         // FIXME use a glob instead of the filter below
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path)) {
             for (Path each : directoryStream) {
-                if (!each.getFileName().toString().toLowerCase().endsWith(JAR_FILE))
+                if (!each.getFileName().toString().toLowerCase().endsWith(JAR_SUFFIX))
                     continue;
                 fileNames.add(each);
             }
@@ -80,14 +80,14 @@ public class PluginServiceLoader implements PluginIntegrator {
         return fileNames;
     }
 
-    private <T> Pair<ServiceLoader<T>, ClassLoader> loadDirecotryIntegrations(Path path, Class<T> clazz) {
+    private <T> Pair<ServiceLoader<T>, ClassLoader> loadDirectoryIntegrations(Path path, Class<T> clazz) {
         List<URL> fileNames = new ArrayList<>();
         try {
             fileNames.add(path.toUri().toURL());
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
         }
-        URL[] array = fileNames.stream().toArray(size -> new URL[size]);
+        URL[] array = fileNames.toArray(new URL[0]);
         URLClassLoader cl = new URLClassLoader(array, getClass().getClassLoader());
         return new Pair<>(ServiceLoader.load(clazz, cl), cl);
     }
@@ -96,9 +96,7 @@ public class PluginServiceLoader implements PluginIntegrator {
     public ObservableMap<String, Plugin> loadPlugins(Path... paths) {
 
         ServiceLoader<Plugin> internal = ServiceLoader.load(Plugin.class);
-        Iterator<Plugin> internalIt = internal.iterator();
-        while (internalIt.hasNext()) {
-            Plugin plugin = internalIt.next();
+        for (Plugin plugin : internal) {
             if (plugins.get(plugin.id()) != null) {
                 // && CoreUtils.versionCompare(plugins.get(plugin.id()).version(), plugin.version()) <= 0) {
                 continue;
@@ -118,9 +116,8 @@ public class PluginServiceLoader implements PluginIntegrator {
             List<Pair<ServiceLoader<Plugin>, ClassLoader>> integrations = loadIntegrations(path, Plugin.class);
             for (Pair<ServiceLoader<Plugin>, ClassLoader> integration : integrations) {
                 ServiceLoader<Plugin> serviceLoader = integration.getKey();
-                Iterator<Plugin> iterator = serviceLoader.iterator();
-                while (iterator.hasNext()) {
-                    Plugin plugin = iterator.next();
+                for (Plugin plugin : serviceLoader) {
+                    plugin.pluginClassLoader(integration.getValue());
                     if (plugins.get(plugin.id()) != null) {
                         // && CoreUtils.versionCompare(plugins.get(plugin.id()).version(), plugin.version()) <= 0) {
                         continue;
