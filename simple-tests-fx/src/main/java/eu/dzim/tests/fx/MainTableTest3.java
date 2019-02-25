@@ -51,7 +51,16 @@ public class MainTableTest3 extends Application {
 
     private ObservableList<TableRecord> createRecords() {
         ObservableList<TableRecord> records = FXCollections.observableArrayList();
-        records.add(new TableRecord("Test", "ASDF", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test1", "ASDF1", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test2", "ASDF2", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test3", "ASDF3", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test4", "ASDF4", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test5", "ASDF5", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test6", "ASDF6", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test7", "ASDF7", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test8", "ASDF8", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test9", "ASDF9", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
+        records.add(new TableRecord("Test0", "ASDF0", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
         return records;
     }
 
@@ -62,9 +71,9 @@ public class MainTableTest3 extends Application {
         columns.add(createColumn(String.class, "Bezeichnung", "azlWert"));
         columns.add(createColumn(Double.class, "Januar", "azlJan"));
         columns.add(createColumn(Double.class, "Februar", "azlFeb"));
-        columns.add(createColumn(Double.class, "März", "azlMai"));
+        columns.add(createColumn(Double.class, "März", "azlMar"));
         columns.add(createColumn(Double.class, "April", "azlApr"));
-        columns.add(createColumn(Double.class, "Mai", "azlMay"));
+        columns.add(createColumn(Double.class, "Mai", "azlMai"));
         columns.add(createColumn(Double.class, "Juni", "azlJun"));
         columns.add(createColumn(Double.class, "Juli", "azlJul"));
         columns.add(createColumn(Double.class, "August", "azlAug"));
