@@ -27,7 +27,7 @@ public class MainTableTest3 extends Application {
     public void start(Stage primaryStage) {
         StringProperty appStatus = new SimpleStringProperty();
 
-        primaryStage.setTitle("TableTest3");
+        primaryStage.setTitle("Table Test 3");
         primaryStage.titleProperty().bind(Bindings
                 .createStringBinding(() -> "TableTest3" + (appStatus.get() != null && !appStatus.get().isEmpty() ? " - " + appStatus.get() : ""),
                         appStatus));

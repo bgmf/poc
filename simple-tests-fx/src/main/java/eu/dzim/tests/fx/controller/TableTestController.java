@@ -54,12 +54,12 @@ public class TableTestController {
         });
 
         tableColumnText.setCellValueFactory(new PropertyValueFactory<>("text"));
-        tableColumnFlag.setCellValueFactory(param -> new SimpleObjectProperty<TableTestObject>(param.getValue()));
-        tableColumnAncestor.setCellValueFactory(param -> new SimpleObjectProperty<TableTestObject>(param.getValue()));
-        tableColumnDescendant.setCellValueFactory(param -> new SimpleObjectProperty<TableTestObject>(param.getValue()));
-        tableColumnPoints.setCellValueFactory(param -> new SimpleObjectProperty<TableTestObject>(param.getValue()));
+        tableColumnFlag.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue()));
+        tableColumnAncestor.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue()));
+        tableColumnDescendant.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue()));
+        tableColumnPoints.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue()));
 
-        tableColumnFlag.setCellFactory(param -> new TableCell<TableTestObject, TableTestObject>() {
+        tableColumnFlag.setCellFactory(param -> new TableCell<>() {
             @Override
             protected void updateItem(TableTestObject item, boolean empty) {
                 super.updateItem(item, empty);
@@ -73,7 +73,7 @@ public class TableTestController {
                 }
             }
         });
-        tableColumnAncestor.setCellFactory(param -> new TableCell<TableTestObject, TableTestObject>() {
+        tableColumnAncestor.setCellFactory(param -> new TableCell<>() {
             @Override
             protected void updateItem(TableTestObject item, boolean empty) {
                 super.updateItem(item, empty);
@@ -81,7 +81,7 @@ public class TableTestController {
                     setText(null);
                 } else {
                     ComboBox<String> cb = new ComboBox<>(ancestorList);
-                    cb.getSelectionModel().selectedItemProperty().addListener((ChangeListener<String>) (observable, oldValue, newValue) -> {
+                    cb.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                         item.ancestorProperty().set(newValue);
                         System.out.println(item.descendantProperty().get());
                     });
@@ -90,7 +90,7 @@ public class TableTestController {
                 }
             }
         });
-        tableColumnDescendant.setCellFactory(param -> new TableCell<TableTestObject, TableTestObject>() {
+        tableColumnDescendant.setCellFactory(param -> new TableCell<>() {
             @Override
             protected void updateItem(TableTestObject item, boolean empty) {
                 super.updateItem(item, empty);
@@ -98,11 +98,11 @@ public class TableTestController {
                     setText(null);
                 } else {
                     ComboBox<String> cb = new ComboBox<>();
-                    item.ancestorProperty().addListener((ChangeListener<String>) (observable, oldValue, newValue) -> {
+                    item.ancestorProperty().addListener((observable, oldValue, newValue) -> {
                         item.descendantProperty().set("");
                         cb.setItems(FXCollections.observableArrayList(descendantMap.get(newValue)));
                     });
-                    cb.getSelectionModel().selectedItemProperty().addListener((ChangeListener<String>) (observable, oldValue, newValue) -> {
+                    cb.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                         item.descendantProperty().set(newValue);
                         System.out.println(item.descendantProperty().get());
                     });
@@ -111,7 +111,7 @@ public class TableTestController {
                 }
             }
         });
-        tableColumnPoints.setCellFactory(param -> new TableCell<TableTestObject, TableTestObject>() {
+        tableColumnPoints.setCellFactory(param -> new TableCell<>() {
             @Override
             protected void updateItem(TableTestObject item, boolean empty) {
                 super.updateItem(item, empty);
@@ -120,7 +120,7 @@ public class TableTestController {
                 } else {
                     Spinner<Integer> spinner = new Spinner<>();
                     spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-5, +5, item.getPoints()));
-                    spinner.valueProperty().addListener((ChangeListener<Integer>) (observable, oldValue, newValue) -> {
+                    spinner.valueProperty().addListener((observable, oldValue, newValue) -> {
                         item.pointsProperty().set(newValue);
                         System.out.println(item.pointsProperty().get());
                     });

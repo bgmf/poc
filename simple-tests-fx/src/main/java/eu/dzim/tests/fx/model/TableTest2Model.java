@@ -7,10 +7,10 @@ import javafx.beans.property.StringProperty;
 
 public class TableTest2Model {
 
-    private StringProperty text = new SimpleStringProperty("");
-    private BooleanProperty flag1 = new SimpleBooleanProperty(false);
-    private BooleanProperty flag2 = new SimpleBooleanProperty(false);
-    private BooleanProperty flag3 = new SimpleBooleanProperty(false);
+    private StringProperty text = new SimpleStringProperty(this, "text", "");
+    private BooleanProperty flag1 = new SimpleBooleanProperty(this, "flag1", false);
+    private BooleanProperty flag2 = new SimpleBooleanProperty(this, "flag2", false);
+    private BooleanProperty flag3 = new SimpleBooleanProperty(this, "flag2", false);
 
     public final StringProperty textProperty() {
         return this.text;

@@ -16,11 +16,11 @@ public class MainTableTest2 extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Koordinatensystem");
+        primaryStage.setTitle("Table Test 2");
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainTableTest2.class.getResource("/fxml/TableTest2.fxml"));
-            Pane rootLayout = (Pane) loader.load();
+            Pane rootLayout = loader.load();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();

@@ -15,6 +15,17 @@
     <name>simple-tests-fx</name>
     <url>http://maven.apache.org</url>
 
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
+        <maven.compile.java.version>11</maven.compile.java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+        <main.class>MainRoot</main.class>
+    </properties>
+
     <repositories>
         <repository>
             <id>jspresso</id>
@@ -76,14 +87,6 @@
             </properties>
         </profile>
     </profiles>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
-        <maven.compile.java.version>11</maven.compile.java.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -166,7 +169,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>eu.dzim.tests.fx.MainTableTest3_2</mainClass>
+                    <mainClass>eu.dzim.tests.fx.${main.class}</mainClass>
                 </configuration>
             </plugin>
         </plugins>

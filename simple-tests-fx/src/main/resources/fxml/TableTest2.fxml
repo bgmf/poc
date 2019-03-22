@@ -5,37 +5,35 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="eu.dzim.tests.fx.controller.TableTest2Controller">
 
     <center>
         <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
             <Tab fx:id="tab1" text="Table">
-                <content>
-                    <VBox>
-                        <TableView fx:id="tableView">
+                <VBox>
+                    <TableView fx:id="tableView">
+                        <columns>
                             <TableColumn fx:id="tableColumnText" text="Text" prefWidth="150"/>
                             <TableColumn fx:id="tableColumnFlag1" text="Flag 1" prefWidth="50"/>
                             <TableColumn fx:id="tableColumnFlag2" text="Flag 2" prefWidth="50"/>
                             <TableColumn fx:id="tableColumnFlag3" text="Flag 3" prefWidth="50"/>
-                        </TableView>
-                    </VBox>
-                </content>
+                        </columns>
+                    </TableView>
+                </VBox>
             </Tab>
             <Tab fx:id="tab2" text="Data">
-                <content>
-                    <GridPane hgap="5" vgap="5">
-                        <Label text="Text:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                        <Label text="Flag 1:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                        <Label text="Flag 2:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                        <Label text="Flag 3:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                        <TextField fx:id="textField" promptText="some text" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                        <CheckBox fx:id="checkBox1" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                        <CheckBox fx:id="checkBox2" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                        <CheckBox fx:id="checkBox4" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                        <Separator GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
-                        <Button fx:id="button" text="Submit" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
-                    </GridPane>
-                </content>
+                <GridPane hgap="5" vgap="5">
+                    <Label text="Text:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label text="Flag 1:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label text="Flag 2:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label text="Flag 3:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <TextField fx:id="textField" promptText="some text" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <CheckBox fx:id="checkBox1" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <CheckBox fx:id="checkBox2" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <CheckBox fx:id="checkBox3" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <Separator GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+                    <Button fx:id="button" text="Submit" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+                </GridPane>
             </Tab>
         </TabPane>
     </center>
