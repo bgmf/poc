@@ -7,14 +7,14 @@
         <!-- Your own application should inherit from spring-boot-starter-parent -->
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.19.RELEASE</version>
+        <version>2.1.2.RELEASE</version>
     </parent>
 
     <artifactId>spring-boot-fx</artifactId>
     <groupId>eu.dzim.poc</groupId>
     <name>Spring Boot Simple Sample</name>
     <description>Spring Boot Simple Sample</description>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <url>https://github.com/bgmf</url>
 
     <scm>
@@ -37,26 +37,17 @@
     <properties>
         <main.basedir>${basedir}/../..</main.basedir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <main.basedir>${basedir}/../..</main.basedir>
-        <java.version>1.8</java.version>
 
-        <maven.compile.java.version>1.8</maven.compile.java.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>11</java.version>
+        <maven.compile.java.version>11</maven.compile.java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 
-        <version.controlsfx>8.40.13</version.controlsfx>
-        <version.tornadofx.controls>1.7.9</version.tornadofx.controls>
-        <version.org.jfoenix>1.7.0</version.org.jfoenix>
+        <version.javafx>11.0.2</version.javafx>
+        <version.jaxb>2.3.1</version.jaxb>
+        <version.annotation.api>1.3.2</version.annotation.api>
 
-        <version.fontawesomfx>8.15</version.fontawesomfx>
-        <version.fontawesomfx.eo>2.2.7-2</version.fontawesomfx.eo>
-        <version.fontawesomfx.fa>4.7.0-5</version.fontawesomfx.fa>
-        <version.fontawesomfx.i525>3.0.0-4</version.fontawesomfx.i525>
-        <version.fontawesomfx.md>2.2.0-5</version.fontawesomfx.md>
-        <version.fontawesomfx.mdif>1.7.22-4</version.fontawesomfx.mdif>
-        <version.fontawesomfx.mdsf>2.1-5</version.fontawesomfx.mdsf>
-        <version.fontawesomfx.oct>4.3.0-5</version.fontawesomfx.oct>
-        <version.fontawesomfx.weather>2.0.10-5</version.fontawesomfx.weather>
+        <version.tornadofx.controls>1.7.18</version.tornadofx.controls>
 
         <version.okhttp3>3.8.1</version.okhttp3>
     </properties>
@@ -82,13 +73,38 @@
             <scope>test</scope>
         </dependency>
 
-        <!--
         <dependency>
-            <groupId>com.squareup.retrofit</groupId>
-            <artifactId>retrofit</artifactId>
-            <version>2.0.0-beta2</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>${version.javafx}</version>
         </dependency>
-        -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${version.javafx}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${version.javafx}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>${version.javafx}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${version.jaxb}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>${version.annotation.api}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -101,103 +117,13 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>com.googlecode.libphonenumber</groupId>
-            <artifactId>libphonenumber</artifactId>
-            <version>7.1.1</version>
-        </dependency>
-        -->
-        <!--
-        <dependency>
-            <groupId>com.googlecode.juniversalchardet</groupId>
-            <artifactId>juniversalchardet</artifactId>
-            <version>1.0.3</version>
-        </dependency>
-        -->
-        <!--
-        <dependency>
-            <groupId>com.lynden</groupId>
-            <artifactId>GMapsFX</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        -->
-
-        <!--
-        <dependency>
-            <groupId>org.controlsfx</groupId>
-            <artifactId>controlsfx</artifactId>
-            <version>${version.controlsfx}</version>
-        </dependency>
-        <dependency>
-            <groupId>no.tornado</groupId>
-            <artifactId>tornadofx-controls</artifactId>
-            <version>${version.tornadofx.controls}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jfoenix</groupId>
-            <artifactId>jfoenix</artifactId>
-            <version>${version.org.jfoenix}</version>
-        </dependency>
-
-        <!- - Fontawesome - ->
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-commons</artifactId>
-            <version>${version.fontawesomfx}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-controls</artifactId>
-            <version>${version.fontawesomfx}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-emojione</artifactId>
-            <version>${version.fontawesomfx.eo}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-fontawesome</artifactId>
-            <version>${version.fontawesomfx.fa}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-icons525</artifactId>
-            <version>${version.fontawesomfx.i525}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-materialicons</artifactId>
-            <version>${version.fontawesomfx.md}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-materialdesignfont</artifactId>
-            <version>${version.fontawesomfx.mdif}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-materialstackicons</artifactId>
-            <version>${version.fontawesomfx.mdsf}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-octicons</artifactId>
-            <version>${version.fontawesomfx.oct}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-weathericons</artifactId>
-            <version>${version.fontawesomfx.weather}</version>
-        </dependency>
-        -->
 
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>${version.okhttp3}</version>
         </dependency>
+
         <dependency>
             <groupId>eu.dzim.poc</groupId>
             <artifactId>shared</artifactId>
@@ -210,6 +136,36 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>11</release>
+                    <!-- <compilerArgs>
+                        <arg>- -add-exports=javafx.graphics/com.sun.javafx.util=ALL-UNNAMED</arg>
+                        <arg>- -add-modules=javafx.controls</arg>
+                    </compilerArgs> -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>eu.dzim.poc.fx.BootApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

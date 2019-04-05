@@ -26,21 +26,6 @@ public class JarLoaderImpl implements JarLoader {
         // sonar
     }
 
-    public static String getCustomManifestEntry(URLClassLoader classLoader, String name, String defaultValue) {
-        URL manifestUrl = classLoader.findResource(SharedConstants.MANIFEST);
-        if (manifestUrl == null)
-            return defaultValue;
-        try {
-            Manifest manifest = new Manifest(manifestUrl.openStream());
-            Attributes attr = manifest.getMainAttributes();
-            String value = attr.getValue(name);
-            return value == null ? defaultValue : value;
-        } catch (IOException e) {
-            LOG.error(e.getMessage(), e);
-            return defaultValue;
-        }
-    }
-
     @Override
     public boolean executeJar(Path path, String... parameter) throws JarLoaderException {
         if (path == null) {
@@ -82,8 +67,21 @@ public class JarLoaderImpl implements JarLoader {
     }
 
     private URLClassLoader loadJarIntegrations(List<URL> fileNames) {
-        URL[] array = fileNames.stream().toArray(size -> new URL[size]);
-        URLClassLoader cl = new URLClassLoader(array); // , getClass().getClassLoader()
-        return cl;
+        return new URLClassLoader(fileNames.toArray(new URL[0]));
+    }
+
+    public static String getCustomManifestEntry(URLClassLoader classLoader, String name, String defaultValue) {
+        URL manifestUrl = classLoader.findResource(SharedConstants.MANIFEST);
+        if (manifestUrl == null)
+            return defaultValue;
+        try {
+            Manifest manifest = new Manifest(manifestUrl.openStream());
+            Attributes attr = manifest.getMainAttributes();
+            String value = attr.getValue(name);
+            return value == null ? defaultValue : value;
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+            return defaultValue;
+        }
     }
 }

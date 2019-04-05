@@ -9,15 +9,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainTableTest3 extends Application {
+public class MainTableTest3_2 extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -27,13 +29,16 @@ public class MainTableTest3 extends Application {
     public void start(Stage primaryStage) {
         StringProperty appStatus = new SimpleStringProperty();
 
-        primaryStage.setTitle("Table Test 3");
+        primaryStage.setTitle("Table Test 3, v2");
         primaryStage.titleProperty().bind(Bindings
                 .createStringBinding(() -> "TableTest3" + (appStatus.get() != null && !appStatus.get().isEmpty() ? " - " + appStatus.get() : ""),
                         appStatus));
 
         BorderPane rootLayout = new BorderPane();
         TableView<TableRecord> table = new TableView<>();
+
+        // TODO check the code from here: https://dzone.com/articles/editable-tables-in-javafx
+        setTableEditable(table);
 
         createTableData(table, createRecords());
 
@@ -90,6 +95,61 @@ public class MainTableTest3 extends Application {
         TableColumn<TableRecord, T> column = new TableColumn<>(columnTitle);
         column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         return column;
+    }
+
+    private void setTableEditable(TableView<TableRecord> table) {
+        table.setEditable(true);
+        // allows the individual cells to be selected
+        table.getSelectionModel().cellSelectionEnabledProperty().set(true);
+        // when character or numbers pressed it will start edit in editable fields
+        table.setOnKeyPressed(event -> {
+            if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
+                editFocusedCell(table);
+            } else if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.TAB) {
+                table.getSelectionModel().selectNext();
+                event.consume();
+            } else if (event.getCode() == KeyCode.LEFT) {
+                // work around due to TableView.getSelectionModel().selectPrevious() due to a bug
+                // stopping it from working on the first column in the last row of the table
+                selectPrevious(table);
+                event.consume();
+            }
+        });
+    }
+
+    @SuppressWarnings("unchecked")
+    private void editFocusedCell(final TableView<TableRecord> table) {
+        final TablePosition<TableRecord, ?> focusedCell = table.focusModelProperty().get().focusedCellProperty().get();
+        table.edit(focusedCell.getRow(), focusedCell.getTableColumn());
+    }
+
+    @SuppressWarnings("unchecked")
+    private void selectPrevious(final TableView<TableRecord> table) {
+        if (table.getSelectionModel().isCellSelectionEnabled()) {
+            // in cell selection mode, we have to wrap around, going from
+            // right-to-left, and then wrapping to the end of the previous line
+            TablePosition<TableRecord, ?> pos = table.getFocusModel().getFocusedCell();
+            if (pos.getColumn() - 1 >= 0) {
+                // go to previous row
+                table.getSelectionModel().select(pos.getRow(), getTableColumn(table, pos.getTableColumn(), -1));
+            } else if (pos.getRow() < table.getItems().size()) {
+                // wrap to end of previous row
+                table.getSelectionModel().select(pos.getRow() - 1, table.getVisibleLeafColumn(table.getVisibleLeafColumns().size() - 1));
+            }
+        } else {
+            int focusIndex = table.getFocusModel().getFocusedIndex();
+            if (focusIndex == -1) {
+                table.getSelectionModel().select(table.getItems().size() - 1);
+            } else if (focusIndex > 0) {
+                table.getSelectionModel().select(focusIndex - 1);
+            }
+        }
+    }
+
+    private TableColumn<TableRecord, ?> getTableColumn(final TableView<TableRecord> table, final TableColumn<TableRecord, ?> column, int offset) {
+        int columnIndex = table.getVisibleLeafIndex(column);
+        int newColumnIndex = columnIndex + offset;
+        return table.getVisibleLeafColumn(newColumnIndex);
     }
 
     public class TableRecord {

@@ -8,8 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -65,10 +63,6 @@ public class MainWithGuiceControllerFactory extends Application {
 
         @Inject private Injector injector;
 
-        @PostConstruct
-        private void postConstruct() {
-        }
-
         @Override
         public FXMLLoader getLoader() {
             FXMLLoader loader = new FXMLLoader();
@@ -100,10 +94,6 @@ public class MainWithGuiceControllerFactory extends Application {
                 e.printStackTrace();
                 return null;
             }
-        }
-
-        @PreDestroy
-        private void preDestroy() {
         }
     }
 

@@ -19,6 +19,13 @@ import java.util.Optional;
 public interface Plugin extends Disposable {
 
     /**
+     * Sets the {@link ClassLoader} for this {@link Plugin}.
+     *
+     * @param classLoader the {@link ClassLoader} for this {@link Plugin}
+     */
+    void pluginClassLoader(ClassLoader classLoader);
+
+    /**
      * @return an {@link Optional} clone of the plugin instance. Needed to have multiple instances active (individual calculation, per project, ...)
      */
     Optional<Plugin> clonePlugin();

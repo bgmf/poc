@@ -28,9 +28,9 @@ public class MainTableTest4 extends Application {
     public void start(Stage primaryStage) {
         StringProperty appStatus = new SimpleStringProperty();
 
-        primaryStage.setTitle("TableTest4");
+        primaryStage.setTitle("Table Test 4");
         primaryStage.titleProperty().bind(Bindings
-                .createStringBinding(() -> "TableTest4" + (appStatus.get() != null && !appStatus.get().isEmpty() ? " - " + appStatus.get() : ""),
+                .createStringBinding(() -> "Table Test 4" + (appStatus.get() != null && !appStatus.get().isEmpty() ? " - " + appStatus.get() : ""),
                         appStatus));
 
         BorderPane rootLayout = new BorderPane();
