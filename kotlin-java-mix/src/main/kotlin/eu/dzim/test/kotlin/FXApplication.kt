@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 
 class FXApplication : Application() {
 
-    override fun start(primaryStage: Stage?) {
+    override fun start(primaryStage: Stage) {
 
         val model = TestModel().apply {
             testString = "test"
@@ -26,7 +26,7 @@ class FXApplication : Application() {
             }
         }
 
-        primaryStage?.apply {
+        primaryStage.apply {
             minWidth = 640.0
             minHeight = 480.0
             title = "FX"
@@ -37,6 +37,6 @@ class FXApplication : Application() {
                 // transform it into a scene
                 Scene(it, minWidth, minHeight) // .apply { more stuff }
             }
-        }?.show()
+        }.show()
     }
 }
