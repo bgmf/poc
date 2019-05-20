@@ -6,12 +6,20 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="eu.dzim.tests.fx.controller.FactoryInjectionController" spacing="5">
 
+    <!--
+    * we define another view here, but should be able to do it with arbitrary variables as well
+    * these vars can be used in this FXML, as well as the controller (injectable via the @FXML annotation)
+    -->
     <fx:define>
         <fx:include fx:id="view2" source="FactoryInjection2.fxml"/>
     </fx:define>
 
     <Label fx:id="counterLabel" text="Increase"/>
 
+    <!--
+    * we can use this reference here
+    * note, that the default property for VBox is #children -> we don't need to wrap in into this children tag
+    -->
     <fx:reference source="view2"/>
 
 </VBox>

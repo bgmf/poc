@@ -1,18 +1,19 @@
 package eu.dzim.tests.fx.controller;
 
-import eu.dzim.tests.fx.MainWithControllerFactory2;
+import eu.dzim.tests.fx.MainWithControllerFactory2.Model;
+import eu.dzim.tests.fx.MainWithControllerFactory2.ModelInjector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class FactoryInjectionController2 implements MainWithControllerFactory2.ModelInjector {
+public class FactoryInjectionController2 implements ModelInjector {
 
     @FXML private Button increaseButton;
 
-    private MainWithControllerFactory2.Model model = null;
+    @FXML private Model model;
 
     @Override
-    public void setModel(MainWithControllerFactory2.Model model) {
+    public void setModel(Model model) {
         System.out.println(getClass().getName() + " is receiving model.");
         this.model = model;
     }

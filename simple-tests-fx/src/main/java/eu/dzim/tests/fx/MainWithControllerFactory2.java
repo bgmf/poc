@@ -3,6 +3,8 @@ package eu.dzim.tests.fx;
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,6 +26,7 @@ public class MainWithControllerFactory2 extends Application {
         // our second UI (sub-UI of the first one) will get the model and increase a counter
         // the first UI, loaded via the FXMLLoader, will display the counters value
         Model model = new Model();
+        model.setText("My Increase Button");
 
         // our loader get's the shiny controller factory
 
@@ -78,12 +81,14 @@ public class MainWithControllerFactory2 extends Application {
         }
     }
 
-    public final class Model {
+    public static final class Model {
 
-        private final IntegerProperty counter;
+        public final IntegerProperty counter;
+        public final StringProperty text;
 
         public Model() {
             counter = new SimpleIntegerProperty(this, "counter", 0);
+            text = new SimpleStringProperty(this, "text", "TEST");
         }
 
         public int getCounter() {
@@ -100,6 +105,18 @@ public class MainWithControllerFactory2 extends Application {
 
         public void increaseCounter() {
             counter.set(counter.get() + 1);
+        }
+
+        public String getText() {
+            return text.get();
+        }
+
+        public void setText(String text) {
+            this.text.set(text);
+        }
+
+        public StringProperty textProperty() {
+            return text;
         }
     }
 
