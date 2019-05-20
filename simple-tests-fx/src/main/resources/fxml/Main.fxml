@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="200" prefWidth="320"
-            fx:controller="application.MainController">
+            fx:controller="eu.dzim.tests.fx.controller.MainController">
     <children>
         <Button layoutX="126" layoutY="90" text="Click Me!" scaleX="4.0" scaleY="4.0" onAction="#handleButtonAction"/>
         <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label"/>
