@@ -15,7 +15,6 @@ fun main(args: Array<String>) {
 
 class Main : Application() {
 
-
     override fun start(primaryStage: Stage) {
 
         val model = Model().apply {
