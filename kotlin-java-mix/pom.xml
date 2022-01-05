@@ -26,9 +26,9 @@
 
         <internal.shared.version>0.0.0-SNAPSHOT</internal.shared.version>
 
-        <kotlin.version>1.3.31</kotlin.version>
-        <tornadofx.version>1.7.18</tornadofx.version>
-        <guice.version>4.2.2</guice.version>
+        <kotlin.version>1.6.0</kotlin.version>
+        <tornadofx.version>1.7.20</tornadofx.version>
+        <guice.version>5.0.1</guice.version>
 
         <junit.version>4.12</junit.version>
     </properties>
