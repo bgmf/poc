@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+	<Properties>
+		<Property name="MaxFileSize">50MB</Property>
+		<Property name="RolloverCount">10</Property>
+		<!-- be aware: %C is the logger, while %c is the class the event was called from -->
+		<!-- while we normally use an identical logger-name as the class, this will result in same class logging, if we ever need more than one logger in a class -->
+		<!--
+		<Property name="colorPattern">%black{%d{yyyy-MM-dd HH:mm:ss.SSS}};%highlight{%p};%blue{%t};%white{%C}.%cyan{%M}(%F:%cyan{%L});%msg%n</Property>
+		<Property name="nonColorPattern">%d{yyyy-MM-dd HH:mm:ss.SSS};%p;%t;%C.%M(%F:%L);%msg%n</Property>
+		-->
+		<Property name="colorPattern">%black{%d{yyyy-MM-dd HH:mm:ss.SSS}};%highlight{%p};%blue{%t};%white{%c}.%cyan{%M}(%F:%cyan{%L});%msg%n</Property>
+		<Property name="nonColorPattern">%d{yyyy-MM-dd HH:mm:ss.SSS};%p;%t;%c.%M(%F:%L);%msg%n</Property>
+	</Properties>
+
+	<Appenders>
+
+		<Console name="stdout" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="${colorPattern}" />
+			<Filters> 
+				<ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/> 
+				<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters> 
+		</Console>
+
+		<Console name="stderr" target="SYSTEM_ERR">
+			<PatternLayout
+				pattern="${colorPattern}" />
+			<Filters>
+				<ThresholdFilter level="warn" onMatch="ACCEPT"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="error" onMatch="ACCEPT"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="fatal" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</Console>
+		
+		<RollingFile name="dev" fileName="./app_detailed.log"
+			filePattern="./root_detailed-%i.log.gz">
+			<PatternLayout
+				pattern="${nonColorPattern}" />
+			<Filters> 
+				<ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/> 
+				<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters> 
+			<Policies>
+				<SizeBasedTriggeringPolicy size="${MaxFileSize}" />
+			</Policies>
+			<DefaultRolloverStrategy max="${RolloverCount}"/>
+		</RollingFile>
+
+		<RollingFile name="prod" fileName="./app_warn.log"
+			filePattern="./root_warn-%i.log.gz">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS};%p;%t;%C:%L;%msg%n" />
+			<Filters>
+				<ThresholdFilter level="warn" onMatch="ACCEPT"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="error" onMatch="ACCEPT"
+					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="fatal" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="${MaxFileSize}" />
+			</Policies>
+			<DefaultRolloverStrategy max="${RolloverCount}"/>
+		</RollingFile>
+
+		<!-- 
+		<Async name="Async">
+			<AppenderRef ref="stdout" />
+			<AppenderRef ref="stderr" /> 
+		</Async> 
+		-->
+	</Appenders>
+
+	<Loggers>
+		<!-- application log -->
+		<Logger name="eu.dzim" level="trace">
+			<AppenderRef ref="dev" />
+			<AppenderRef ref="stdout" />
+		</Logger>
+		<!-- log for packages, starting with org.* -->
+		<Logger name="org" level="info">
+			<AppenderRef ref="dev" />
+			<AppenderRef ref="stdout" />
+		</Logger>
+		<!-- log for packages, starting with com.* -->
+		<Logger name="com" level="info">
+			<AppenderRef ref="dev" />
+			<AppenderRef ref="stdout" />
+		</Logger>
+		<!-- root logger - only WARN and upwards -->
+		<Root level="warn">
+			<AppenderRef ref="prod" />
+			<AppenderRef ref="stderr" />
+		</Root>
+	</Loggers>
+
+</Configuration>
