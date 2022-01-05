@@ -18,7 +18,6 @@ class TornadoView : View() {
                 label("Resource Binding: ")
                 label { textProperty().bind(resource.getBinding("test.string")) }
             }
-
             region { vgrow = Priority.ALWAYS }
         }
         bottom = hbox {

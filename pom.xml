@@ -42,7 +42,7 @@
     <repositories>
         <repository>
             <id>maven</id>
-            <url>http://repo1.maven.org/maven2</url>
+            <url>https://repo1.maven.org/maven2</url>
         </repository>
 
         <repository>
@@ -56,7 +56,7 @@
             </snapshots>
             <id>bintray-jerady-maven</id>
             <name>bintray</name>
-            <url>http://dl.bintray.com/jerady/maven</url>
+            <url>https://dl.bintray.com/jerady/maven</url>
         </repository>
     </repositories>
 
@@ -67,7 +67,7 @@
             </snapshots>
             <id>bintray-jerady-maven</id>
             <name>bintray-plugins</name>
-            <url>http://dl.bintray.com/jerady/maven</url>
+            <url>https://dl.bintray.com/jerady/maven</url>
         </pluginRepository>
     </pluginRepositories>
 
@@ -83,24 +83,24 @@
         <tool.base>eu.dzim.poc</tool.base>
         <tool.version>0.0.0</tool.version>
 
-        <version.javafx>11.0.2</version.javafx>
+        <version.javafx>17.0.1</version.javafx>
         <version.jaxb.api>2.3.1</version.jaxb.api>
         <version.annotation.api>1.3.2</version.annotation.api>
 
         <version.junit>5.3.2</version.junit>
-        <version.guice>4.2.2</version.guice>
-        <version.guava>27.0.1-jre</version.guava>
-        <version.log4j>2.11.1</version.log4j>
+        <version.guice>5.0.1</version.guice>
+        <version.guava>31.0.1-jre</version.guava>
+        <version.log4j>2.17.1</version.log4j>
         <version.apache.commons.cli>1.4</version.apache.commons.cli>
-        <version.jackson>2.9.8</version.jackson>
+        <version.jackson>2.13.0</version.jackson>
 
         <version.jasperreports>6.4.1</version.jasperreports>
 
         <version.org.swinglabs.pdfrenderer>1.0.5</version.org.swinglabs.pdfrenderer>
 
-        <version.controlsfx>9.0.0</version.controlsfx>
+        <version.controlsfx>11.1.0</version.controlsfx>
         <version.tornadofx.controls>1.7.9</version.tornadofx.controls>
-        <version.org.jfoenix>9.0.8</version.org.jfoenix>
+        <version.org.jfoenix>9.0.10</version.org.jfoenix>
 
         <version.fontawesomfx>11.0</version.fontawesomfx>
         <version.fontawesomfx.eo>2.2.7-11</version.fontawesomfx.eo>
@@ -515,5 +515,6 @@
         <module>guice-fx</module>
         <module>kotlin-java-mix</module>
         <module>spring-boot-fx</module>
+        <module>kotlin-app-starter</module>
     </modules>
 </project>
