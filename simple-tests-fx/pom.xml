@@ -13,7 +13,7 @@
 
     <artifactId>simple-tests-fx</artifactId>
     <name>simple-tests-fx</name>
-    <url>http://maven.apache.org</url>
+    <url>https://maven.apache.org</url>
 
 
     <properties>
@@ -23,7 +23,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <kotlin.version>1.3.31</kotlin.version>
+        <kotlin.version>1.6.0</kotlin.version>
 
         <main.class>MainRoot</main.class>
     </properties>
@@ -31,7 +31,7 @@
     <repositories>
         <repository>
             <id>jspresso</id>
-            <url>http://repository.jspresso.org/maven2/</url>
+            <url>https://repository.jspresso.org/maven2/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -136,12 +136,12 @@
         <dependency>
             <groupId>org.jpedal</groupId>
             <artifactId>OpenViewerFX</artifactId>
-            <version>7.9.26</version>
+            <version>7.12.28</version>
         </dependency>
         <dependency>
             <groupId>org.scilab.forge</groupId>
             <artifactId>jlatexmath</artifactId>
-            <version>1.0.6</version>
+            <version>1.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.swt</groupId>
@@ -151,7 +151,7 @@
         <dependency>
             <groupId>com.dorkbox</groupId>
             <artifactId>SystemTray</artifactId>
-            <version>3.9</version>
+            <version>4.1</version>
         </dependency>
         <dependency>
             <groupId>eu.dzim.poc</groupId>
